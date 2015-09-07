@@ -31,7 +31,7 @@ Aquí encontrarás una lista de los protocolos soportados: [Protocolos](https://
 
 Vista el hilo del foro para más información:
 
-	[http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
+[http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
 # amv-open360tracker (english)
 
