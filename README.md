@@ -8,7 +8,7 @@ El firmware está basado en la familia de microprocesadores de 8-bit de atmel pr
 
 Vista el hilo del foro para más información: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
-* English version
+# amv-open360tracker (english)
 
 The AMV spanish community version (fork) of the open source antenna tracker for FPV for continuous 360 degree rotation.
 
