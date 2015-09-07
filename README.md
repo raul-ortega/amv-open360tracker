@@ -29,7 +29,9 @@ Aquí encontrarás una lista de los protocolos soportados: [Protocolos](https://
 
 # Comunidad FPV AMV:
 
-Vista el hilo del foro para más información: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
+Vista el hilo del foro para más información:
+
+	[http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
 # amv-open360tracker (english)
 
@@ -40,3 +42,5 @@ This project is a fork of the original firmware of the [open360tracker](https://
 The firmware is based on the 8-bit atmel microcontrollers and manage an DIY antenna tracker which offers full 360° continuous rotation and support for lots of different telemetry protocols and flight controllers like FrSky, HoTT, Mavlink, MultiWii, Naza, ArduPilot, Arducopter and Rangevideo.
 
 More info about this projet at [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
+
+
