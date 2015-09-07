@@ -1,5 +1,5 @@
 /*
-This code is written by Samuel Brucksch
+This code is written by Samuel Brucksch, and debugged by Raúl Ortega
  
  it will decode the RVOSD telemetry protocol and will convert it into values the open360tracker can understand
  
