@@ -66,12 +66,13 @@ geoCoordinate_t trackerPosition;
   //download from https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home
   #if (LCD_DISPLAY == I2C)
     #include <LiquidCrystal_I2C.h>
-    #ifdef LCD_BANGGOOD_SKU166911  // Nueva Linea introducida
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,LCD_SIZE_COL,LCD_SIZE_ROW);  // Nueva Linea introducida
+    #ifdef LCD_BANGGOOD_SKU166911
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
     #else  // Nueva Linea introducida
-      lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW);
-      lcd.setBacklightPin(3, POSITIVE);
-      lcd.setBacklight(HIGH);
+      //lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
+      //lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
+      //lcd.setBacklight(HIGH);                // GUILLESAN LCD ???
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
     #endif  // Nueva Linea introducida
   #elif (LCD_DISPLAY == SPI)
     #include <LiquidCrystal.h>
