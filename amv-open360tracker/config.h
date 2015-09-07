@@ -147,7 +147,7 @@
  *
  */
 #define LCD_DISPLAY I2C
-#define LCD_SIZE_ROW 2 // default 2
+#define LCD_SIZE_ROW 2 // default 2 
 
 /*
  * LCD Display I2C ADDRESS
