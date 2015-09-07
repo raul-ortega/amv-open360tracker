@@ -140,7 +140,7 @@ void setup()
     #endif
     lcd.print(" open360tracker ");
     lcd.setCursor ( 0, 1 );
-    lcd.print("   version ");
+    lcd.print(" version amv");
     lcd.print(FMW_VERSION);
     lcd.print("  ");
   #endif
@@ -302,8 +302,13 @@ void loop()
             #else
                   #ifdef BATTERYMONITORING
                     sprintf(lcd_str, "H:%03u V%02u.%01u ", trackerPosition.heading / 10, (uint16_t)Bat_Voltage,(uint16_t)(Bat_Voltage*10)%10);
-                  #else
-                    sprintf(lcd_str, "H:%03u A:%03u ", trackerPosition.heading / 10, targetPosition.heading / 10);
+                  #else 
+                    #ifdef RVOSD
+                      targetPosition.heading = getAzimut();
+                      sprintf(lcd_str, "H:%03u A:%03u ", trackerPosition.heading / 10, targetPosition.heading);
+                    #else
+                      sprintf(lcd_str, "H:%03u A:%03u ", trackerPosition.heading / 10, targetPosition.heading / 10);
+                    #endif
                   #endif
                   
                   lcd.print(lcd_str);
@@ -372,6 +377,9 @@ void loop()
                 Serial.print(" Target Sats: "); Serial.println(getSats());
             #endif //DEBUG
         #else
+          #ifdef RVOSD
+            targetPosition.heading = getAzimut();
+          #endif
           #ifdef DEBUG
               Serial.print("Target alt: "); Serial.println(targetPosition.alt);
           #endif //DEBUG

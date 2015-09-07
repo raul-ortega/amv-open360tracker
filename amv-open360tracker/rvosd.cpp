@@ -55,6 +55,9 @@ int16_t alttemp;
 int16_t alt;
 int8_t altsign;
 
+uint16_t headingtemp;
+uint16_t heading=0;
+
 int8_t latsign;
 int8_t lonsign;
 uint32_t lat_bp;
@@ -92,6 +95,10 @@ int8_t getIndex() {
   return index;
 }
 
+uint16_t getAzimut() {
+  return (uint16_t)heading;
+}
+
 void encodeTargetData(uint8_t c) {
   if (c == '$' && !frame_started){
     frame_started = true;
@@ -110,6 +117,7 @@ void encodeTargetData(uint8_t c) {
     checksum_index = 0;
     index=0;
     dot_found=false;
+    headingtemp=0;
     //HAS_FIX = false;
     //HAS_ALT = false;
     return;
@@ -145,8 +153,8 @@ void encodeTargetData(uint8_t c) {
       lat = ((int32_t)lat_bp*100000+(int32_t)(lat_ap/10))*(int32_t)latsign;
       lon = ((int32_t)lon_bp*100000+(int32_t)(lon_ap/10))*(int32_t)lonsign;
       sats=satstemp;
-      alt=altsign*alttemp;;
-      //Serial.println(lat);
+      alt=altsign*alttemp;
+      heading=headingtemp;
       // data is ready
       HAS_FIX = true;
       HAS_ALT = true;
@@ -273,6 +281,11 @@ void encodeTargetData(uint8_t c) {
     else{
       //no after comma i think
     }
+    break;
+    case 14:
+      //Heading;
+      headingtemp *= 10;
+      headingtemp += c- '0';
     break;
   case 23:
     satstemp *= 10;
