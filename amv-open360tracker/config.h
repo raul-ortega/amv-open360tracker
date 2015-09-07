@@ -147,7 +147,7 @@
  *
  */
 #define LCD_DISPLAY I2C
-#define LCD_SIZE_ROW 2 // default 2. Tested with 2 and 4.
+#define LCD_SIZE_ROW 2  // default 2. Tested with 2 and 4.
 #define LCD_SIZE_COL 16 // default 16. Tested with 16 and 20.
 /*
  * LCD Display I2C ADDRESS

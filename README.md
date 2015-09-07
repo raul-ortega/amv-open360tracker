@@ -1,10 +1,33 @@
 # amv-open360tracker
 
-La versión del seguidor de antena para FPV con rotaicón contínua de 360º de la comunidad española de AMV.
+Seguidor de antena para FPV con rotaicón contínua de 360º de la comunidad española de AMV.
 
 Este proyecto deriva del proyecto original de  [open360tracker](https://github.com/SamuelBrucksch/open360tracker) creado por SamuelBrucksch.
 
 El firmware está basado en la familia de microprocesadores de 8-bit de atmel presente en la plataforma Arduino. Es capaz de manegar un antenna tracker de fabricación casera que ofrece completa rotación continua de 360º, y soporta varios prococolos de telemetría y comunicaciones de diferentes controladoras de vuelo, como FrSky, Hott, Mavlink, MultiWii, Naza, Ardupilot, Arducopter y Rangevideo.
+
+# Rotación continua de 360°
+
+La rotación contínua se consigue con la utlización de un servo normal, una vez desprovisto de su potenciómetro y tope que le impiden seguir girando, y añadiendo un sencillo divisor de tensión. También existe la posibildiad de usar servos específicos para rotación continua de 360º.
+
+Para eliminar el cruce y trenzado de cables entre las dos secciones del tracker, se emplea un "slip ring", un anillo de giro contínuo 360 ° con coletor de conexiones.
+
+# Heading (Azimut)
+
+La dirección hacia la que apunta el seguidor de antena se controla mediante un compás electrónico, que elimina la necesidad de apuntar hacia la dirección correcta de forma manual, como se venía haciendo en los seguidores de antena tradicionales.
+
+# Telemetría y Sistemas de Comunicaciones
+
+En esta versión inicial se soporta diversos protocolos y sistemas de comunicaciones:
+
+* Descodificación de datos de telemetría desde la salida de datos de los módulos TX FrSky.
+* Transmisión de tramas NMEA 0183 directas desde GPS por comunicación series "transparente"", sobre el enlace de de telemetría de los TX/RX basados en Open LRS (testado por la comunidad).
+* Protocolo de comunicaciones Mavlink desde la salida de datos desde OSD my MyFlyDream o desde controladoras de vuelo basadas en APM, sobre enlaces de telemetría TX/RX Open LRS, o modulación demodulación sobre canal de vídeo video 1.2/2.4/5.8 Ghz (testado por la comunidad).
+* Decodificación de datos de telemetría de Rangevideo OSD enviados vía enlace TX/RX de vídeo, y extraídos directament desde el módulo decodificador RVGS de tierra (en fase de pruebas).
+
+Aquí encontrarás una lista de los protocolos soportados: [Protocolos](https://github.com/SamuelBrucksch/open360tracker/wiki/Protocols)
+
+# Comunidad FPV AMV:
 
 Vista el hilo del foro para más información: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
