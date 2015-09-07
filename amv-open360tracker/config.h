@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 /* Config file
- * created by Samuel Brucksch
+ * created by Samuel Brucksch, edited by Raúl Ortega.
  *
  */
 //#define DEBUG
@@ -36,8 +36,8 @@
  *  SERVOTEST
  */
 //#define SERVOTEST
-//#define GPS_TELEMETRY
-#define RVOSD
+#define GPS_TELEMETRY
+//#define RVOSD
 /* #### Baud Rate ####
  *
  * baud rate of telemetry input
@@ -46,31 +46,31 @@
  * 115200 for RVOSD (RVGS)
  * ??? for HoTT
  */
-#define BAUD 115200 //4800
+#define BAUD 9600 // default 9600
 
 /* #### Tilt servo 0° adjustment ####
  *
  *  Enter PWM value of Servo for pointing straight forward
  */
-#define TILT_0 1200 //1050
+#define TILT_0 1200 // default 1050
 
 /* #### Tilt servo 90° adjustment ####
  *
  *  Enter PWM value of Servo for pointing 90° up
  */
-#define TILT_90 1500 //2025
+#define TILT_90 1500 // default 2025
 
 /* #### Pan servo 0° adjustment ####
  *
  *  Enter PWM value of Servo for not moving
  */
-#define PAN_0 610 //1470
+#define PAN_0 610 // default 1470
 
 /* #### Pan servo minimum required speed ####
  *
  *  If the servo has problems to start a rotation when the speed is slow adjust this value until the tracker moves directly from each position
  */
-#define MIN_PAN_SPEED -25 //50
+#define MIN_PAN_SPEED -25 // default 50
 
 /* #### Compass declination ####
  *
@@ -82,7 +82,7 @@
  *
  * set to 0 if you cannot find your declination!
  */
-#define DECLINATION 32
+#define DECLINATION 32 //default 32
 
 /* #### Compass offset ####
  *
@@ -93,7 +93,7 @@
  * Range: 0 ... 3599
  *
  */
-#define OFFSET 2700 //900
+#define OFFSET 2700 //default 900
 
 /* #### DIY GPS / Fix Type ####
 *
@@ -119,9 +119,9 @@
  *
  * does not work when in MFD mode
  */
-#define LOCAL_GPS
+//#define LOCAL_GPS // default uncommented
 //#define MTK
-#define GPS_BAUDRATE 9600
+#define GPS_BAUDRATE 9600 //default 9600
 #endif
 
 /* #### Tracker Setup ####
@@ -131,7 +131,7 @@
  * It is recommended to start tracking only if plane moved a few meters already. Default: 10m
  *
  */
-#define START_TRACKING_DISTANCE 10
+#define START_TRACKING_DISTANCE 10 //default 10
 
 /* ### LCD Display ###
  *
@@ -147,14 +147,14 @@
  *
  */
 #define LCD_DISPLAY I2C
-#define LCD_SIZE_ROW 2 // default 2 
-
+#define LCD_SIZE_ROW 2 // default 2, tested with 2 and 4
+#define LCD_SIZE_COL 16 // default 16, tested with 20 and 16
 /*
  * LCD Display I2C ADDRESS
  * Default is 0x27 if uncommented. You'll need a I2C address scanner sketch if you don't know the correct one.
  * If your LCD has a different address descoment this line and change its value.
  */
-#define LCD_I2C_ADDR 0x27
+#define LCD_I2C_ADDR 0x3F // default 0x27
 
 /*
 * LCD display bought at en Banggood http://www.banggood.com/IIC-I2C-1602-Blue-Backlight-LCD-Display-Module-For-Arduino-p-950726.html
@@ -162,7 +162,7 @@
 * The 1602 is the correct one.
 * The default I2C address for this LCD display is 0x3F
 */
-//#define LCD_BANGGOOD_SKU166911 
+#define LCD_BANGGOOD_SKU166911 //default commented
 
 /* ### Battery monitoring ###
  *

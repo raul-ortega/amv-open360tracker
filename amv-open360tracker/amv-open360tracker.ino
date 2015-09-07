@@ -67,9 +67,11 @@ geoCoordinate_t trackerPosition;
   #if (LCD_DISPLAY == I2C)
     #include <LiquidCrystal_I2C.h>
     #ifdef LCD_BANGGOOD_SKU166911  // Nueva Linea introducida
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);  // Nueva Linea introducida
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,LCD_SIZE_COL,LCD_SIZE_ROW);  // Nueva Linea introducida
     #else  // Nueva Linea introducida
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, LCD_SIZE_ROW, 1, 0, 4, 5, 6, 7); 
+      lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW);
+      lcd.setBacklightPin(3, POSITIVE);
+      lcd.setBacklight(HIGH);
     #endif  // Nueva Linea introducida
   #elif (LCD_DISPLAY == SPI)
     #include <LiquidCrystal.h>
