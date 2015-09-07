@@ -147,8 +147,8 @@
  *
  */
 #define LCD_DISPLAY I2C
-#define LCD_SIZE_ROW 2 // default 2, tested with 2 and 4
-#define LCD_SIZE_COL 16 // default 16, tested with 20 and 16
+#define LCD_SIZE_ROW 2 // default 2. Tested with 2 and 4.
+#define LCD_SIZE_COL 16 // default 16. Tested with 16 and 20.
 /*
  * LCD Display I2C ADDRESS
  * Default is 0x27 if uncommented. You'll need a I2C address scanner sketch if you don't know the correct one.
