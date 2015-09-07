@@ -7,3 +7,4 @@ The firmware is based on the 8-bit atmel microcontrollers and manage an DIY ante
 
 More info about this projet at [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?p=473550#post473550)
 
+# amv-open360tracker
