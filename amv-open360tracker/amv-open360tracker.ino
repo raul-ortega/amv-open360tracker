@@ -1,12 +1,15 @@
-#include <LiquidCrystal_I2C.h>
 
-/* Open Source 360° continuous rotation antenna tracker software
- * created by Samuel Brucksch
+/* AMV Open Source 360° continuous rotation antenna tracker software
+ * by Raúl Ortega, based on the original project from Samuel Brucksch
+ *
+ * Sapanish community: http://www.aeromodelismovirtual.com/showthread.php?t=34530
  *
  * Digital Smooth method from Arduino playground: http://playground.arduino.cc/Main/DigitalSmooth
  * Local GPS uses parser from TinyGPS: http://arduiniana.org/libraries/tinygps/
- * FPV Community thread: http://fpv-community.de/showthread.php?46439-360%B0-Community-Antennentracker-mit-Schleifring-Wer-macht-mit
+ * 
  */
+ 
+#include <LiquidCrystal_I2C.h>
 #include <EEPROM.h>
 #include "defines.h"
 #include "config.h"
