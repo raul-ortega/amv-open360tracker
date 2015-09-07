@@ -23,4 +23,5 @@ int32_t getTargetLon();
 int16_t getSats();
 #endif
 
+
 #endif
