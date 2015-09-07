@@ -4,7 +4,7 @@
 #define DEFINES_H
 
 /* Defines file
- * created by Samuel Brucksch
+ * created by Samuel Brucksch, edited by Raúl Ortega
  *
  */
 #include <inttypes.h>
