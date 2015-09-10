@@ -1,4 +1,4 @@
-# amv-open360tracker
+# amv-open360tracker v0.2
 
 Seguidor de antena para FPV con rotaicón contínua de 360º de la comunidad española de AMV.
 
