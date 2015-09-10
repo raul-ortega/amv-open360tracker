@@ -4,7 +4,7 @@ Seguidor de antena para FPV con rotaicón contínua de 360º de la comunidad esp
 
 Este proyecto deriva del proyecto original de  [open360tracker](https://github.com/SamuelBrucksch/open360tracker) creado por SamuelBrucksch.
 
-El firmware está basado en la familia de microprocesadores de 8-bit de atmel presente en la plataforma Arduino. Es capaz de manegar un antenna tracker de fabricación casera que ofrece completa rotación continua de 360º, y soporta varios prococolos de telemetría y comunicaciones de diferentes controladoras de vuelo, como FrSky, Hott, Mavlink, MultiWii, Naza, Ardupilot, Arducopter y Rangevideo.
+El firmware está basado en la familia de microprocesadores de 8-bit de atmel presente en la plataforma Arduino. Es capaz de controlar un antenna tracker de fabricación casera que ofrece completa rotación continua de 360º, y soporta varios prococolos de telemetría y comunicaciones de diferentes controladoras de vuelo, como FrSky, Hott, Mavlink, MultiWii, Naza, Ardupilot, Arducopter y Rangevideo.
 
 # Rotación continua de 360°
 
