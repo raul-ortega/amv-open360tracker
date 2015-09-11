@@ -1,5 +1,8 @@
-# amv-open360tracker v0.2
-
+# amv-open360tracker v0.5
+---------------------
+# EXPERIMENTAL
+Easing effect added to servo tilt. Use this version in you opent360tracker under your own risk.
+---------------------
 Seguidor de antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
 Este proyecto deriva del proyecto original de  [open360tracker](https://github.com/SamuelBrucksch/open360tracker) creado por SamuelBrucksch.
