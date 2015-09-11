@@ -1,12 +1,13 @@
 
 /* AMV Open Source 360° continuous rotation antenna tracker software
- * by Raúl Ortega, based on the original project from Samuel Brucksch
- *
+ * by Raúl Ortega https://github.com/raul-ortega/amv-open360tracker/
  * Sapanish community: http://www.aeromodelismovirtual.com/showthread.php?t=34530
+ * 
+ * Based on the original project from Samuel Brucksch https://github.com/SamuelBrucksch/open360tracker
  *
  * Digital Smooth method from Arduino playground: http://playground.arduino.cc/Main/DigitalSmooth
  * Local GPS uses parser from TinyGPS: http://arduiniana.org/libraries/tinygps/
- * 
+ * Easing Ecuations by Robert Penner http://www.gizma.com/easing/
  */
  
 #include <LiquidCrystal_I2C.h>
@@ -24,6 +25,14 @@
   #include <Mavlink.h>
 #endif
 
+#ifdef TILT_EASING
+  float _lasttilt=0.0;
+  bool _servo_tilt_has_arrived=true;
+  uint8_t _tilt_pos=0;
+  int16_t _servo_tilt_must_move=-1;
+#endif
+
+int _contador=0;
 void calcTilt();
 void getError();
 void calculatePID();
@@ -190,6 +199,10 @@ void setup()
   #endif
   initServos();
 
+  #ifdef TILT_EASING
+    _lasttilt=0.0;
+  #endif
+  
   #ifdef DEBUG
     Serial.println("Init Compass");
   #endif
@@ -221,6 +234,8 @@ void setup()
   #ifdef DEBUG
     Serial.println("Setup finished");
   #endif
+
+  
 }
 
 #ifdef SERVOTEST
@@ -230,11 +245,11 @@ void setup()
 void loop()
 {
   #ifdef SERVOTEST
-    if (millis() - servoTimer > 200) {
+    if (millis() - servoTimer > 500) {
       Serial.print("Heading: "); Serial.print(trackerPosition.heading / 10);
       Serial.print(" Target Heading: "); Serial.print(targetPosition.heading / 10);
       Serial.print(" PAN: "); Serial.print(PWMOutput);
-      Serial.print(" TILT: "); Serial.print(tilt);
+      Serial.print(" TILT: "); Serial.print(_lasttilt);
       Serial.print(" P: "); Serial.print(p);
       Serial.print(" I: "); Serial.print(i);
       Serial.print(" D: "); Serial.println(d);
@@ -257,8 +272,15 @@ void loop()
             value = 90;
           else if (value < 0)
             value = 0;
-          tilt = map(value, 0, 90, TILT_0, TILT_90);
-          SET_TILT_SERVO_SPEED(tilt);
+          #ifdef TILT_EASING
+              //moveServoTilt(value);
+              _servo_tilt_must_move=value;
+              _servo_tilt_has_arrived=false;
+          #else
+            tilt = map(value, 0, 90, TILT_0, TILT_90);
+            SET_TILT_SERVO_SPEED(tilt);
+          #endif
+          
         } else if (c == 'M' || c == 'm') {
           //tilt angle in ms
           tilt = Serial.parseInt();
@@ -576,6 +598,9 @@ void loop()
       }
     }
   #endif //MDF
+  #ifdef TILT_EASING
+    servo_tilt_update();
+  #endif
 }
 //////////////// Me he quedado aquí revisando los #ifdef
 //Tilt angle alpha = atan(alt/dist)
@@ -601,7 +626,14 @@ void calcTilt() {
     alpha = 0;
   else if (alpha > 90)
     alpha = 90;
-  SET_TILT_SERVO_SPEED(map(alpha, 0, 90, TILT_0, TILT_90));
+  //SET_TILT_SERVO_SPEED(map(alpha, 0, 90, TILT_0, TILT_90));
+  #ifdef TILT_EASING
+    _servo_tilt_must_move=alpha;
+    _servo_tilt_has_arrived=false;
+    //moveServoTilt(alpha);
+  #else
+    SET_TILT_SERVO_SPEED(map(alpha, 0, 90, TILT_0, TILT_90));
+  #endif
 }
 
 void getError(void)
@@ -706,4 +738,92 @@ void initGps() {
     Bat_Voltage = ((float)Bat_AVG / 1024.0) * BATTERYMONITORING_VREF / Bat_denominator * BATTERYMONITORING_CORRECTION;
     Serial.print("V: "); Serial.println(Bat_Voltage);
   }
+#endif
+
+#ifdef TILT_EASING
+  void moveServoTilt(float value){
+    int _pwmpulse;
+    float easingout;
+    if(abs(_lasttilt-value)>TILT_EASING_MIN_ANGLE) {
+      #ifdef DEBUG
+        Serial.println("Easing tilt...");
+      #endif      
+      for (int pos=0; pos<TILT_EASING_STEPS; pos++){
+        if(_lasttilt<=value)
+          easingout=_lasttilt+easeTilt(pos, 0, value-_lasttilt, TILT_EASING_STEPS);
+        else
+          easingout=_lasttilt-easeTilt(pos, 0, _lasttilt-value, TILT_EASING_STEPS);
+        _pwmpulse=(int)map(easingout,0,90,TILT_0,TILT_90);
+        SET_TILT_SERVO_SPEED(_pwmpulse);
+        #ifdef DEBUG && TILT_EASING 
+          Serial.print(" dur: "); Serial.print(TILT_EASING_STEPS);
+          Serial.print(" pos: "); Serial.print(pos);
+          Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
+          Serial.print(" value: "); Serial.print(value);
+          Serial.print(" easingout: "); Serial.print(easingout);    
+          Serial.print(" pwmpulse: "); Serial.println(_pwmpulse);
+        #endif
+        delay(15);
+      }
+    }
+    else
+      SET_TILT_SERVO_SPEED(map(value,0,90, TILT_0, TILT_90));
+    _lasttilt=(float)value;  
+
+  }
+  void servo_tilt_update(){
+    int _pwmpulse;
+    float easingout;
+    if(_servo_tilt_must_move<0) _tilt_pos=0;
+    if(!_servo_tilt_has_arrived && _servo_tilt_must_move>-1){
+      if(abs(_lasttilt-_servo_tilt_must_move)>TILT_EASING_MIN_ANGLE) {
+        /*#ifdef DEBUG
+          Serial.println("Easing tilt...");
+        #endif*/
+        /*#ifdef DEBUG && TILT_EASING && SERVOTEST
+            Serial.print(" _tilt_pos: "); Serial.print(_tilt_pos);
+            Serial.print(" _servo_tilt_must_move: "); Serial.print(_servo_tilt_must_move);
+            Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
+            Serial.print(" TILT_EASING_STEPS: "); Serial.println(TILT_EASING_STEPS);
+        #endif*/
+        if(_tilt_pos<TILT_EASING_STEPS){
+          if(_lasttilt<=_servo_tilt_must_move)
+            easingout=_lasttilt+easeTilt(_tilt_pos, 0, _servo_tilt_must_move-_lasttilt, TILT_EASING_STEPS);
+          else
+            easingout=_lasttilt-easeTilt(_tilt_pos, 0, _lasttilt-_servo_tilt_must_move, TILT_EASING_STEPS);
+          _pwmpulse=(int)map(easingout,0,90,TILT_0,TILT_90);
+          SET_TILT_SERVO_SPEED(_pwmpulse);
+          #ifdef DEBUG && TILT_EASING
+            Serial.print(" dur: "); Serial.print(TILT_EASING_STEPS);
+            Serial.print(" pos: "); Serial.print(_tilt_pos);
+            Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
+            Serial.print(" value: "); Serial.print(_servo_tilt_must_move);
+            Serial.print(" easingout: "); Serial.print(easingout);    
+            Serial.print(" pwmpulse: "); Serial.println(_pwmpulse);
+          #endif
+          #if TILT_EASING_MILIS
+          delay(TILT_EASING_MILIS);
+          #endif;
+          _tilt_pos++;
+        }
+        else {
+          if(_tilt_pos==TILT_EASING_STEPS){
+            SET_TILT_SERVO_SPEED(map(_servo_tilt_must_move,0,90, TILT_0, TILT_90));
+            #if TILT_EASING_MILIS
+            delay(TILT_EASING_MILIS);
+            #endif;
+            _lasttilt=(float)_servo_tilt_must_move;
+            _tilt_pos=0;
+            _servo_tilt_has_arrived=true;
+            _servo_tilt_must_move=-1;
+          }
+        }
+      }
+      else {
+      _servo_tilt_has_arrived=true;
+      _servo_tilt_must_move=-1;
+      }
+    }
+  }
+
 #endif

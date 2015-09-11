@@ -17,7 +17,7 @@
 /* #### Atmega 2560 ####
  *
  *  If using an APM or Atmega 2560 we do not need softserial, so uncomment if using an atema 2560
- *  
+ *
  *  MEGA -> APM & other MEGA Boards
  */
 //#define MEGA
@@ -60,6 +60,33 @@
  */
 #define TILT_90 1500 // default 2025
 
+/* ### Easing effect for tilt movements (EXPERIMENTAL)
+ *
+ * TILT_EASING_STEPS is the maximun number of steps to reach tilt position using easing functions
+ *
+ * 0 or 1:   normal use, no easing effect applied, servo will reach tilt position in only 1 step.
+ * >1:  servo will move to tilt position in with easing effect.
+ * 60 steps ~ 1 second
+ * 30 steps ~ 1/2 seconds
+ * 15 stips ~ 1/4 seconds
+ *
+ * TILT_EASING_MIN_ANGLE: Easing is applied if the difference between last and new tilt position is greater than TILT_EASING_MIN_ANGLE grade.
+ * TILT_EASING_MILIS: Is the time in miliseconds spend by echa step.
+ */
+#define TILT_EASING
+#define TILT_EASING_STEPS 10 // default 10
+#define TILT_EASING_MIN_ANGLE 2 // default 4
+#define TILT_EASING_MILIS 15 //default 15
+/*
+ * ### Easing ecuations
+ *  EASE_OUT_QRT ->  The easing effect is only applied at the end of the movement.
+ *  EASE_INOUT_QRT -> The easing effect is applied at the begining and at the end of the movement.
+ *  EASE_OUT_CIRC -> The easing out circular effect.
+ *  Read more: Easing ecuations by Robert Penner, http://www.gizma.com/easing/
+ */
+//#define EASE_OUT_QRT // Easing Out Quart function
+//#define EASE_INOUT_QRT // Easing In Out Quart function
+#define EASE_OUT_CIRC  / Easing Out Circular function
 /* #### Pan servo 0° adjustment ####
  *
  *  Enter PWM value of Servo for not moving
@@ -155,7 +182,7 @@
  * Default is 0x27 if uncommented. You'll need a I2C address scanner sketch if you don't know the correct one.
  * If your LCD has a different address descoment this line and change its value.
  */
-#define LCD_I2C_ADDR 0x27 //default 0x27
+#define LCD_I2C_ADDR 0x3F //default 0x27
 
 /*
 * LCD display bought at en Banggood http://www.banggood.com/IIC-I2C-1602-Blue-Backlight-LCD-Display-Module-For-Arduino-p-950726.html
@@ -163,7 +190,7 @@
 * The 1602 is the correct one.
 * The default I2C address for this LCD display is 0x3F
 */
-//#define LCD_BANGGOOD_SKU166911 //default commented
+#define LCD_BANGGOOD_SKU166911 //default commented
 
 /* ### Battery monitoring ###
  *
