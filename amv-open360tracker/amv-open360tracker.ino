@@ -656,6 +656,9 @@ void getError(void)
 
 void calculatePID(void)
 {
+#ifndef MAX_PID_ERROR
+  #define MAX_PID_ERROR 10
+#endif
   // Calculate the PID
 #ifdef SERVOTEST
   PID = Error[0] * p;     // start with proportional gain
@@ -673,9 +676,9 @@ void calculatePID(void)
     PID = 500;
   if (PID <= -500)
     PID = -500;
-  if (Error[0] > 10) {
+  if (Error[0] > MAX_PID_ERROR) {
     PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
-  } else if (Error[0] < -10) {
+  } else if (Error[0] < -1*MAX_PID_ERROR) {
     PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
   } else {
     PWMOutput = PAN_0;
@@ -696,9 +699,9 @@ void calculatePID(void)
     PID = 500;
   if (PID <= -500)
     PID = -500;
-  if (Error[0] > 10) {
+  if (Error[0] > MAX_PID_ERROR) {
     PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
-  } else if (Error[0] < -10) {
+  } else if (Error[0] < -1*MAX_PID_ERROR) {
     PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
   } else {
     PWMOutput = PAN_0;

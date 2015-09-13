@@ -9,11 +9,15 @@
 
 /** PID Values
 *
-*/
+* MAX_PID_ERROR is the máximun grades allowed error in the PAN angle calculations.
+* If after moving the PAN servo, the difference between reached angle and desired 
+* angle is smaller or greater than this value, the angle will be corrected using PIDs.
+* 
+*/ 
 #define P 5000 //5000 //default 2200
 #define I 100 //100 //default 280
 #define D 100 //1000 //default 20000
-
+#define MAX_PID_ERROR 10 // default 10 
 /* #### Atmega 2560 ####
  *
  *  If using an APM or Atmega 2560 we do not need softserial, so uncomment if using an atema 2560
@@ -52,13 +56,13 @@
  *
  *  Enter PWM value of Servo for pointing straight forward
  */
-#define TILT_0 1200 // default 1050
+#define TILT_0 1125 // 1200 // default 1050
 
 /* #### Tilt servo 90° adjustment ####
  *
  *  Enter PWM value of Servo for pointing 90° up
  */
-#define TILT_90 1500 // default 2025
+#define TILT_90 2100 // 1500 // default 2025
 
 /* ### Easing effect for tilt movements (EXPERIMENTAL)
  *
@@ -74,7 +78,7 @@
  * TILT_EASING_MILIS: Is the time in miliseconds spend by echa step.
  */
 #define TILT_EASING
-#define TILT_EASING_STEPS 10 // default 10
+#define TILT_EASING_STEPS 15 // default 10
 #define TILT_EASING_MIN_ANGLE 2 // default 4
 #define TILT_EASING_MILIS 15 //default 15
 /*
