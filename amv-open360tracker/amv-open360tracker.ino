@@ -126,6 +126,8 @@ geoCoordinate_t trackerPosition;
   int PAN_0;
   int MIN_PAN_SPEED;
   int OFFSET;
+
+void (*pseudoReset)(void)=0;
   
 void setup()
 {
@@ -980,8 +982,8 @@ void command_help()
     Serial.println(F("List of available commands:"));
     Serial.println(F(" help       list commands"));
     Serial.println(F(" defaults   reset settings to defaults"));
-    Serial.println(F(" *feature   enable/disable/list features"));
-    Serial.println(F(" set       set/list parameters"));
+    Serial.println(F(" feature    enable/disable/list features"));
+    Serial.println(F(" set        list parameters"));
     Serial.println(F(" *status    print out system status"));
     Serial.println(F(" version    print out firmware version"));
     Serial.println(F(" save       save settings and exit"));
@@ -992,7 +994,9 @@ void command_save()
   Serial.println(F("Saving settings..."));
   writeEEPROM();
   Serial.println(F("Command Line Interface closed"));
+  Serial.flush();
   cli_status=0;
+  pseudoReset();
 }
 void command_defaults() {
   Serial.println(F("Resetting to defaults..."));
@@ -1015,5 +1019,5 @@ void list_features(){
   if(value>0) Serial.print(F("bat_mon "));
   Serial.println(F("\n>"));
 }
-//void(* resetFunc)(void) = 0;
+
 
