@@ -1,7 +1,23 @@
 # amv-open360tracker v0.5
 ---------------------
 # EXPERIMENTAL
-Easing effect added to servo tilt. Use this version in you opent360tracker under your own risk.
+#Command Line Interface added. Use this version in your opent360tracker under your own risk.
+
+* To enter in CLI mode key in ### and press enter.
+* Key in help and press Enter to see a list of available commands.
+* Only a few commands will take effect if you set them:
+** set P=value
+** set I=value
+** set D=value
+** set max_pid_error=value
+** set tilt0=value
+** set tilt90=value
+** set pan0=value
+** set min_pan_speed=value
+** set offset
+Please, be quite carefully using this feature, it is only for experimental use.
+
+
 ---------------------
 Seguidor de antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
