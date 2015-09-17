@@ -5,17 +5,7 @@
 
 * To enter in CLI mode key in ### and press enter
 * Key in help and press Enter to see a list of available commands
-* Only a few set commands will take effect if you set them:
-
-	- set P=value
-	- set I=value
-	- set D=value
-	- set max_pid_error=value
-	- set tilt0=value
-	- set tilt90=value
-	- set pan0=value
-	- set min_pan_speed=value
-	- set offset=value
+* Settings on LOCAL GPS, LCD DISPLAY and BATTERY MONITORING, will not take effect in this release.
 
 Please, be quite carefully using this feature, it is only for experimental use.
 
