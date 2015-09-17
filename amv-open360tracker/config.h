@@ -77,10 +77,10 @@
  * TILT_EASING_MIN_ANGLE: Easing is applied if the difference between last and new tilt position is greater than TILT_EASING_MIN_ANGLE grade.
  * TILT_EASING_MILIS: Is the time in miliseconds spend by echa step.
  */
-#define TILT_EASING
-#define TILT_EASING_STEPS 15 // default 10
-#define TILT_EASING_MIN_ANGLE 2 // default 4
-#define TILT_EASING_MILIS 15 //default 15
+//#define TILT_EASING
+//#define TILT_EASING_STEPS 15 // default 10
+//#define TILT_EASING_MIN_ANGLE 2 // default 4
+//#define TILT_EASING_MILIS 15 //default 15
 /*
  * ### Easing ecuations
  *  EASE_OUT_QRT ->  The easing effect is only applied at the end of the movement.
@@ -90,7 +90,7 @@
  */
 //#define EASE_OUT_QRT // Easing Out Quart function
 //#define EASE_INOUT_QRT // Easing In Out Quart function
-#define EASE_OUT_CIRC  / Easing Out Circular function
+//#define EASE_OUT_CIRC  / Easing Out Circular function
 /* #### Pan servo 0° adjustment ####
  *
  *  Enter PWM value of Servo for not moving

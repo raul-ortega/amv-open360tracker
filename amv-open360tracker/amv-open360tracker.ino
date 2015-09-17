@@ -29,12 +29,13 @@ extern uint8_t Settings[EEPROM_SETTINGS];
   #include <Mavlink.h>
 #endif
 
-#ifdef TILT_EASING
+//#ifdef TILT_EASING
   float _lasttilt=0.0;
+  int tilt;
   bool _servo_tilt_has_arrived=true;
   uint8_t _tilt_pos=0;
   int16_t _servo_tilt_must_move=-1;
-#endif
+//#endif
 
 int _contador=0;
 void calcTilt();
@@ -123,6 +124,10 @@ geoCoordinate_t trackerPosition;
 
   int TILT_0;
   int TILT_90;
+  int TILT_EASING;
+  int TILT_EASING_STEPS;
+  int TILT_EASING_MIN_ANGLE;
+  int TILT_EASING_MILIS;
   int PAN_0;
   int MIN_PAN_SPEED;
   int OFFSET;
@@ -130,7 +135,6 @@ geoCoordinate_t trackerPosition;
   uint8_t SERVOTEST;
 
   int cli_status=0;
-
  
   void (*pseudoReset)(void)=0;
   
@@ -149,6 +153,10 @@ void setup()
   
   TILT_0        = getParamValue("tilt0");
   TILT_90       = getParamValue("tilt90");
+  TILT_EASING   = getParamValue("easing");
+  TILT_EASING_STEPS       = getParamValue("easing_steps");
+  TILT_EASING_MIN_ANGLE   = getParamValue("easing_min_angle");
+  TILT_EASING_MILIS       = getParamValue("easing_milis");
   PAN_0         = getParamValue("pan0");
   MIN_PAN_SPEED = getParamValue("min_pan_speed");
   OFFSET        = getParamValue("offset");
@@ -246,9 +254,9 @@ void setup()
   #endif
   initServos();
 
-  #ifdef TILT_EASING
-    _lasttilt=0.0;
-  #endif
+  //if(TILT_EASING
+  if(TILT_EASING) _lasttilt=0.0;
+  //#endif
   
   #ifdef DEBUG
     Serial.println("Init Compass");
@@ -628,9 +636,9 @@ void loop()
       }
     }
   #endif //MDF
-  #ifdef TILT_EASING
-    servo_tilt_update();
-  #endif
+  //#ifdef TILT_EASING
+    if(TILT_EASING) servo_tilt_update();
+  //#endif
 
 }
 
@@ -657,14 +665,15 @@ void calcTilt() {
     alpha = 0;
   else if (alpha > 90)
     alpha = 90;
-  //SET_TILT_SERVO_SPEED(map(alpha, 0, 90, TILT_0, TILT_90));
-  #ifdef TILT_EASING
+  //#ifdef TILT_EASING
+  if(TILT_EASING){
     _servo_tilt_must_move=alpha;
     _servo_tilt_has_arrived=false;
-    //moveServoTilt(alpha);
-  #else
+  }
+  //#else
+  else
     SET_TILT_SERVO_SPEED(map(alpha, 0, 90, TILT_0, TILT_90));
-  #endif
+  //#endif
 }
 
 void getError(void)
@@ -751,7 +760,7 @@ void initGps() {
   }
 #endif
 
-#ifdef TILT_EASING
+//#ifdef TILT_EASING
   void moveServoTilt(float value){
     int _pwmpulse;
     float easingout;
@@ -766,14 +775,14 @@ void initGps() {
           easingout=_lasttilt-easeTilt(pos, 0, _lasttilt-value, TILT_EASING_STEPS);
         _pwmpulse=(int)map(easingout,0,90,TILT_0,TILT_90);
         SET_TILT_SERVO_SPEED(_pwmpulse);
-        #ifdef DEBUG && TILT_EASING 
+        /*#ifdef DEBUG && TILT_EASING 
           Serial.print(" dur: "); Serial.print(TILT_EASING_STEPS);
           Serial.print(" pos: "); Serial.print(pos);
           Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
           Serial.print(" value: "); Serial.print(value);
           Serial.print(" easingout: "); Serial.print(easingout);    
           Serial.print(" pwmpulse: "); Serial.println(_pwmpulse);
-        #endif
+        #endif*/
         delay(15);
       }
     }
@@ -788,15 +797,6 @@ void initGps() {
     if(_servo_tilt_must_move<0) _tilt_pos=0;
     if(!_servo_tilt_has_arrived && _servo_tilt_must_move>-1){
       if(abs(_lasttilt-_servo_tilt_must_move)>TILT_EASING_MIN_ANGLE) {
-        /*#ifdef DEBUG
-          Serial.println("Easing tilt...");
-        #endif*/
-        /*#ifdef DEBUG && TILT_EASING && SERVOTEST
-            Serial.print(" _tilt_pos: "); Serial.print(_tilt_pos);
-            Serial.print(" _servo_tilt_must_move: "); Serial.print(_servo_tilt_must_move);
-            Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
-            Serial.print(" TILT_EASING_STEPS: "); Serial.println(TILT_EASING_STEPS);
-        #endif*/
         if(_tilt_pos<TILT_EASING_STEPS){
           if(_lasttilt<=_servo_tilt_must_move)
             easingout=_lasttilt+easeTilt(_tilt_pos, 0, _servo_tilt_must_move-_lasttilt, TILT_EASING_STEPS);
@@ -804,25 +804,25 @@ void initGps() {
             easingout=_lasttilt-easeTilt(_tilt_pos, 0, _lasttilt-_servo_tilt_must_move, TILT_EASING_STEPS);
           _pwmpulse=(int)map(easingout,0,90,TILT_0,TILT_90);
           SET_TILT_SERVO_SPEED(_pwmpulse);
-          #ifdef DEBUG && TILT_EASING
+          /*#ifdef DEBUG && TILT_EASING
             Serial.print(" dur: "); Serial.print(TILT_EASING_STEPS);
             Serial.print(" pos: "); Serial.print(_tilt_pos);
             Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
             Serial.print(" value: "); Serial.print(_servo_tilt_must_move);
             Serial.print(" easingout: "); Serial.print(easingout);    
             Serial.print(" pwmpulse: "); Serial.println(_pwmpulse);
-          #endif
-          #if TILT_EASING_MILIS
-          delay(TILT_EASING_MILIS);
-          #endif;
+          #endif*/
+          //#if TILT_EASING_MILIS
+          if(TILT_EASING) delay(TILT_EASING_MILIS);
+          //#endif;
           _tilt_pos++;
         }
         else {
           if(_tilt_pos==TILT_EASING_STEPS){
             SET_TILT_SERVO_SPEED(map(_servo_tilt_must_move,0,90, TILT_0, TILT_90));
-            #if TILT_EASING_MILIS
-            delay(TILT_EASING_MILIS);
-            #endif;
+            //#if TILT_EASING_MILIS
+            if(TILT_EASING_MILIS) delay(TILT_EASING_MILIS);
+            //#endif;
             _lasttilt=(float)_servo_tilt_must_move;
             _tilt_pos=0;
             _servo_tilt_has_arrived=true;
@@ -837,7 +837,7 @@ void initGps() {
     }
   }
 
-#endif
+//#endif
 
 void encodeServoTest(uint8_t c){
     
@@ -851,18 +851,22 @@ void encodeServoTest(uint8_t c){
       value = 90;
     else if (value < 0)
       value = 0;
-    #ifdef TILT_EASING
+    //#ifdef TILT_EASING
+    if(TILT_EASING) {
         //moveServoTilt(value);
         _servo_tilt_must_move=value;
         _servo_tilt_has_arrived=false;
-    #else
+    }
+    else {
+    //#else
       tilt = map(value, 0, 90, TILT_0, TILT_90);
       SET_TILT_SERVO_SPEED(tilt);
-    #endif
+    }
+    //#endif
     
   } else if (c == 'M' || c == 'm') {
     //tilt angle in ms
-    int tilt = Serial.parseInt();
+    tilt = Serial.parseInt();
     SET_TILT_SERVO_SPEED(tilt);
   } else if (c == 'P' || c == 'p') {
     //p = Serial.parseInt();

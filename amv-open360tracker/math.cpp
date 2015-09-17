@@ -26,24 +26,24 @@ void setHome(geoCoordinate_t *tracker, geoCoordinate_t *target) {
   tracker->alt = target->alt;
   HOME_SET = true;
 }
-#ifdef TILT_EASING
+//#ifdef TILT_EASING
 float easeTilt(float t, float b, float c, float d) {
-  #ifdef EASE_OUT_QRT
+  //#ifdef EASE_OUT_QRT
   return easeOutQuart(t, b, c, d);
-  #endif
-  #ifdef EASE_INOUT_QRT
-  return easeInOutQuart(t, b, c, d);
-  #endif
-  #ifdef EASE_OUT_CIRC
-   return easeOutCirc(t, b, c, d);
-  #endif
+  //#endif
+  //#ifdef EASE_INOUT_QRT
+  //return easeInOutQuart(t, b, c, d);
+  //#endif
+  //#ifdef EASE_OUT_CIRC
+  //return easeOutCirc(t, b, c, d);
+  //#endif
 }
 
 float easeOutQuart(float t, float b, float c, float d) {
     return -c * ((t=t/d-1)*t*t*t - 1) + b;
   }
 
-float easeInOutQuart(float t, float b, float c, float d) {
+/*float easeInOutQuart(float t, float b, float c, float d) {
   t /= d/2;
   if (t < 1) return c/2*t*t*t*t + b;
   t -= 2;
@@ -54,5 +54,5 @@ float easeOutCirc(float t, float b, float c, float d) {
   if (t < 1) return -c/2 * (sqrt(1 - t*t) - 1) + b;
   t -= 2;
   return c/2 * (sqrt(1 - t*t) + 1) + b;
-}
-#endif
+}*/
+//#endif
