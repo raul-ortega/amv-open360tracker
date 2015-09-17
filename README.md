@@ -1,4 +1,4 @@
-# amv-open360tracker v0.6
+# amv-open360tracker v0.7
 ---------------------
 # EXPERIMENTAL
 #Command Line Interface added. Use this version in your opent360tracker under your own risk.
