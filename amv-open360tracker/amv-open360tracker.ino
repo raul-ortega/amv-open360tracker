@@ -130,7 +130,8 @@ geoCoordinate_t trackerPosition;
   uint8_t SERVOTEST;
 
   int cli_status=0;
-  
+
+ 
   void (*pseudoReset)(void)=0;
   
 void setup()
@@ -942,20 +943,20 @@ void cli_encode_command(char c){
     }
   }
   else if((c == '\n' || c == '\r') && parameter_started ){
-    if(command_name == "set") {
-      uint8_t value=getParamValue(parameter_name);
-      if(value==0) 
-        Serial.print("Parameter not valid"); 
-      else { 
-        Serial.println("Ok\n");
-      }
-  
-  
+    if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="local_gps" || parameter_name=="bat_mon" || parameter_name=="easing")) {
+      int value=getParamValue(parameter_name);
+      if(value==0)
+        value=1;
+      else
+        value=0;
+      setParamValue(parameter_name,value);
+      list_features();
+      
     }
-    else if(command_name == "feature") {
+    /*else if(command_name == "feature") {
       //change_settings(parameter_name,parameter_value.toInt());
       Serial.print("feature ");
-    }
+    }*/
 
     parameter_value = "";
     parameter_name = "";
