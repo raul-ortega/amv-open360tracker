@@ -64,7 +64,9 @@ enum Settings_ {
 /* 24 */ S_BATTERYMONITORING_RESISTOR_1,
 /* 25 */ S_BATTERYMONITORING_RESISTOR_2,
 /* 26 */ S_BATTERYMONITORING_CORRECTION,
-/* 27 */ EEPROM_SETTINGS
+/* 27 */ S_SERVOTEST,
+/* 28 */ S_CLI,
+/* 29 */ EEPROM_SETTINGS
 };
 
 // Default settings 
@@ -94,6 +96,8 @@ enum Settings_ {
 #define DEF_S_BATTERYMONITORING_RESISTOR_1    182 // 182*100 = 18200 ohm = 18.2 Kohm
 #define DEF_S_BATTERYMONITORING_RESISTOR_2      1 //   1*100 =   100 ohm =  0.1 Kohm
 #define DEF_S_BATTERYMONITORING_CORRECTION     11 //   11/10 =   1.1 
+#define DEF_S_SERVOTEST                         0 //
+#define DEF_S_CLI                               1 //
 
 #define ADDR_OFFSET 12 // commpass.cpp stores into eeprom 12 integer (2 per axi) after callibration
 

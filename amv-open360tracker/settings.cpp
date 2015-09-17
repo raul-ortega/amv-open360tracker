@@ -31,7 +31,9 @@ uint8_t EEPROM_DEFAULT[EEPROM_SETTINGS]={
 /* 23 */ DEF_S_BATTERYMONITORING,
 /* 24 */ DEF_S_BATTERYMONITORING_RESISTOR_1,
 /* 25 */ DEF_S_BATTERYMONITORING_RESISTOR_2,
-/* 26 */ DEF_S_BATTERYMONITORING_CORRECTION
+/* 26 */ DEF_S_BATTERYMONITORING_CORRECTION,
+/* 27 */ DEF_S_SERVOTEST,
+/* 28 */ DEF_S_CLI
 };
 
 uint8_t Settings[EEPROM_SETTINGS];
@@ -62,7 +64,9 @@ char *param_names[EEPROM_SETTINGS]={
 /* 23 */"bat_mon",
 /* 24 */"bat_res1",
 /* 25 */"bat_res2",
-/* 26 */"bat_corr"
+/* 26 */"bat_corr",
+/* 27 */"servotest",
+/* 28 */"cli"
  };
 void writeEEPROM(void)
 {
@@ -90,6 +94,7 @@ void defaultsEEMPROM(void)
   for(uint8_t en=0;en<EEPROM_SETTINGS;en++){
       EEPROM.write(en+ADDR_OFFSET,EEPROM_DEFAULT[en]);
   }
+  readEEPROM();
 }
 void dumpSettings(){
   int param_value;

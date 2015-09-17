@@ -127,7 +127,11 @@ geoCoordinate_t trackerPosition;
   int MIN_PAN_SPEED;
   int OFFSET;
 
-void (*pseudoReset)(void)=0;
+  uint8_t SERVOTEST;
+
+  int cli_status=0;
+  
+  void (*pseudoReset)(void)=0;
   
 void setup()
 {
@@ -147,6 +151,16 @@ void setup()
   PAN_0         = getParamValue("pan0");
   MIN_PAN_SPEED = getParamValue("min_pan_speed");
   OFFSET        = getParamValue("offset");
+
+  SERVOTEST     = getParamValue("servotest");
+  
+  cli_status    = getParamValue("cli");
+  
+  if(cli_status) {
+    delay(250);
+    cli_welcome_message();
+  }
+    
   
   MAX_PID_ERROR=getParamValue("max_pid_error");
   //Serial.println();Serial.print("P=");Serial.println(P);
@@ -188,13 +202,14 @@ void setup()
 
   HAS_ALT = false;
   HAS_FIX = false;
-  #ifdef SERVOTEST
+  if(SERVOTEST && !cli_status){
     HOME_SET = true;
     TRACKING_STARTED = true;
-  #else
+  }
+  else {
     HOME_SET = false;
     TRACKING_STARTED = false;
-  #endif
+  }
   SETTING_HOME = false;
   PREVIOUS_STATE = true;
 
@@ -267,28 +282,29 @@ void setup()
   #endif
 
 }
-
-#ifdef SERVOTEST
+/*#ifdef SERVOTEST
+if(SERVOTEST && !cli_status){
   long servoTimer = 0;
-#endif
+}*/
+ //#endif
+long servoTimer = 0;
 
 
-int cli_status=0;
 
 void loop()
 {
-  #ifdef SERVOTEST
+  if(SERVOTEST && !cli_status){
     if (millis() - servoTimer > 500) {
       Serial.print("Heading: "); Serial.print(trackerPosition.heading / 10);
       Serial.print(" Target Heading: "); Serial.print(targetPosition.heading / 10);
       Serial.print(" PAN: "); Serial.print(PWMOutput);
       Serial.print(" TILT: "); Serial.print(_lasttilt);
-      Serial.print(" P: "); Serial.print(p);
-      Serial.print(" I: "); Serial.print(i);
-      Serial.print(" D: "); Serial.println(d);
+      Serial.print(" P: "); Serial.print(P);
+      Serial.print(" I: "); Serial.print(I);
+      Serial.print(" D: "); Serial.println(D);
       servoTimer = millis();
     }
-  #endif
+  }
 
   //TODO change to telemetry serial port
   if (Serial.available() > 1)
@@ -304,17 +320,17 @@ void loop()
       // Salimos del modo comando
     }
 
-    #ifdef SERVOTEST
-        encodeServoTest();
-    #else
+    if(SERVOTEST && !cli_status)
+        encodeServoTest(c);
+    else
         encodeTargetData(c);
-    #endif
+    
     digitalWrite(LED_PIN, HIGH);
   }
   else {
     digitalWrite(LED_PIN, LOW);
   }
-  #ifndef SERVOTEST
+  if(SERVOTEST && !cli_status){
       #ifdef LCD_DISPLAY
         if (millis() > lcd_time) {
           int lcd_nr;
@@ -454,7 +470,7 @@ void loop()
           HAS_FIX = false;
         }
       #endif //MDF
-  #endif //SERVO_TEST
+  }//#endif //SERVO_TEST
   // refresh rate of compass is 75Hz -> 13.333ms to refresh the data
   // we update the heading every 14ms to get as many samples into the smooth array as possible
   if (millis() > time) {
@@ -497,7 +513,7 @@ void loop()
     }
     PREVIOUS_STATE = CURRENT_STATE;
   }
-  #ifndef SERVOTEST
+  if(!SERVOTEST){
     #ifndef LOCAL_GPS
       //only needed if no local gps
       if (!digitalRead(HOME_BUTTON)) {
@@ -583,7 +599,7 @@ void loop()
         NEW_HEADING = false;
       }
     #endif //MFD
-  #endif //SERVOTEST
+  }//#endif //SERVOTEST
   #ifndef MFD
     //Only track if home ist set.
     if (HOME_SET) {
@@ -821,7 +837,7 @@ void initGps() {
   }
 
 #endif
-#ifdef SERVOTEST
+
 void encodeServoTest(uint8_t c){
     
     if (c == 'H' || c == 'h') {
@@ -845,7 +861,7 @@ void encodeServoTest(uint8_t c){
     
   } else if (c == 'M' || c == 'm') {
     //tilt angle in ms
-    tilt = Serial.parseInt();
+    int tilt = Serial.parseInt();
     SET_TILT_SERVO_SPEED(tilt);
   } else if (c == 'P' || c == 'p') {
     //p = Serial.parseInt();
@@ -857,7 +873,7 @@ void encodeServoTest(uint8_t c){
     calibrate_compass();
   }
 }
-#endif
+
 
 ////////
   String command_name = "";
@@ -879,10 +895,7 @@ void cli_open_detect(char c){
     cli_header = 0;
   }
   if(cli_header==3){
-    Serial.println(F("amv-open360tracker"));
-    Serial.println(F("------------------"));
-    Serial.print(">");
-    Serial.flush();
+    cli_welcome_message();
     cli_status=1;
     cli_header = 0;
     command_name = "";
@@ -992,6 +1005,7 @@ void command_help()
 void command_save()
 {
   Serial.println(F("Saving settings..."));
+  setParamValue("cli",0); // First time saving disable cli by default;
   writeEEPROM();
   Serial.println(F("Command Line Interface closed"));
   Serial.flush();
@@ -1017,7 +1031,13 @@ void list_features(){
   if(value>0) Serial.print(F("lcd "));
   value=getParamValue("bat_mon");
   if(value>0) Serial.print(F("bat_mon "));
+  value=getParamValue("servotest");
+  if(value>0) Serial.print(F("servotest "));
   Serial.println(F("\n>"));
 }
-
+void cli_welcome_message(){
+    Serial.println(F("amv-open360tracker"));
+    Serial.println(F("------------------"));
+    Serial.print(">");
+}
 
