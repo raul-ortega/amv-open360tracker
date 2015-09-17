@@ -66,30 +66,21 @@ char *param_names[EEPROM_SETTINGS]={
  };
 void writeEEPROM(void)
 {
-  //Settings[S_AMPMAXH] = S16_AMPMAX>>8;
-  //Settings[S_AMPMAXL] = S16_AMPMAX&0xFF;
   for(uint8_t en=0;en<EEPROM_SETTINGS;en++){
-    EEPROM.write(en,Settings[en]);
+    EEPROM.write(en+ADDR_OFFSET,Settings[en]);
   } 
-  EEPROM.write(0,FMW_VER);
-  //#ifdef DEBUG
-    //Serial.println("Settings stored in EEPROM");
-  //#endif
+  EEPROM.write(0+ADDR_OFFSET,FMW_VER);
 }
 
 void readEEPROM(void)
 {
   for(uint8_t en=0;en<EEPROM_SETTINGS;en++){
-     Settings[en] = EEPROM.read(en);
+     Settings[en] = EEPROM.read(en+ADDR_OFFSET);
   }
-  //#ifdef DEBUG
-    //Serial.println("Settings read from EEPROM");
-  //#endif
-  //S16_AMPMAX=(Settings[S_AMPMAXH]<<8)+Settings[S_AMPMAXL];
 }
 void checkEEPROM(void)
 {
-  uint8_t EEPROM_Loaded = EEPROM.read(0);
+  uint8_t EEPROM_Loaded = EEPROM.read(0+ADDR_OFFSET);
   if (EEPROM_Loaded!=FMW_VER){
     defaultsEEMPROM();
   }
@@ -97,7 +88,7 @@ void checkEEPROM(void)
 void defaultsEEMPROM(void)
 {
   for(uint8_t en=0;en<EEPROM_SETTINGS;en++){
-      EEPROM.write(en,EEPROM_DEFAULT[en]);
+      EEPROM.write(en+ADDR_OFFSET,EEPROM_DEFAULT[en]);
   }
 }
 void dumpSettings(){
@@ -114,9 +105,9 @@ uint8_t setParamValue(String param_name,int param_value){
   uint8_t index;
   uint8_t value;
   uint8_t divider;
-  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0" || param_name=="offset" || param_name=="gps_bauds")
+  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0" || param_name=="offset")
     divider=10;
-  else if(param_name=="bat_res1" || param_name=="bat_res2")
+  else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds")
     divider=100;
   else
     divider=1;
@@ -130,9 +121,9 @@ int getParamValue(String param_name){
   uint8_t index = getParamIndex(param_name);
   int value=0;
   uint8_t multiplier;
-  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0" || param_name=="offset" || param_name=="gps_bauds")
+  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0" || param_name=="offset")
     multiplier=10;
-  else if(param_name=="bat_res1" || param_name=="bat_res2")
+  else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds")
     multiplier=100;
   else
     multiplier=1;

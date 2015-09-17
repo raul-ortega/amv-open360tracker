@@ -130,6 +130,7 @@ geoCoordinate_t trackerPosition;
 void setup()
 {
 
+  
   Serial.begin(BAUD);
   checkEEPROM();
   readEEPROM();
@@ -263,7 +264,6 @@ void setup()
     Serial.println("Setup finished");
   #endif
 
-  
 }
 
 #ifdef SERVOTEST
@@ -291,6 +291,7 @@ void loop()
   //TODO change to telemetry serial port
   if (Serial.available() > 1)
   {
+    
     uint8_t c = Serial.read();
     if(cli_status==0)
       cli_open_detect(c);
@@ -1014,5 +1015,5 @@ void list_features(){
   if(value>0) Serial.print(F("bat_mon "));
   Serial.println(F("\n>"));
 }
-
+//void(* resetFunc)(void) = 0;
 

@@ -84,7 +84,7 @@ enum Settings_ {
 #define DEF_S_OFFSET                           90 //  90*10 = 900
 #define DEF_S_LOCAL_GPS                         0
 #define DEF_S_MTK                               0
-#define DEF_S_GPS_BAUD_RATE                   960 // 960*10 = 9600 bauds
+#define DEF_S_GPS_BAUD_RATE                    96 // 960*100 = 9600 bauds
 #define DEF_S_START_TRACKING_DISTANCE          10
 #define DEF_S_LCD_DISPLAY                       1
 #define DEF_S_LCD_SIZE_ROW                      2
@@ -95,7 +95,7 @@ enum Settings_ {
 #define DEF_S_BATTERYMONITORING_RESISTOR_2      1 //   1*100 =   100 ohm =  0.1 Kohm
 #define DEF_S_BATTERYMONITORING_CORRECTION     11 //   11/10 =   1.1 
 
-
+#define ADDR_OFFSET 12 // commpass.cpp stores into eeprom 12 integer (2 per axi) after callibration
 
 void writeEEPROM(void);
 void readEEPROM(void);
