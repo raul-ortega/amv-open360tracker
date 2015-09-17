@@ -252,7 +252,8 @@ void setup()
   #ifdef DEBUG
     Serial.println("Init Servos");
   #endif
-  initServos();
+  
+  if(cli_status==0) initServos();
 
   //if(TILT_EASING
   if(TILT_EASING) _lasttilt=0.0;
