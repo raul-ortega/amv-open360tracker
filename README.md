@@ -3,8 +3,8 @@
 # EXPERIMENTAL
 #Command Line Interface added. Use this version in your opent360tracker under your own risk.
 
-* To enter in CLI mode key in ### and press enter.
-* Key in help and press Enter to see a list of available commands.
+* To enter in CLI mode key in ### and press enter
+* Key in help and press Enter to see a list of available commands
 * Only a few set commands will take effect if you set them:
 
 	- set P=value
@@ -15,10 +15,9 @@
 	- set tilt90=value
 	- set pan0=value
 	- set min_pan_speed=value
-	- set offset
+	- set offset=value
 
 Please, be quite carefully using this feature, it is only for experimental use.
-
 
 ---------------------
 Seguidor de antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
