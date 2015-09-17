@@ -10,7 +10,8 @@
 #include <inttypes.h>
 #include "config.h"
 
-#define FMW_VERSION "0.5"
+#define FMW_VERSION "1.0"
+#define FMW_VER 1 // Settings verification purpose
 
 #ifdef MEGA
   #define HOME_BUTTON 8

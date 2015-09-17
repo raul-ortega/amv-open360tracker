@@ -21,6 +21,10 @@
 #include "telemetry.h"
 #include "math.h"
 #include <TinyGPS.h>
+#include "settings.h"
+
+extern uint8_t Settings[EEPROM_SETTINGS];
+
 #ifdef Mavlink
   #include <Mavlink.h>
 #endif
@@ -111,15 +115,39 @@ geoCoordinate_t trackerPosition;
   uint16_t distance;
 #endif
 
-#ifdef SERVOTEST
-  int p = P;
-  int i = I;
-  int d = D;
-  int tilt = 0;
-#endif
 
+  int P;
+  int I;
+  int D;
+  uint8_t MAX_PID_ERROR;
+
+  int TILT_0;
+  int TILT_90;
+  int PAN_0;
+  int MIN_PAN_SPEED;
+  int OFFSET;
+  
 void setup()
 {
+
+  Serial.begin(BAUD);
+  checkEEPROM();
+  readEEPROM();
+
+  P             = getParamValue("P");
+  I             = getParamValue("I");
+  D             = getParamValue("D");
+  MAX_PID_ERROR = getParamValue("max_pid_error");
+  
+  TILT_0        = getParamValue("tilt0");
+  TILT_90       = getParamValue("tilt90");
+  PAN_0         = getParamValue("pan0");
+  MIN_PAN_SPEED = getParamValue("min_pan_speed");
+  OFFSET        = getParamValue("offset");
+  
+  MAX_PID_ERROR=getParamValue("max_pid_error");
+  //Serial.println();Serial.print("P=");Serial.println(P);
+  ////
   #ifdef BATTERYMONITORING
     pinMode(VOLTAGEDIVIDER, INPUT);
     analogReference(BATTERYMONITORING_VREF_SOURCE);
@@ -173,7 +201,7 @@ void setup()
     TEST_MODE = false;
   #endif
 
-  Serial.begin(BAUD);
+  
 
   #ifdef DEBUG
     Serial.println("Setup start");
@@ -242,6 +270,9 @@ void setup()
   long servoTimer = 0;
 #endif
 
+
+int cli_status=0;
+
 void loop()
 {
   #ifdef SERVOTEST
@@ -261,44 +292,23 @@ void loop()
   if (Serial.available() > 1)
   {
     uint8_t c = Serial.read();
+    if(cli_status==0)
+      cli_open_detect(c);
+    else if(cli_status==1) {
+      cli_encode_command(c);
+    }
+    else {
+      // Salimos del modo comando
+    }
+
     #ifdef SERVOTEST
-        if (c == 'H' || c == 'h') {
-          //target heading in degree
-          targetPosition.heading = Serial.parseInt();
-        } else if (c == 'T' || c == 't') {
-          //tilt angle in degree
-          int value = Serial.parseInt();
-          if (value > 90)
-            value = 90;
-          else if (value < 0)
-            value = 0;
-          #ifdef TILT_EASING
-              //moveServoTilt(value);
-              _servo_tilt_must_move=value;
-              _servo_tilt_has_arrived=false;
-          #else
-            tilt = map(value, 0, 90, TILT_0, TILT_90);
-            SET_TILT_SERVO_SPEED(tilt);
-          #endif
-          
-        } else if (c == 'M' || c == 'm') {
-          //tilt angle in ms
-          tilt = Serial.parseInt();
-          SET_TILT_SERVO_SPEED(tilt);
-        } else if (c == 'P' || c == 'p') {
-          p = Serial.parseInt();
-        } else if (c == 'I' || c == 'i') {
-          i = Serial.parseInt();
-        } else if (c == 'D' || c == 'd') {
-          d = Serial.parseInt();
-        } else if (c == 'C' || c == 'c') {
-          calibrate_compass();
-        }
+        encodeServoTest();
     #else
         encodeTargetData(c);
     #endif
     digitalWrite(LED_PIN, HIGH);
-  } else {
+  }
+  else {
     digitalWrite(LED_PIN, LOW);
   }
   #ifndef SERVOTEST
@@ -601,8 +611,9 @@ void loop()
   #ifdef TILT_EASING
     servo_tilt_update();
   #endif
+
 }
-//////////////// Me he quedado aquí revisando los #ifdef
+
 //Tilt angle alpha = atan(alt/dist)
 void calcTilt() {
   uint16_t alpha = 0;
@@ -656,34 +667,11 @@ void getError(void)
 
 void calculatePID(void)
 {
-#ifndef MAX_PID_ERROR
-  #define MAX_PID_ERROR 10
-#endif
+
+  
+
   // Calculate the PID
-#ifdef SERVOTEST
-  PID = Error[0] * p;     // start with proportional gain
-  Accumulator += Error[0];  // accumulator is sum of errors
-  if (Accumulator > 5000)
-    Accumulator = 5000;
-  if (Accumulator < -5000)
-    Accumulator = -5000;
-  PID += i * Accumulator; // add integral gain and error accumulation
-  Dk = d * (Error[0] - Error[10]);
-  PID += Dk; // differential gain comes next
-  PID = PID >> Divider; // scale PID down with divider
-  // limit the PID to the resolution we have for the PWM variable
-  if (PID >= 500)
-    PID = 500;
-  if (PID <= -500)
-    PID = -500;
-  if (Error[0] > MAX_PID_ERROR) {
-    PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
-  } else if (Error[0] < -1*MAX_PID_ERROR) {
-    PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
-  } else {
-    PWMOutput = PAN_0;
-  }
-#else
+
   PID = Error[0] * P;     // start with proportional gain
   Accumulator += Error[0];  // accumulator is sum of errors
   if (Accumulator > 5000)
@@ -706,7 +694,7 @@ void calculatePID(void)
   } else {
     PWMOutput = PAN_0;
   }
-#endif
+//#endif
 }
 
 #ifdef LOCAL_GPS
@@ -830,3 +818,201 @@ void initGps() {
   }
 
 #endif
+#ifdef SERVOTEST
+void encodeServoTest(uint8_t c){
+    
+    if (c == 'H' || c == 'h') {
+    //target heading in degree
+    targetPosition.heading = Serial.parseInt();
+  } else if (c == 'T' || c == 't') {
+    //tilt angle in degree
+    int value = Serial.parseInt();
+    if (value > 90)
+      value = 90;
+    else if (value < 0)
+      value = 0;
+    #ifdef TILT_EASING
+        //moveServoTilt(value);
+        _servo_tilt_must_move=value;
+        _servo_tilt_has_arrived=false;
+    #else
+      tilt = map(value, 0, 90, TILT_0, TILT_90);
+      SET_TILT_SERVO_SPEED(tilt);
+    #endif
+    
+  } else if (c == 'M' || c == 'm') {
+    //tilt angle in ms
+    tilt = Serial.parseInt();
+    SET_TILT_SERVO_SPEED(tilt);
+  } else if (c == 'P' || c == 'p') {
+    //p = Serial.parseInt();
+  } else if (c == 'I' || c == 'i') {
+    //i = Serial.parseInt();
+  } else if (c == 'D' || c == 'd') {
+    //d = Serial.parseInt();
+  } else if (c == 'C' || c == 'c') {
+    calibrate_compass();
+  }
+}
+#endif
+
+////////
+  String command_name = "";
+  String parameter_name = "";
+  uint8_t cli_header=0;
+  uint8_t parameter_started=false;
+  uint8_t value_started=false;
+  String parameter_value="";
+  uint8_t command_started=false;
+////////
+void cli_open_detect(char c){
+  if(c == '#' && cli_header==0){
+    cli_header = 1;
+  }
+  else if(c == '#'){
+    cli_header ++;
+  }
+  else {
+    cli_header = 0;
+  }
+  if(cli_header==3){
+    Serial.println(F("amv-open360tracker"));
+    Serial.println(F("------------------"));
+    Serial.print(">");
+    Serial.flush();
+    cli_status=1;
+    cli_header = 0;
+    command_name = "";
+  }
+  return;
+ 
+}
+void cli_encode_command(char c){
+   
+  if((c == '\n' || c == '\r') && !command_started){
+    if(command_name == "help")
+      command_help();
+    else if(command_name == "save")
+      command_save();
+    else if(command_name == "defaults")
+      command_defaults();
+    else if(command_name == "version")
+      command_version();
+    else if(command_name == "set" && !parameter_started && !value_started && !command_started)
+      dumpSettings();
+    else if(command_name == "feature" && !parameter_started && !value_started && !command_started)
+      list_features();
+    command_name = "";
+    command_started=false;
+    return;
+  }
+  else if(c == 32 && !parameter_started && !value_started){
+
+      parameter_name = "";
+      parameter_started = true;
+      parameter_value = "";
+      value_started = false;
+      command_started = true;
+      return;
+
+  }
+  else if(c == '=' && parameter_started && !value_started){
+    if(command_name == "set")
+    {
+      parameter_value = "";
+      parameter_started = false;
+      value_started = true;
+      return;
+    }
+  }
+  else if((c == '\n' || c == '\r') && parameter_started ){
+    if(command_name == "set") {
+      uint8_t value=getParamValue(parameter_name);
+      if(value==0) 
+        Serial.print("Parameter not valid"); 
+      else { 
+        Serial.println("Ok\n");
+      }
+  
+  
+    }
+    else if(command_name == "feature") {
+      //change_settings(parameter_name,parameter_value.toInt());
+      Serial.print("feature ");
+    }
+
+    parameter_value = "";
+    parameter_name = "";
+    command_name = "";
+    parameter_started = false;
+    value_started = false;
+    command_started = false;
+    return;
+  }
+  else if((c == '\n' || c == '\r') && value_started){
+    setParamValue(parameter_name,parameter_value.toInt());
+    parameter_value="";
+    parameter_name="";
+    command_name="";
+    parameter_started=false;
+    value_started=false;
+    command_started=false;
+    return;
+  }
+  else {
+    if(parameter_started==true){
+      parameter_name += c;
+    }
+    else if(value_started==true){
+      parameter_value += c;
+    }
+    else
+    {
+      command_name += c;
+    }
+  }
+}
+void command_help()
+{
+
+    Serial.println();
+    Serial.println(F("List of available commands:"));
+    Serial.println(F(" help       list commands"));
+    Serial.println(F(" defaults   reset settings to defaults"));
+    Serial.println(F(" *feature   enable/disable/list features"));
+    Serial.println(F(" set       set/list parameters"));
+    Serial.println(F(" *status    print out system status"));
+    Serial.println(F(" version    print out firmware version"));
+    Serial.println(F(" save       save settings and exit"));
+    Serial.println(F(">"));
+}
+void command_save()
+{
+  Serial.println(F("Saving settings..."));
+  writeEEPROM();
+  Serial.println(F("Command Line Interface closed"));
+  cli_status=0;
+}
+void command_defaults() {
+  Serial.println(F("Resetting to defaults..."));
+  defaultsEEMPROM();
+  Serial.println(F("Ok\n>"));
+}
+void command_version() {
+    Serial.print(F("Firmware amv-open360tracker V"));Serial.println(FMW_VERSION);Serial.println(F(">"));
+}
+void list_features(){
+  uint8_t value;
+  Serial.println(F("Enabled features: "));
+  value=getParamValue("easing");
+  if(value>0) Serial.print(F("easing "));
+  value=getParamValue("local_gps");
+  if(value>0) Serial.print(F("local_gps "));
+  value=getParamValue("lcd");
+  if(value>0) Serial.print(F("lcd "));
+  value=getParamValue("bat_mon");
+  if(value>0) Serial.print(F("bat_mon "));
+  Serial.println(F("\n>"));
+}
+
+

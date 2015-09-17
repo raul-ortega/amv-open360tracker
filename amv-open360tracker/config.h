@@ -14,10 +14,10 @@
 * angle is smaller or greater than this value, the angle will be corrected using PIDs.
 * 
 */ 
-#define P 5000 //5000 //default 2200
-#define I 100 //100 //default 280
-#define D 100 //1000 //default 20000
-#define MAX_PID_ERROR 10 // default 10 
+//#define P 5000 //5000 //default 2200
+//#define I 100 //100 //default 280
+//#define D 100 //1000 //default 20000
+//#define MAX_PID_ERROR 10 // default 10 
 /* #### Atmega 2560 ####
  *
  *  If using an APM or Atmega 2560 we do not need softserial, so uncomment if using an atema 2560
@@ -56,13 +56,13 @@
  *
  *  Enter PWM value of Servo for pointing straight forward
  */
-#define TILT_0 1125 // 1200 // default 1050
+//#define TILT_0 1125 // 1200 // default 1050
 
 /* #### Tilt servo 90° adjustment ####
  *
  *  Enter PWM value of Servo for pointing 90° up
  */
-#define TILT_90 2100 // 1500 // default 2025
+//#define TILT_90 2100 // 1500 // default 2025
 
 /* ### Easing effect for tilt movements (EXPERIMENTAL)
  *
@@ -95,13 +95,13 @@
  *
  *  Enter PWM value of Servo for not moving
  */
-#define PAN_0 610 // default 1470
+//#define PAN_0 610 // default 1470
 
 /* #### Pan servo minimum required speed ####
  *
  *  If the servo has problems to start a rotation when the speed is slow adjust this value until the tracker moves directly from each position
  */
-#define MIN_PAN_SPEED -25 // default 50
+//#define MIN_PAN_SPEED -25 // default 50
 
 /* #### Compass declination ####
  *
@@ -124,7 +124,7 @@
  * Range: 0 ... 3599
  *
  */
-#define OFFSET 2700 //default 900
+//#define OFFSET 2700 //default 900
 
 /* #### DIY GPS / Fix Type ####
 *
@@ -211,12 +211,12 @@
 #endif
 
 /* #### Do not edit below this line */
-#if TILT_0 < 800 || TILT_0 > 2200 || TILT_90 > 2200  || TILT_90 < 800
-#error "Tilt servo range invalid. Must be between 800 and 2200."
-#endif
+//#if TILT_0 < 800 || TILT_0 > 2200 || TILT_90 > 2200  || TILT_90 < 800
+//#error "Tilt servo range invalid. Must be between 800 and 2200."
+//#endif
 
-#if OFFSET < 0 || OFFSET > 3599
-#error "Offset invalid. Must be between 0 and 3599."
-#endif
+//#if OFFSET < 0 || OFFSET > 3599
+//#error "Offset invalid. Must be between 0 and 3599."
+//#endif
 
 #endif

@@ -22,6 +22,8 @@ float smoothed[3];
 int magZero[3];
 static uint8_t magInit = 0;
 
+extern int OFFSET;
+
 void initMpu6050(){
   Wire.beginTransmission(MPU6050_Address); //PWR_MGMT_1    -- DEVICE_RESET 1
   Wire.write(0x6B);

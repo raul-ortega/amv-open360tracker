@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>6.2</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
+    <ProjectGuid>{07b459b4-8d76-4638-bc6d-a459ba2d616b}</ProjectGuid>
+    <avrdevice>atmega328p</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>CPP</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>amv-open360tracker</AssemblyName>
+    <Name>amv-open360tracker</Name>
+    <RootNamespace>amv-open360tracker</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <OverrideVtorValue>
+    </OverrideVtorValue>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <CacheFlash>true</CacheFlash>
+    <UncachedRange />
+    <BootSegment>0</BootSegment>
+    <AsfFrameworkConfig>
+      <framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.18.1" />
+  </dependencies>
+</framework-data>
+    </AsfFrameworkConfig>
+    <preserveEEPROM>true</preserveEEPROM>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=165</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_PRO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1/utility</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM</Value>
+      <Value>../../amv-open360tracker</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=165</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_PRO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1/utility</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM</Value>
+      <Value>../../amv-open360tracker</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;../../amv-open360tracker;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/utility;C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src;C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src/utility;C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1;C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/utility;C:/Program Files (x86)/Arduino/libraries/TinyGPS-13;C:/Program Files (x86)/Arduino/libraries/TinyGPS-13/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/Raul/Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=165</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_PRO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1/utility</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM</Value>
+      <Value>../../amv-open360tracker</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega328p__</Value>
+      <Value>__AVR_ATmega328P__</Value>
+      <Value>ARDUINO=165</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_PRO</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/TinyGPS-13</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1/utility</Value>
+      <Value>C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM</Value>
+      <Value>../../amv-open360tracker</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+    <VMSETTING_IncludePaths>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;../../amv-open360tracker;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/utility;C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src;C:/Program Files (x86)/Arduino/libraries/LiquidCrystal/src/utility;C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1;C:/Users/Raul/Documents/Arduino/libraries/LiquidCrystal_I2C1602V1/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/utility;C:/Program Files (x86)/Arduino/libraries/TinyGPS-13;C:/Program Files (x86)/Arduino/libraries/TinyGPS-13/utility;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Visual Micro/Visual Micro for Arduino/Micro Platforms/default/debuggers;C:/Users/Raul/Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr//avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.8.1/include;</VMSETTING_IncludePaths>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="amv-open360tracker.ino">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Visual Micro\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="compass.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="compass.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="defines.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="eeprom_functions.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="eeprom_functions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="frsky.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="frsky_common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="frsky_sport.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="gps.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="settings.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="settings.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="hott.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="math.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="math.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mavlink.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="mfd.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="rvosd.cpp">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="sample.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="servos.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="telemetry.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Visual Micro\.amv-open360tracker.vsarduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>

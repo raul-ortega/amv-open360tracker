@@ -17,6 +17,9 @@
 #define SET_PAN_SERVO_SPEED(A) PAN_SERVO = A * 2
 #define SET_TILT_SERVO_SPEED(A) TILT_SERVO = A * 2
 
+extern int PAN_0;
+extern int TILT_0;
+
 // Initializes both hardware PWMs to be used for tilt and pan servos.
 inline void initServos()
 {
