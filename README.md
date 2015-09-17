@@ -16,7 +16,7 @@
 	- set pan0=value
 	- set min_pan_speed=value
 	- set offset
-	- 
+
 Please, be quite carefully using this feature, it is only for experimental use.
 
 
