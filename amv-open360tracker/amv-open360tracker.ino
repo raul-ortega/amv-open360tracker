@@ -196,17 +196,17 @@ void setup()
     #if LCD_SIZE_ROW == 4
         lcd.setCursor ( 0, 1 );
     #endif
-    lcd.print(" open360tracker ");
+    lcd.print(F(" open360tracker "));
     #if LCD_SIZE_ROW == 4
       lcd.setCursor ( 0, 2 );
     #elif LCD_SIZE_ROW == 2
       lcd.setCursor ( 0, 1 );
     #endif
-    lcd.print(" open360tracker ");
+    lcd.print(F(" open360tracker "));
     lcd.setCursor ( 0, 1 );
-    lcd.print(" version amv");
+    lcd.print(F(" version amv"));
     lcd.print(FMW_VERSION);
-    lcd.print("  ");
+    lcd.print(F("  "));
   #endif
 
   HAS_ALT = false;
@@ -305,13 +305,13 @@ void loop()
 {
   if(SERVOTEST && !cli_status){
     if (millis() - servoTimer > 500) {
-      Serial.print("Heading: "); Serial.print(trackerPosition.heading / 10);
-      Serial.print(" Target Heading: "); Serial.print(targetPosition.heading / 10);
-      Serial.print(" PAN: "); Serial.print(PWMOutput);
-      Serial.print(" TILT: "); Serial.print(_lasttilt);
-      Serial.print(" P: "); Serial.print(P);
-      Serial.print(" I: "); Serial.print(I);
-      Serial.print(" D: "); Serial.println(D);
+      Serial.print(F("Heading: ")); Serial.print(trackerPosition.heading / 10);
+      Serial.print(F(" Target Heading: ")); Serial.print(targetPosition.heading / 10);
+      Serial.print(F(" PAN: ")); Serial.print(PWMOutput);
+      Serial.print(F(" TILT: ")); Serial.print(_lasttilt);
+      Serial.print(F(" P: ")); Serial.print(P);
+      Serial.print(F(" I: ")); Serial.print(I);
+      Serial.print(F(" D: ")); Serial.println(D);
       servoTimer = millis();
     }
   }
@@ -948,7 +948,7 @@ void cli_encode_command(char c){
     }
   }
   else if((c == '\n' || c == '\r') && parameter_started ){
-    if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="local_gps" || parameter_name=="bat_mon" || parameter_name=="easing")) {
+    if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="local_gps" || parameter_name=="bat_mon" || parameter_name=="easing" ||  parameter_name=="servotest")) {
       int value=getParamValue(parameter_name);
       if(value==0)
         value=1;
@@ -999,13 +999,13 @@ void command_help()
 
     Serial.println();
     Serial.println(F("List of available commands:"));
-    Serial.println(F(" help       list commands"));
-    Serial.println(F(" defaults   reset settings to defaults"));
-    Serial.println(F(" feature    enable/disable/list features"));
-    Serial.println(F(" set        list parameters"));
-    Serial.println(F(" *status    print out system status"));
-    Serial.println(F(" version    print out firmware version"));
-    Serial.println(F(" save       save settings and exit"));
+    Serial.println(F(" help      list commands"));
+    Serial.println(F(" defaults  reset settings to defaults"));
+    Serial.println(F(" feature   enable/disable/list features"));
+    Serial.println(F(" set       list parameters"));
+    Serial.println(F(" *status   print out system status"));
+    Serial.println(F(" version   print out firmware version"));
+    Serial.println(F(" save      save settings and exit"));
     Serial.println(F(">"));
 }
 void command_save()
@@ -1044,6 +1044,6 @@ void list_features(){
 void cli_welcome_message(){
     Serial.println(F("amv-open360tracker"));
     Serial.println(F("------------------"));
-    Serial.print(">");
+    Serial.print(F(">"));
 }
 
