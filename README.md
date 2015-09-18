@@ -1,10 +1,10 @@
 # amv-open360tracker v0.5
 ---------------------
-# Novedades en esta vesrión:
+# Novedades en esta versión:
 
 * Efecto de amortiguación para el servo tilt.
 
-# New in this version:
+# What's new in this version:
 
 * Easing effect added to servo tilt.
 
