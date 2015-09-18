@@ -1,11 +1,28 @@
 # amv-open360tracker v0.5
 ---------------------
-# EXPERIMENTAL
-Easing effect added to servo tilt. Use this version in you opent360tracker under your own risk.
+# Novedades en esta vesrión:
+
+* Efecto de amortiguación para el servo tilt.
+
+# New in this version:
+
+* Easing effect added to servo tilt.
+
 ---------------------
+# Seguidor de Antena de 360º Open Source
+
 Seguidor de antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
-Este proyecto deriva del proyecto original de  [open360tracker](https://github.com/SamuelBrucksch/open360tracker) creado por SamuelBrucksch.
+Este proyecto, que se deriva del proyecto original de  [open360tracker](https://github.com/SamuelBrucksch/open360tracker) creado por SamuelBrucksch, ha sido adoptado como sistema seguidor de antena por un grupo de usuarios de la comunidad FPV de Aeromodelismo Virtual, resolviendo algunas deficiencias del proyecto original y añadiendo nuevas características:
+
+* Se han resuelto los errores de compilación con el uso del LCD cuando no se usa GPS Local.
+* Se han corregido errores de visualización de datos y deficiencias en el funcionamiento cuando no usa GPS Local.
+* Se ha corregido y completado el algoritmo para la decodifiación de la telemetría de RVSOD, que no funcionaba en la veresión original.
+* Se ha añadido efecto de amortiguación en el servo de TILT, pudiendo elegir entre tres funciones distintas de amortiguación.
+
+Actualmente se está trabajando en una interfaz de línea de comandos (CLI) para modificar los parámetros de configuraicón desde consola serie. En el futuro se desarrollará una aplicación android para interactuar con el tracker vía Bluetooth.
+
+# Basado en Plataforma Arduino
 
 El firmware está basado en la familia de microprocesadores de 8-bit de atmel presente en la plataforma Arduino. Es capaz de controlar un antenna tracker de fabricación casera que ofrece completa rotación continua de 360º, y soporta varios prococolos de telemetría y comunicaciones de diferentes controladoras de vuelo, como FrSky, Hott, Mavlink, MultiWii, Naza, Ardupilot, Arducopter y Rangevideo.
 
