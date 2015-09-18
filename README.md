@@ -17,7 +17,6 @@ Pleas, use this version in your opent360tracker under your own risk.
 * Settings on LOCAL GPS, LCD DISPLAY and BATTERY MONITORING, will not take effect in this release.
 
 Please, be quite carefully using this feature, it is only for experimental use.
-
 ---------------------
 # Instrucciones de Uso:
 
@@ -58,7 +57,7 @@ Para ver si el parámetro se ha modificado, tecleamos set y pulsamos enter, most
 Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos save y pulsamos enter. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
 Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD, los servos, etc... En este inicio ya no entramos en el modo CLI, dejándose de mostrar información por la consola.
 
-Entrar en modo CLI
+# Entrar en modo CLI
 
 Para volver a entrar en el modo CLI, tenemos que teclear ### y pulsar enter. La consola espera nuevamente a que enviemos comandos.
 
@@ -97,8 +96,8 @@ suponiendo que esté desactivada.
 
 Para desactivarla podemos ejecutar cualquiera de los dos siguientes:
 
-    set servotest=0
-    feature servotest
+* set servotest=0
+* feature servotest
 
 # Efecto Easing en Servo Tilt
 	
@@ -117,8 +116,7 @@ En estos momentos se han verificado el funcionamiento correcto cuando configuram
 * pan0: se aplica correctamente.
 * min_pan_speed: funciona, aunque aún no acepta valores negativos (en algunos modelos de servos es necesario meter valores negativos para que funcione bien).
 * offset: se aplica correctamente.
-
-	
+---------------------
 Para obtener más información visita el foro:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
