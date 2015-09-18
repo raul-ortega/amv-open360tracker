@@ -69,6 +69,8 @@ Vista el hilo del foro para más información:
 
 The AMV spanish community version (fork) of the open source antenna tracker for FPV with continuous 360 degree rotation. This project is a fork of the original firmware of the [open360tracker](https://github.com/SamuelBrucksch/open360tracker) created by SamuelBrucksch.
 
+# Improvements
+
 There are many improvements in this version:
 
 * Solved compilation issues regarding when using LCD Display, and a local GPS is not present.
@@ -76,6 +78,10 @@ There are many improvements in this version:
 * The telemetry parser algorithm for decoding the RVOSD frames has been debugged and improved, and now it works.
 * The tilt servo movement has been improved by adding easing effects at the beginning and smoothing at the end. This will avoid damaging the tilt servo and other mechanisms when using heavy and larger antennas.
 
+We are now working on a Command Line Interface (CLI) which will facilitate setting parameters using a remote console, for example some Android app over Bluetooth.
+
+# Platform
+	
 The firmware is based on the 8-bit atmel microcontrollers and manage an DIY antenna tracker which offers full 360° continuous rotation and support for lots of different telemetry protocols and flight controllers like FrSky, HoTT, Mavlink, MultiWii, Naza, ArduPilot, Arducopter and Rangevideo.
 
 More info about this projet at [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
