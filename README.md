@@ -2,9 +2,12 @@
 ---------------------
 # EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
 
-En es una versión derivada (branch) de la [versión master](https://github.com/raul-ortega/amv-open360tracker) del Seguidor de Antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
+Versión derivada de la [versión master](https://github.com/raul-ortega/amv-open360tracker) del Seguidor de Antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
 
-Se ha añadido una Interfaz de Línea de Comandos (Command Line Interface, o CLI) que permite el ajuste de los parámetros de configuración desde consola serie.
+# Nueva Interfaz de Línea de Comandos (Command Line Interface, o CLI)
+
+Permite la modificación de los parámetros de configuración desde consola serie.
+
 ---------------------
 New CLI feature (Command Line Interface) added. It allows setting up the parámeters throught the serial com terminal.
 Pleas, use this version in your opent360tracker under your own risk.
