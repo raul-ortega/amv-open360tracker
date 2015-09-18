@@ -7,6 +7,8 @@
 
 float lonScale = 1.0f;
 
+extern int TILT_EASING;
+
 void calcTargetDistanceAndHeading(geoCoordinate_t *tracker, geoCoordinate_t *target) {
   int16_t dLat = tracker->lat - target->lat;
   int16_t dLon = (tracker->lon - target->lon);// * lonScale;
@@ -28,15 +30,11 @@ void setHome(geoCoordinate_t *tracker, geoCoordinate_t *target) {
 }
 //#ifdef TILT_EASING
 float easeTilt(float t, float b, float c, float d) {
-  //#ifdef EASE_OUT_QRT
-  return easeOutQuart(t, b, c, d);
-  //#endif
-  //#ifdef EASE_INOUT_QRT
-  //return easeInOutQuart(t, b, c, d);
-  //#endif
-  //#ifdef EASE_OUT_CIRC
-  //return easeOutCirc(t, b, c, d);
-  //#endif
+  if(TILT_EASING==1)
+    return easeOutQuart(t, b, c, d);
+  else if(TILT_EASING==2)
+    return easeOutCirc(t, b, c, d);
+
 }
 
 float easeOutQuart(float t, float b, float c, float d) {
@@ -48,11 +46,11 @@ float easeOutQuart(float t, float b, float c, float d) {
   if (t < 1) return c/2*t*t*t*t + b;
   t -= 2;
   return -c/2 * (t*t*t*t - 2) + b;
-}
+}*/
 float easeOutCirc(float t, float b, float c, float d) {
   t /= d/2;
   if (t < 1) return -c/2 * (sqrt(1 - t*t) - 1) + b;
   t -= 2;
   return c/2 * (sqrt(1 - t*t) + 1) + b;
-}*/
+}
 //#endif
