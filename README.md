@@ -17,6 +17,7 @@ Pleas, use this version in your opent360tracker under your own risk.
 * Settings on LOCAL GPS, LCD DISPLAY and BATTERY MONITORING, will not take effect in this release.
 
 Please, be quite carefully using this feature, it is only for experimental use.
+
 ---------------------
 # Instrucciones de Uso:
 
@@ -115,6 +116,7 @@ En estos momentos se han verificado el funcionamiento correcto cuando configuram
 * pan0: se aplica correctamente.
 * min_pan_speed: funciona, aunque aún no acepta valores negativos (en algunos modelos de servos es necesario meter valores negativos para que funcione bien).
 * offset: se aplica correctamente.
+
 ---------------------
 Para obtener más información visita el foro:
 
