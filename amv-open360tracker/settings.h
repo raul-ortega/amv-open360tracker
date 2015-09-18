@@ -83,7 +83,7 @@ enum Settings_ {
 #define DEF_S_PAN_0                           147 // 147*10 = 1470 ms
 #define DEF_S_MIN_PAN_SPEED                    50 
 #define DEF_S_DECLINATION                       0
-#define DEF_S_OFFSET                           90 //  90*10 = 900
+#define DEF_S_OFFSET                            9 //  9*100 = 900
 #define DEF_S_LOCAL_GPS                         0
 #define DEF_S_MTK                               0
 #define DEF_S_GPS_BAUD_RATE                    96 // 960*100 = 9600 bauds
