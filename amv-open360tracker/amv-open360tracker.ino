@@ -116,7 +116,6 @@ geoCoordinate_t trackerPosition;
   uint16_t distance;
 #endif
 
-
   int P;
   int I;
   int D;
@@ -140,9 +139,7 @@ geoCoordinate_t trackerPosition;
   
 void setup()
 {
-
-  
-  Serial.begin(BAUD);
+  // Check and load settings from EEPROM; 
   checkEEPROM();
   readEEPROM();
 
@@ -228,7 +225,7 @@ void setup()
     TEST_MODE = false;
   #endif
 
-  
+  Serial.begin(BAUD);
 
   #ifdef DEBUG
     Serial.println("Setup start");
@@ -337,10 +334,10 @@ void loop()
     
     digitalWrite(LED_PIN, HIGH);
   }
-  else {
+  else
     digitalWrite(LED_PIN, LOW);
-  }
-  if(SERVOTEST && !cli_status){
+
+  if(!SERVOTEST && !cli_status){
       #ifdef LCD_DISPLAY
         if (millis() > lcd_time) {
           int lcd_nr;
@@ -920,8 +917,10 @@ void cli_encode_command(char c){
       command_defaults();
     else if(command_name == "version")
       command_version();
-    else if(command_name == "set" && !parameter_started && !value_started && !command_started)
+    else if(command_name == "set" && !parameter_started && !value_started && !command_started) {
       dumpSettings();
+      showPrompt();
+    }
     else if(command_name == "feature" && !parameter_started && !value_started && !command_started)
       list_features();
     command_name = "";
@@ -956,7 +955,7 @@ void cli_encode_command(char c){
         value=0;
       setParamValue(parameter_name,value);
       list_features();
-      
+     
     }
     /*else if(command_name == "feature") {
       //change_settings(parameter_name,parameter_value.toInt());
@@ -973,6 +972,8 @@ void cli_encode_command(char c){
   }
   else if((c == '\n' || c == '\r') && value_started){
     setParamValue(parameter_name,parameter_value.toInt());
+    Serial.println("Ok");
+    showPrompt();
     parameter_value="";
     parameter_name="";
     command_name="";
@@ -1006,7 +1007,7 @@ void command_help()
     Serial.println(F(" *status   print out system status"));
     Serial.println(F(" version   print out firmware version"));
     Serial.println(F(" save      save settings and exit"));
-    Serial.println(F(">"));
+    showPrompt();
 }
 void command_save()
 {
@@ -1021,10 +1022,11 @@ void command_save()
 void command_defaults() {
   Serial.println(F("Resetting to defaults..."));
   defaultsEEMPROM();
-  Serial.println(F("Ok\n>"));
+  showPrompt();
 }
 void command_version() {
-    Serial.print(F("Firmware amv-open360tracker V"));Serial.println(FMW_VERSION);Serial.println(F(">"));
+    Serial.print(F("Firmware amv-open360tracker V"));Serial.println(FMW_VERSION);
+    showPrompt();
 }
 void list_features(){
   uint8_t value;
@@ -1038,12 +1040,16 @@ void list_features(){
   value=getParamValue("bat_mon");
   if(value>0) Serial.print(F("bat_mon "));
   value=getParamValue("servotest");
-  if(value>0) Serial.print(F("servotest "));
-  Serial.println(F("\n>"));
+  if(value>0) Serial.print(F("servotest"));
+  Serial.println();
+  showPrompt();
 }
 void cli_welcome_message(){
     Serial.println(F("amv-open360tracker"));
     Serial.println(F("------------------"));
     Serial.print(F(">"));
+}
+void showPrompt(){
+  Serial.print(F(">"));
 }
 
