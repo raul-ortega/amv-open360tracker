@@ -49,6 +49,10 @@ Aquí encontrarás una lista de los protocolos soportados: [Protocolos](https://
 
 # Comunidad FPV AMV:
 
+A continuación un vídeo realizado por el compañero Simba, en el que se ve su antenna tracker en plena acción:
+
+[![ScreenShot](https://i.ytimg.com/vi/7mY_J5hPdOo/mqdefault.jpg)](https://www.youtube.com/watch?v=7mY_J5hPdOo)
+
 Vista el hilo del foro para más información:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
