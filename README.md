@@ -20,19 +20,18 @@ Please, be quite carefully using this feature, it is only for experimental use.
 ---------------------
 # Instrucciones de Uso:
 
-# Número de Versión
+Antes de su utilización, tenga en cuenta lo siguiente:
 
-El número de versión 0.7, para que no haya confusión. Yo, de momento, me limitaría a subirla a la placa con los servos desconectados, por lo que pueda pasar.
-
-Si habéis usado alguna vez el CLI de una Naze32 con Baseflight, veréis que me he inspirado ligeramente en su forma de proceder.
-
-Aunque todos los parámetros son configurables, los relacionados con LCD, monitorización de la batería y gps local no tendrán efecto sobre el tracker, pues aún están por implementar. Los que sí tienen efecto los he dejado todos comentados en el config.h
+* El número de versión es 0.7 para que no haya confusión con la versión master (v0.5). 
+* Se recomienda subir el firm a la controladora con los servos desconectados.
+* Al cargarse los parámetros por defecto, éstos podrían no ser adecuados para sus servos, podría haber una respuesta no esperada al inicio.
+* Este CLI está inspierado en el Naze32 con Baseflight, si estás familiarizado con él te será más fácil usarlo.
+* Aunque todos los parámetros se pueden modificar en el CLI, los relacionados con LCD, monitorización de la batería y gps local no tendrán efecto alguno sobre el tracker, pues aún no están implementados, en tal caso es necesario modificar el config.h.
+* Se puede interactuar con el CLI con la herramienta Monitor serie del IDE de Arduino. La consola espera nuestras órdenes, pero antes de se recomienda activar el retorno de carro y nueva línea en la consola. También es posible interactuar con el CLI utilizando otras herramientas, como por ejemplo Hércules.
 
 # Primer Inicio
 
 La primera vez que se inicia la controladora tras la carga del firmware, entrará automáticamente en modo CLI. El motivo es simple, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que se pondría poner a girar sin parar.
-
-La consola espera nuestras órdenes, per oantes de nada recomiendo activar el retorno de carro y el line feed en la consola.
 
 Así que lo primero es teclear help y luego pulsar enter. Nos aparecerá un listado con todos los comandos disponibles. Los que lleven un asterisco delante no funcionan.
 
