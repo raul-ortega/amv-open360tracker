@@ -76,7 +76,7 @@ enum Settings_ {
 #define DEF_S_MAX_PID_ERROR                    10 
 #define DEF_S_TILT_0                          150 // 150*10 = 1500 ms
 #define DEF_S_TILT_90                         202 // 202*10 = 2020 ms
-#define DEF_S_TILT_EASING                       1
+#define DEF_S_TILT_EASING                       1 // 0: no easing, 1: out-quart function, 2: out-circ function
 #define DEF_S_TILT_EASING_STEPS                10 
 #define DEF_S_TILT_EASING_MIN_ANGLE             2 
 #define DEF_S_TILT_EASING_MILIS                15
