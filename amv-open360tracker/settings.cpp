@@ -104,15 +104,14 @@ void dumpSettings(){
     Serial.print("set ");Serial.print(param_names[i]);Serial.print("=");Serial.println(param_value);
     Serial.flush();
   }
-  Serial.println(F(">"));
 }
 uint8_t setParamValue(String param_name,int param_value){
   uint8_t index;
   uint8_t value;
   uint8_t divider;
-  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0" || param_name=="offset")
+  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0")
     divider=10;
-  else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds")
+  else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds" || param_name=="offset")
     divider=100;
   else
     divider=1;
@@ -120,15 +119,14 @@ uint8_t setParamValue(String param_name,int param_value){
   //Serial.print(param_value);Serial.print("/");Serial.print(divider);Serial.print("=");Serial.println(value);
   index = getParamIndex(param_name);
   Settings[index]=value;
-  Serial.println("Ok\n>");
 }
 int getParamValue(String param_name){
   uint8_t index = getParamIndex(param_name);
   int value=0;
   uint8_t multiplier;
-  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0" || param_name=="offset")
+  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0")
     multiplier=10;
-  else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds")
+  else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds" || param_name=="offset")
     multiplier=100;
   else
     multiplier=1;
