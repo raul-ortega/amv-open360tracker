@@ -24,7 +24,9 @@ Actualmente se está trabajando en una interfaz de línea de comandos (CLI) para
 
 # Basado en Plataforma Arduino
 
-El firmware está basado en la familia de microprocesadores de 8-bit de atmel presente en la plataforma Arduino. Es capaz de controlar un antenna tracker de fabricación casera que ofrece completa rotación continua de 360º, y soporta varios prococolos de telemetría y comunicaciones de diferentes controladoras de vuelo, como FrSky, Hott, Mavlink, MultiWii, Naza, Ardupilot, Arducopter y Rangevideo.
+El firmware está basado en la familia de microprocesadores de 8-bit de atmel presente en la plataforma Arduino. Es capaz de controlar un antenna tracker de fabricación casera que ofrece completa rotación continua de 360º, y soporta varios prococolos de telemetría y comunicaciones y puede correr sobre diferentes controladoras de vuelo, como FrSky, Hott, Mavlink, MultiWii, Naza, Ardupilot, Arducopter y Rangevideo.
+
+En la comunidad de usuarios de FPV de Aeromodelismo Virtual, se ha montado y testado el firm sobre Arduino Uno y controladora de vuelo Crius SE V2.5, que poseen el microprocesador Atmega328p. También es posible ejecutar el código en controladoras dotadas con Atmega2560, aunque de momento no hay ningún compañero que la haya testado. Otra posibilidad es usar como plataforma hardware FQR-MAX, también todado con atmega328, que están desarrolando usuarios de la comunidad.
 
 # Rotación continua de 360°
 
@@ -59,7 +61,7 @@ Vista el hilo del foro para más información:
 
 # amv-open360tracker (english)
 
-The AMV spanish community version (fork) of the open source antenna tracker for FPV for continuous 360 degree rotation.
+The AMV spanish community version (fork) of the open source antenna tracker for FPV with continuous 360 degree rotation.
 
 This project is a fork of the original firmware of the [open360tracker](https://github.com/SamuelBrucksch/open360tracker) created by SamuelBrucksch.
 
