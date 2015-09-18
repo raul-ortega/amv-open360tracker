@@ -3,10 +3,16 @@
 # Novedades en esta versión:
 
 * Efecto de amortiguación para el servo tilt.
+* La telemetría RVSOD ahora funciona.
+* Problemas de compilación con LCD sin GPS local resueltos.
+* Problemas de visualización de datos resueltos.
 
 # What's new in this version:
 
-* Easing effect added to servo tilt.
+* Easing effect added to tilt servo movement.
+* RVSOD telemetry now works.
+* Some compilation issues solved.
+* Some data visualization issues solved.
 
 ---------------------
 # Seguidor de Antena de 360º Open Source
@@ -59,11 +65,16 @@ Vista el hilo del foro para más información:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
-# amv-open360tracker (english)
+# amv-open360tracker v0.5 (English)
 
-The AMV spanish community version (fork) of the open source antenna tracker for FPV with continuous 360 degree rotation.
+The AMV spanish community version (fork) of the open source antenna tracker for FPV with continuous 360 degree rotation. This project is a fork of the original firmware of the [open360tracker](https://github.com/SamuelBrucksch/open360tracker) created by SamuelBrucksch.
 
-This project is a fork of the original firmware of the [open360tracker](https://github.com/SamuelBrucksch/open360tracker) created by SamuelBrucksch.
+There are many improvements in this version:
+
+* Solved compilation issues regarding when using LCD Display, and a local GPS is not present.
+* Solved issues when displaying data and bad functioning when a local GPS device is not present.
+* The telemetry parser algorithm for decoding the RVOSD frames has been debugged and improved, and now it works.
+* The tilt servo movement has been improved by adding easing effects at the beginning and smoothing at the end. This will avoid damaging the tilt servo and other mechanisms when using heavy and larger antennas.
 
 The firmware is based on the 8-bit atmel microcontrollers and manage an DIY antenna tracker which offers full 360° continuous rotation and support for lots of different telemetry protocols and flight controllers like FrSky, HoTT, Mavlink, MultiWii, Naza, ArduPilot, Arducopter and Rangevideo.
 
