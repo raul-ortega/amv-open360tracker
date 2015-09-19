@@ -96,7 +96,7 @@ geoCoordinate_t trackerPosition;
 #endif
 
 // CLI Settings
-  int P;
+  /*int P;
   int I;
   int D;
   uint8_t MAX_PID_ERROR;
@@ -114,16 +114,48 @@ geoCoordinate_t trackerPosition;
   uint8_t LCD_MODEL;
   uint8_t LCD_I2C_ADDR;
   uint8_t LCD_SIZE_ROW;
+
 // 
-  int cli_status=0;
+  int cli_status=0;*/
+  
+// Check and load settings from EEPROM; 
+  uint8_t temp1=checkEEPROM();
+  uint8_t temp2=readEEPROM();
+  // PID Settings
+  int P                       = Settings[S_PID_P]*10;
+  int I                       = Settings[S_PID_I]*10;
+  int D                       = Settings[S_PID_D]*10;
+  uint8_t MAX_PID_ERROR           = Settings[S_MAX_PID_ERROR];
+  // Tilt Settings
+  int TILT_0                  = Settings[S_TILT_0]*10;
+  int TILT_90                 = Settings[S_TILT_90]*10;
+  uint8_t TILT_EASING             = Settings[S_TILT_EASING];
+  uint8_t TILT_EASING_STEPS       = Settings[S_TILT_EASING_STEPS];
+  uint8_t TILT_EASING_MIN_ANGLE   = Settings[S_TILT_EASING_MIN_ANGLE];
+  int TILT_EASING_MILIS       = Settings[S_TILT_EASING_MILIS];
+  // Pan Settings
+  int PAN_0                   = Settings[S_PAN_0]*10;
+  uint8_t MIN_PAN_SPEED           = Settings[S_MIN_PAN_SPEED]*10;
+  int OFFSET                  = Settings[S_OFFSET]*100;
+  // LCD Settings
+  uint8_t LCD_DISPLAY             = Settings[S_LCD_DISPLAY];
+  uint8_t LCD_MODEL               = Settings[S_LCD_MODEL];
+  uint8_t LCD_I2C_ADDR            = Settings[S_LCD_I2C_ADDR]; 
+  uint8_t LCD_SIZE_ROW            = Settings[S_LCD_SIZE_ROW];
+  // Other Settings
+  uint8_t SERVOTEST               = Settings[S_SERVOTEST];
+  uint8_t cli_status              = Settings[S_CLI];
+
+  
 // Pseudo reset. This function is called after saveing settings.
   void (*pseudoReset)(void)=0;
+  void *test;
   
   // Este  bloque #ifdef es necesario tenerlo aquí para que el constructor lcd funciona y esté accesible desde setup y loop
   #ifdef LCD_BANGGOOD_SKU166911
-      LiquidCrystal_I2C lcd(DEF_S_LCD_I2C_ADDR,16,LCD_SIZE_ROW);
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
     #else  // Nueva Linea introducida
-      LiquidCrystal_I2C lcd(DEF_S_LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
   #endif
   
   char lcd_str[24];
@@ -132,7 +164,8 @@ geoCoordinate_t trackerPosition;
 
 void setup()
 {
-  // Check and load settings from EEPROM; 
+ check_Display();
+ /* // Check and load settings from EEPROM; 
   checkEEPROM();
   readEEPROM();
   // PID Settings
@@ -158,24 +191,25 @@ void setup()
   LCD_SIZE_ROW            = Settings[S_LCD_SIZE_ROW];
   // Other Settings
   SERVOTEST               = Settings[S_SERVOTEST];
-  cli_status              = Settings[S_CLI];
+  cli_status              = Settings[S_CLI];*/
   //
   if(cli_status) {
     delay(250);
     cli_welcome_message();
   }
     
-  #ifdef LCD_BANGGOOD_SKU166911
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
-    #else  // Nueva Linea introducida
-      /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
-        lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
-        lcd.setBacklight(HIGH);                // GUILLESAN LCD ???*/
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
-  #endif
+  //#ifdef LCD_BANGGOOD_SKU166911
+      //LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
+  //  #else  // Nueva Linea introducida
+  //    /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
+  //      lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
+  //      lcd.setBacklight(HIGH);                // GUILLESAN LCD ???*/
+      //LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7);
+  //#endif
+
+  // Este  bloque #ifdef es necesario tenerlo aquí para que el constructor lcd funciona y esté accesible desde setup y loop
   
-  MAX_PID_ERROR=getParamValue("max_pid_error");
-  //Serial.println();Serial.print("P=");Serial.println(P);
+
   ////
   #ifdef BATTERYMONITORING
     pinMode(VOLTAGEDIVIDER, INPUT);
@@ -306,6 +340,13 @@ long servoTimer = 0;
 
 void loop()
 {
+  /*if (millis() - servoTimer > 1000) {
+    Serial.print("lcd: ");Serial.print(LCD_DISPLAY);
+    Serial.print(" rows: ");Serial.print(LCD_SIZE_ROW);
+    Serial.print(" addr: ");Serial.print(LCD_I2C_ADDR);
+    Serial.print(" servotest: ");Serial.print(SERVOTEST);
+    Serial.print(" cli: ");Serial.println(cli_status);
+  }*/
   if(SERVOTEST && !cli_status){
     if (millis() - servoTimer > 500) {
       Serial.print(F("Heading: ")); Serial.print(trackerPosition.heading / 10);
@@ -348,14 +389,13 @@ void loop()
         if (millis() > lcd_time) {
           int lcd_nr;
           //switch screen every X seconds
-          if(LCD_SIZE_ROW == 2)//#if LCD_SIZE_ROW == 2
-            if ((millis() % 10000 < 7000)) {
+          if(LCD_SIZE_ROW == 2){
+            if ((millis() % 10000 < 7000))
               lcd_nr = 1;
-            }
-            else {
+            else 
               lcd_nr = 2;
-            }
-          else if(LCD_SIZE_ROW == 4)//#elif LCD_SIZE_ROW == 4
+          }
+          else if(LCD_SIZE_ROW == 4)
             lcd_nr = 0;
           //#endif
           if (lcd_nr == 0 || lcd_nr == 1) {
@@ -1023,6 +1063,8 @@ void command_save()
   Serial.println(F("Command Line Interface closed"));
   Serial.flush();
   cli_status=0;
+  check_Display();
+  void clear();
   pseudoReset();
 }
 void command_defaults() {
@@ -1058,6 +1100,13 @@ void cli_welcome_message(){
 void showPrompt(){
   Serial.print(F(">"));
 }
-
+void check_Display(){
+  LCD_DISPLAY = Settings[S_LCD_DISPLAY];
+  if(!LCD_DISPLAY){
+    lcd.clear();
+    lcd.noDisplay();
+    lcd.noBacklight();
+  }
+}
 
 
