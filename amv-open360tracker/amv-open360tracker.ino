@@ -124,6 +124,8 @@ geoCoordinate_t trackerPosition;
   uint8_t SERVOTEST               = Settings[S_SERVOTEST];
   uint8_t cli_status              = Settings[S_CLI];
   uint8_t START_TRACKING_DISTANCE = Settings[S_START_TRACKING_DISTANCE];
+  uint8_t DECLINATION             = Settings[S_DECLINATION];
+  
   
 // Pseudo reset. This function is called after saveing settings.
   void (*pseudoReset)(void)=0;

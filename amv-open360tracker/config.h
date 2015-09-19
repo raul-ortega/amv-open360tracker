@@ -113,7 +113,7 @@
  *
  * set to 0 if you cannot find your declination!
  */
-#define DECLINATION 32 //default 32
+//#define DECLINATION 32 //default 32
 
 /* #### Compass offset ####
  *

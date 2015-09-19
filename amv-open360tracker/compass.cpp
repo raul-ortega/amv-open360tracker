@@ -22,6 +22,7 @@ float smoothed[3];
 int magZero[3];
 static uint8_t magInit = 0;
 
+extern uint8_t DECLINATION;
 extern int OFFSET;
 
 void initMpu6050(){
