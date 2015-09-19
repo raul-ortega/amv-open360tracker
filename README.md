@@ -14,7 +14,7 @@ Pleas, use this version in your opent360tracker under your own risk.
 
 * To enter in CLI mode key in ### and press enter
 * Key in help and press Enter to see a list of available commands
-* Settings on LOCAL GPS, LCD DISPLAY and BATTERY MONITORING, will not take effect in this release.
+* Settings on LOCAL GPS and BATTERY MONITORING, will not take effect in this release.
 
 Please, be quite carefully using this feature, it is only for experimental use.
 
@@ -27,7 +27,7 @@ Antes de su utilización, tenga en cuenta lo siguiente:
 * Se recomienda subir el firm a la controladora con los servos desconectados.
 * Al cargarse los parámetros por defecto, éstos podrían no ser adecuados para sus servos, podría haber una respuesta no esperada al inicio.
 * Este CLI está inspierado en el Naze32 con Baseflight, si estás familiarizado con él te será más fácil usarlo.
-* Aunque todos los parámetros se pueden modificar en el CLI, los relacionados con LCD, monitorización de la batería y gps local no tendrán efecto alguno sobre el tracker, pues aún no están implementados, en tal caso es necesario modificar el config.h.
+* Aunque todos los parámetros se pueden modificar en el CLI, monitorización de la batería y gps local no tendrán efecto alguno sobre el tracker, pues aún no están implementados, en tal caso es necesario modificar el config.h.
 * Se puede interactuar con el CLI con la herramienta Monitor serie del IDE de Arduino. La consola espera nuestras órdenes, pero antes de se recomienda activar el retorno de carro y nueva línea en la consola. También es posible interactuar con el CLI utilizando otras herramientas, como por ejemplo Hércules.
 
 # Primer Inicio
@@ -55,7 +55,7 @@ Para ver si el parámetro se ha modificado, tecleamos set y pulsamos enter, most
 # Salvar los cambios
 
 Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos save y pulsamos enter. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
-Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD, los servos, etc... En este inicio ya no entramos en el modo CLI, dejándose de mostrar información por la consola.
+Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD (si está habilidada la característica), los servos, etc... En este inicio ya no entramos en el modo CLI, dejándose de mostrar información por la consola.
 
 # Entrar en modo CLI
 
@@ -116,6 +116,12 @@ En estos momentos se han verificado el funcionamiento correcto cuando configuram
 * pan0: se aplica correctamente.
 * min_pan_speed: funciona, aunque aún no acepta valores negativos (en algunos modelos de servos es necesario meter valores negativos para que funcione bien).
 * offset: se aplica correctamente.
+* lcd: se activa y desactiva la visualización de datos tras salvar (el parámetro lcd_model no está operativo aún).
+* lcd_rows: testado para 2 filas.
+* lcd_addr: ahora es necesario introducir el valor como entero decimal. Para los valores hexadecimales típicos usad:
+	- 0x20 --> 32
+	- 0x27 --> 39
+	- 0x3F --> 63
 
 ---------------------
 Para obtener más información visita el foro:
