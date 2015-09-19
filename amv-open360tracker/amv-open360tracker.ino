@@ -118,23 +118,13 @@ geoCoordinate_t trackerPosition;
   int cli_status=0;
 // Pseudo reset. This function is called after saveing settings.
   void (*pseudoReset)(void)=0;
-
-//#ifdef LCD_DISPLAY
-  //download from https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home
-  //#if (LCD_DISPLAY == I2C)
-    #include <LiquidCrystal_I2C.h>
-    #ifdef LCD_BANGGOOD_SKU166911
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
+  
+  // Este  bloque #ifdef es necesario tenerlo aquí para que el constructor lcd funciona y esté accesible desde setup y loop
+  #ifdef LCD_BANGGOOD_SKU166911
+      LiquidCrystal_I2C lcd(DEF_S_LCD_I2C_ADDR,16,LCD_SIZE_ROW);
     #else  // Nueva Linea introducida
-      /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
-        lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
-        lcd.setBacklight(HIGH);                // GUILLESAN LCD ???*/
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
-    #endif  // Nueva Linea introducida
-  //#elif (LCD_DISPLAY == SPI)
-  //  #include <LiquidCrystal.h>
-  //  LiquidCrystal lcd(12, 11, 13, 4, 3, 2);
-  //#endif
+      LiquidCrystal_I2C lcd(DEF_S_LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
+  #endif
   
   char lcd_str[24];
   long lcd_time;
@@ -147,7 +137,7 @@ void setup()
   readEEPROM();
   // PID Settings
   P                       = Settings[S_PID_P]*10;
-  I                       = Settings[S_PID_P]*10;
+  I                       = Settings[S_PID_I]*10;
   D                       = Settings[S_PID_D]*10;
   MAX_PID_ERROR           = Settings[S_MAX_PID_ERROR];
   // Tilt Settings
@@ -175,6 +165,14 @@ void setup()
     cli_welcome_message();
   }
     
+  #ifdef LCD_BANGGOOD_SKU166911
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
+    #else  // Nueva Linea introducida
+      /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
+        lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
+        lcd.setBacklight(HIGH);                // GUILLESAN LCD ???*/
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
+  #endif
   
   MAX_PID_ERROR=getParamValue("max_pid_error");
   //Serial.println();Serial.print("P=");Serial.println(P);
@@ -187,8 +185,8 @@ void setup()
       getBatterieVoltage();
     }
   #endif
-  #ifdef LCD_DISPLAY
-
+  
+  if(LCD_DISPLAY) {
     #ifdef LCD_BANGGOOD_SKU166911  // Nueva Linea introducida
       lcd.init();                           // Nueva línea introducida
       lcd.backlight();                      // Nueva línea introducida
@@ -198,21 +196,21 @@ void setup()
       lcd.setBacklight(HIGH); 
     #endif // Nueva Linea introducida
     lcd.home();
-    #if LCD_SIZE_ROW == 4
+    if(LCD_SIZE_ROW == 4)
         lcd.setCursor ( 0, 1 );
-    #endif
+
     lcd.print(F(" open360tracker "));
-    #if LCD_SIZE_ROW == 4
+    if(LCD_SIZE_ROW == 4)
       lcd.setCursor ( 0, 2 );
-    #elif LCD_SIZE_ROW == 2
+    else if(LCD_SIZE_ROW == 2)
       lcd.setCursor ( 0, 1 );
-    #endif
+ 
     lcd.print(F(" open360tracker "));
     lcd.setCursor ( 0, 1 );
     lcd.print(F(" version amv"));
     lcd.print(FMW_VERSION);
     lcd.print(F("  "));
-  #endif
+  }
 
   HAS_ALT = false;
   HAS_FIX = false;
@@ -279,7 +277,7 @@ void setup()
     initGps();
   #endif
 
-  #ifdef LCD_DISPLAY
+  if(LCD_DISPLAY) {
     lcd.clear();
     lcd.setCursor(0, 0);
     sprintf(lcd_str, "HDG:%03u AZI:%03u", 0, 0);
@@ -288,7 +286,7 @@ void setup()
     sprintf(lcd_str, "A:%05d D:%05u", 0, 0);
     lcd.print(lcd_str);
     lcd_time = millis();
-  #endif
+  }
 
   time = millis();
 
@@ -346,20 +344,20 @@ void loop()
     digitalWrite(LED_PIN, LOW);
 
   if(!SERVOTEST && !cli_status){
-      #ifdef LCD_DISPLAY
+      if(LCD_DISPLAY){//#ifdef LCD_DISPLAY
         if (millis() > lcd_time) {
           int lcd_nr;
           //switch screen every X seconds
-          #if LCD_SIZE_ROW == 2
+          if(LCD_SIZE_ROW == 2)//#if LCD_SIZE_ROW == 2
             if ((millis() % 10000 < 7000)) {
               lcd_nr = 1;
             }
             else {
               lcd_nr = 2;
             }
-          #elif LCD_SIZE_ROW == 4
+          else if(LCD_SIZE_ROW == 4)//#elif LCD_SIZE_ROW == 4
             lcd_nr = 0;
-          #endif
+          //#endif
           if (lcd_nr == 0 || lcd_nr == 1) {
             //headings, alt, distance, sats
             lcd.setCursor(0, 0);
@@ -405,19 +403,19 @@ void loop()
             }
           if (lcd_nr == 0 || lcd_nr == 2) {
             //lat, lon
-            #if LCD_SIZE_ROW == 4
-              lcd.setCursor ( 0, 2 );
-            #else
-              lcd.setCursor(0, 0);
-            #endif
+            if(LCD_SIZE_ROW == 4)//#if LCD_SIZE_ROW == 4
+              lcd.setCursor(0,2);
+            else //#else
+              lcd.setCursor(0,0);
+            //#endif
             lcd.print("T LAT:");
             dtostrf(targetPosition.lat / 100000.0f, 10, 5, lcd_str);
             lcd.print(lcd_str);
-            #if LCD_SIZE_ROW == 4
-              lcd.setCursor ( 0, 3 );
-            #else
+            if(LCD_SIZE_ROW == 4)//#if LCD_SIZE_ROW == 4
+              lcd.setCursor(0,3);
+            else //else
               lcd.setCursor(0, 1);
-            #endif
+            //#endif
             lcd.print("T LON:");
             dtostrf(targetPosition.lon / 100000.0f, 10, 5, lcd_str);
             lcd.print(lcd_str);
@@ -427,7 +425,7 @@ void loop()
           #endif
           lcd_time = millis() + 200;
         }
-      #endif
+      }//#endif
 
       if (HAS_ALT) {
         targetPosition.alt = getTargetAlt();
@@ -506,22 +504,22 @@ void loop()
     } else if (CURRENT_STATE && millis() - calib_timer > 4000) {
       //start calibration routine if button pressed > 4s and released
       //cli();
-    #ifdef LCD_DISPLAY
+    if(LCD_DISPLAY){//#ifdef LCD_DISPLAY
       lcd.clear();
-      #if LCD_SIZE_ROW == 4
+      if(LCD_SIZE_ROW == 4)//#if LCD_SIZE_ROW == 4
         lcd.setCursor(0, 1);
-      #else
+      else //#else
         lcd.setCursor(0, 0);
-      #endif
+      //#endif
       //sprintf(lcd_str, "HDG:%03u AZI:%03u", 0, 0);
       lcd.print(" Calibration in ");
-      #if LCD_SIZE_ROW == 4
+      if(LCD_SIZE_ROW == 4)//#if LCD_SIZE_ROW == 4
         lcd.setCursor(0, 2);
-      #else
+      else //#else
         lcd.setCursor(0, 1);
-      #endif
+      //#endif
       lcd.print("   progress...  ");
-    #endif //LCD_DISPLAY
+    }//#endif //LCD_DISPLAY
       calibrate_compass();
       calib_timer = 0;
       //sei();
@@ -1060,4 +1058,6 @@ void cli_welcome_message(){
 void showPrompt(){
   Serial.print(F(">"));
 }
+
+
 
