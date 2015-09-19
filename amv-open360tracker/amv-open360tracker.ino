@@ -116,25 +116,28 @@ geoCoordinate_t trackerPosition;
   uint16_t distance;
 #endif
 
+// CLI Settings
   int P;
   int I;
   int D;
   uint8_t MAX_PID_ERROR;
-
   int TILT_0;
   int TILT_90;
-  int TILT_EASING;
-  int TILT_EASING_STEPS;
-  int TILT_EASING_MIN_ANGLE;
+  uint8_t TILT_EASING;
+  uint8_t TILT_EASING_STEPS;
+  uint8_t TILT_EASING_MIN_ANGLE;
   int TILT_EASING_MILIS;
   int PAN_0;
-  int MIN_PAN_SPEED;
+  uint8_t MIN_PAN_SPEED;
   int OFFSET;
-
   uint8_t SERVOTEST;
-
+  uint8_t LCD_DISPLAY;
+  uint8_t LCD_MODEL;
+  uint8_t LCD_I2C_ADDR;
+  uint8_t LCD_SIZE_ROW;
+// 
   int cli_status=0;
- 
+// Pseudo reset. This function is called after saveing settings.
   void (*pseudoReset)(void)=0;
   
 void setup()
@@ -142,26 +145,31 @@ void setup()
   // Check and load settings from EEPROM; 
   checkEEPROM();
   readEEPROM();
-
-  P             = getParamValue("P");
-  I             = getParamValue("I");
-  D             = getParamValue("D");
-  MAX_PID_ERROR = getParamValue("max_pid_error");
-  
-  TILT_0        = getParamValue("tilt0");
-  TILT_90       = getParamValue("tilt90");
-  TILT_EASING   = getParamValue("easing");
-  TILT_EASING_STEPS       = getParamValue("easing_steps");
-  TILT_EASING_MIN_ANGLE   = getParamValue("easing_min_angle");
-  TILT_EASING_MILIS       = getParamValue("easing_milis");
-  PAN_0         = getParamValue("pan0");
-  MIN_PAN_SPEED = getParamValue("min_pan_speed");
-  OFFSET        = getParamValue("offset");
-
-  SERVOTEST     = getParamValue("servotest");
-  
-  cli_status    = getParamValue("cli");
-  
+  // PID Settings
+  P                       = Settings[S_PID_P]*10;
+  I                       = Settings[S_PID_P]*10;
+  D                       = Settings[S_PID_D]*10;
+  MAX_PID_ERROR           = Settings[S_MAX_PID_ERROR];
+  // Tilt Settings
+  TILT_0                  = Settings[S_TILT_0]*10;
+  TILT_90                 = Settings[S_TILT_90]*10;
+  TILT_EASING             = Settings[S_TILT_EASING];
+  TILT_EASING_STEPS       = Settings[S_TILT_EASING_STEPS];
+  TILT_EASING_MIN_ANGLE   = Settings[S_TILT_EASING_MIN_ANGLE];
+  TILT_EASING_MILIS       = Settings[S_TILT_EASING_MILIS];
+  // Pan Settings
+  PAN_0                   = Settings[S_PAN_0]*10;
+  MIN_PAN_SPEED           = Settings[S_MIN_PAN_SPEED]*10;
+  OFFSET                  = Settings[S_OFFSET]*100;
+  // LCD Settings
+  LCD_DISPLAY             = Settings[S_LCD_DISPLAY];
+  LCD_MODEL               = Settings[S_LCD_MODEL];
+  LCD_I2C_ADDR            = Settings[S_LCD_I2C_ADDR]; 
+  LCD_SIZE_ROW            = Settings[S_LCD_SIZE_ROW];
+  // Other Settings
+  SERVOTEST               = Settings[S_SERVOTEST];
+  cli_status              = Settings[S_CLI];
+  //
   if(cli_status) {
     delay(250);
     cli_welcome_message();
