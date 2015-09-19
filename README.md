@@ -26,7 +26,7 @@ Este proyecto, que se deriva del proyecto original de  [open360tracker](https://
 * Se ha corregido y completado el algoritmo para la decodifiación de la telemetría de RVSOD, que no funcionaba en la veresión original.
 * Se ha añadido efecto de amortiguación en el servo de TILT, pudiendo elegir entre tres funciones distintas de amortiguación.
 
-Actualmente se está trabajando en una interfaz de línea de comandos (CLI) para modificar los parámetros de configuraicón desde consola serie. En el futuro se desarrollará una aplicación android para interactuar con el tracker vía Bluetooth.
+Actualmente se está trabajando en la nueva [versión con interfaz de línea de comandos (CLI)](https://github.com/raul-ortega/amv-open360tracker/blob/remote-settings/README.md) para modificar los parámetros de configuraicón desde consola serie. En el futuro se desarrollará una aplicación android para interactuar con el tracker vía Bluetooth.
 
 # Basado en Plataforma Arduino
 
