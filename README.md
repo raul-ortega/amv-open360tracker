@@ -117,13 +117,14 @@ En estos momentos se han verificado el funcionamiento correcto cuando configuram
 * pan0: se aplica correctamente.
 * min_pan_speed: funciona, aunque aún no acepta valores negativos (en algunos modelos de servos es necesario meter valores negativos para que funcione bien).
 * offset: se aplica correctamente.
-* lcd: se activa y desactiva la visualización de datos tras salvar (el parámetro lcd_model no está operativo aún).
+* lcd: si lo configuramos a cero se desactiva el LCD Display tras salvar (el parámetro lcd_model no está operativo aún). Si lo configuramos a 1, el LCD Display se encenderá y mostrará datos.
 * lcd_rows: testado para 2 filas.
 * lcd_addr: ahora es necesario introducir el valor como entero decimal. Para los valores hexadecimales típicos usad:
 	- 0x20 --> 32
 	- 0x27 --> 39
 	- 0x3F --> 63
-
+* start_track_dist: el parámetro es configurable desde el CLI. Se ha verificado su funcionamiento.
+* declination: configurable desde el CLI, pendiente verificar su funcionamiento en campo de vuelo.
 ---------------------
 Para obtener más información visita el foro:
 
