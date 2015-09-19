@@ -102,8 +102,8 @@ enum Settings_ {
 #define ADDR_OFFSET 12 // commpass.cpp stores into eeprom 12 integer (2 per axi) after callibration
 
 void writeEEPROM(void);
-void readEEPROM(void);
-void checkEEPROM(void);
+uint8_t readEEPROM(void);
+uint8_t checkEEPROM(void);
 void defaultsEEMPROM(void);
 void dumpSettings(void);
 uint8_t setParamValue(String param_name,int param_value);

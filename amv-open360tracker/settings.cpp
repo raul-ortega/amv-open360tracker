@@ -76,18 +76,20 @@ void writeEEPROM(void)
   EEPROM.write(0+ADDR_OFFSET,FMW_VER);
 }
 
-void readEEPROM(void)
+uint8_t readEEPROM(void)
 {
   for(uint8_t en=0;en<EEPROM_SETTINGS;en++){
      Settings[en] = EEPROM.read(en+ADDR_OFFSET);
   }
+  return 1;
 }
-void checkEEPROM(void)
+uint8_t checkEEPROM(void)
 {
   uint8_t EEPROM_Loaded = EEPROM.read(0+ADDR_OFFSET);
   if (EEPROM_Loaded!=FMW_VER){
     defaultsEEMPROM();
   }
+  return 1;
 }
 void defaultsEEMPROM(void)
 {
