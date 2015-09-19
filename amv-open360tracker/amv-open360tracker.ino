@@ -76,27 +76,6 @@ geoCoordinate_t trackerPosition;
 
 #endif
 
-#ifdef LCD_DISPLAY
-  //download from https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home
-  #if (LCD_DISPLAY == I2C)
-    #include <LiquidCrystal_I2C.h>
-    #ifdef LCD_BANGGOOD_SKU166911
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
-    #else  // Nueva Linea introducida
-      //lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
-      //lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
-      //lcd.setBacklight(HIGH);                // GUILLESAN LCD ???
-      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
-    #endif  // Nueva Linea introducida
-  #elif (LCD_DISPLAY == SPI)
-    #include <LiquidCrystal.h>
-    LiquidCrystal lcd(12, 11, 13, 4, 3, 2);
-  #endif
-  
-  char lcd_str[24];
-  long lcd_time;
-#endif
-
 #ifdef BATTERYMONITORING
   #ifndef BATTERYMONITORING_AVERAGE
     #define BATTERYMONITORING_AVERAGE 2
@@ -139,7 +118,28 @@ geoCoordinate_t trackerPosition;
   int cli_status=0;
 // Pseudo reset. This function is called after saveing settings.
   void (*pseudoReset)(void)=0;
+
+//#ifdef LCD_DISPLAY
+  //download from https://bitbucket.org/fmalpartida/new-liquidcrystal/wiki/Home
+  //#if (LCD_DISPLAY == I2C)
+    #include <LiquidCrystal_I2C.h>
+    #ifdef LCD_BANGGOOD_SKU166911
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
+    #else  // Nueva Linea introducida
+      /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
+        lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
+        lcd.setBacklight(HIGH);                // GUILLESAN LCD ???*/
+      LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
+    #endif  // Nueva Linea introducida
+  //#elif (LCD_DISPLAY == SPI)
+  //  #include <LiquidCrystal.h>
+  //  LiquidCrystal lcd(12, 11, 13, 4, 3, 2);
+  //#endif
   
+  char lcd_str[24];
+  long lcd_time;
+//#endif
+
 void setup()
 {
   // Check and load settings from EEPROM; 
