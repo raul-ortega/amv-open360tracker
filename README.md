@@ -125,6 +125,7 @@ En estos momentos se han verificado el funcionamiento correcto cuando configuram
 	- 0x3F --> 63
 * start_track_dist: el parámetro es configurable desde el CLI. Se ha verificado su funcionamiento.
 * declination: configurable desde el CLI, pendiente verificar su funcionamiento en campo de vuelo.
+
 ---------------------
 Para obtener más información visita el foro:
 
