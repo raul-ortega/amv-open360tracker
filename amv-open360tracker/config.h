@@ -177,16 +177,16 @@
  *  Requires modified LiquidCrystal library: https://bitbucket.org/fmalpartida/new-liquidcrystal/downloads
  *
  */
-#define LCD_DISPLAY I2C
+//#define LCD_DISPLAY I2C
 // no usar esta línea, es sólo experimental // #define LCD_SIZE_COL 16 // default 16. Not tested 20.
-#define LCD_SIZE_ROW 2  // default 2. Not tested with 4.
+//#define LCD_SIZE_ROW 2  // default 2. Not tested with 4.
 
 /*
  * LCD Display I2C ADDRESS
  * Default is 0x27 if uncommented. You'll need a I2C address scanner sketch if you don't know the correct one.
  * If your LCD has a different address descoment this line and change its value.
  */
-#define LCD_I2C_ADDR 0x3F //default 0x27
+//#define LCD_I2C_ADDR 0x3F //default 0x27
 
 /*
 * LCD display bought at en Banggood http://www.banggood.com/IIC-I2C-1602-Blue-Backlight-LCD-Display-Module-For-Arduino-p-950726.html
