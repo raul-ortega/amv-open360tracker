@@ -29,6 +29,7 @@ Antes de su utilización, tenga en cuenta lo siguiente:
 * Este CLI está inspierado en el Naze32 con Baseflight, si estás familiarizado con él te será más fácil usarlo.
 * Aunque todos los parámetros se pueden modificar en el CLI, monitorización de la batería y gps local no tendrán efecto alguno sobre el tracker, pues aún no están implementados, en tal caso es necesario modificar el config.h.
 * Se puede interactuar con el CLI con la herramienta Monitor serie del IDE de Arduino. La consola espera nuestras órdenes, pero antes de se recomienda activar el retorno de carro y nueva línea en la consola. También es posible interactuar con el CLI utilizando otras herramientas, como por ejemplo Hércules.
+* Esta versión solo soporta tipo LCD Display de tipo I2C, ya no está soportado el tipo SPI.
 
 # Primer Inicio
 
