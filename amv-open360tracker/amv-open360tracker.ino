@@ -72,7 +72,7 @@ geoCoordinate_t trackerPosition;
   
   TinyGPS gps;
   void initGps();
-  #define START_TRACKING_DISTANCE 0
+  //#define START_TRACKING_DISTANCE 0
 
 #endif
 
@@ -95,48 +95,26 @@ geoCoordinate_t trackerPosition;
   uint16_t distance;
 #endif
 
-// CLI Settings
-  /*int P;
-  int I;
-  int D;
-  uint8_t MAX_PID_ERROR;
-  int TILT_0;
-  int TILT_90;
-  uint8_t TILT_EASING;
-  uint8_t TILT_EASING_STEPS;
-  uint8_t TILT_EASING_MIN_ANGLE;
-  int TILT_EASING_MILIS;
-  int PAN_0;
-  uint8_t MIN_PAN_SPEED;
-  int OFFSET;
-  uint8_t SERVOTEST;
-  uint8_t LCD_DISPLAY;
-  uint8_t LCD_MODEL;
-  uint8_t LCD_I2C_ADDR;
-  uint8_t LCD_SIZE_ROW;
-
-// 
-  int cli_status=0;*/
   
 // Check and load settings from EEPROM; 
   uint8_t temp1=checkEEPROM();
   uint8_t temp2=readEEPROM();
   // PID Settings
-  int P                       = Settings[S_PID_P]*10;
-  int I                       = Settings[S_PID_I]*10;
-  int D                       = Settings[S_PID_D]*10;
+  int P                           = Settings[S_PID_P]*10;
+  int I                           = Settings[S_PID_I]*10;
+  int D                           = Settings[S_PID_D]*10;
   uint8_t MAX_PID_ERROR           = Settings[S_MAX_PID_ERROR];
   // Tilt Settings
-  int TILT_0                  = Settings[S_TILT_0]*10;
-  int TILT_90                 = Settings[S_TILT_90]*10;
+  int TILT_0                      = Settings[S_TILT_0]*10;
+  int TILT_90                     = Settings[S_TILT_90]*10;
   uint8_t TILT_EASING             = Settings[S_TILT_EASING];
   uint8_t TILT_EASING_STEPS       = Settings[S_TILT_EASING_STEPS];
   uint8_t TILT_EASING_MIN_ANGLE   = Settings[S_TILT_EASING_MIN_ANGLE];
-  int TILT_EASING_MILIS       = Settings[S_TILT_EASING_MILIS];
+  int TILT_EASING_MILIS           = Settings[S_TILT_EASING_MILIS];
   // Pan Settings
-  int PAN_0                   = Settings[S_PAN_0]*10;
+  int PAN_0                       = Settings[S_PAN_0]*10;
   uint8_t MIN_PAN_SPEED           = Settings[S_MIN_PAN_SPEED]*10;
-  int OFFSET                  = Settings[S_OFFSET]*100;
+  int OFFSET                      = Settings[S_OFFSET]*100;
   // LCD Settings
   uint8_t LCD_DISPLAY             = Settings[S_LCD_DISPLAY];
   uint8_t LCD_MODEL               = Settings[S_LCD_MODEL];
@@ -145,7 +123,7 @@ geoCoordinate_t trackerPosition;
   // Other Settings
   uint8_t SERVOTEST               = Settings[S_SERVOTEST];
   uint8_t cli_status              = Settings[S_CLI];
-
+  uint8_t START_TRACKING_DISTANCE = Settings[S_START_TRACKING_DISTANCE];
   
 // Pseudo reset. This function is called after saveing settings.
   void (*pseudoReset)(void)=0;
@@ -155,6 +133,9 @@ geoCoordinate_t trackerPosition;
   #ifdef LCD_BANGGOOD_SKU166911
       LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
     #else  // Nueva Linea introducida
+      /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
+      lcd.setBacklightPin(3, POSITIVE);        // GUILLESAN LCD ???
+      lcd.setBacklight(HIGH);                  // GUILLESAN LCD ???*/
       LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7); 
   #endif
   
@@ -165,52 +146,12 @@ geoCoordinate_t trackerPosition;
 void setup()
 {
  check_Display();
- /* // Check and load settings from EEPROM; 
-  checkEEPROM();
-  readEEPROM();
-  // PID Settings
-  P                       = Settings[S_PID_P]*10;
-  I                       = Settings[S_PID_I]*10;
-  D                       = Settings[S_PID_D]*10;
-  MAX_PID_ERROR           = Settings[S_MAX_PID_ERROR];
-  // Tilt Settings
-  TILT_0                  = Settings[S_TILT_0]*10;
-  TILT_90                 = Settings[S_TILT_90]*10;
-  TILT_EASING             = Settings[S_TILT_EASING];
-  TILT_EASING_STEPS       = Settings[S_TILT_EASING_STEPS];
-  TILT_EASING_MIN_ANGLE   = Settings[S_TILT_EASING_MIN_ANGLE];
-  TILT_EASING_MILIS       = Settings[S_TILT_EASING_MILIS];
-  // Pan Settings
-  PAN_0                   = Settings[S_PAN_0]*10;
-  MIN_PAN_SPEED           = Settings[S_MIN_PAN_SPEED]*10;
-  OFFSET                  = Settings[S_OFFSET]*100;
-  // LCD Settings
-  LCD_DISPLAY             = Settings[S_LCD_DISPLAY];
-  LCD_MODEL               = Settings[S_LCD_MODEL];
-  LCD_I2C_ADDR            = Settings[S_LCD_I2C_ADDR]; 
-  LCD_SIZE_ROW            = Settings[S_LCD_SIZE_ROW];
-  // Other Settings
-  SERVOTEST               = Settings[S_SERVOTEST];
-  cli_status              = Settings[S_CLI];*/
-  //
+ 
   if(cli_status) {
     delay(250);
     cli_welcome_message();
   }
-    
-  //#ifdef LCD_BANGGOOD_SKU166911
-      //LiquidCrystal_I2C lcd(LCD_I2C_ADDR,16,LCD_SIZE_ROW);
-  //  #else  // Nueva Linea introducida
-  //    /*lcd.begin(LCD_SIZE_COL, LCD_SIZE_ROW); // GUILLESAN LCD ???
-  //      lcd.setBacklightPin(3, POSITIVE);      // GUILLESAN LCD ???
-  //      lcd.setBacklight(HIGH);                // GUILLESAN LCD ???*/
-      //LiquidCrystal_I2C lcd(LCD_I2C_ADDR, 2, 1, 0, 4, 5, 6, 7);
-  //#endif
 
-  // Este  bloque #ifdef es necesario tenerlo aquí para que el constructor lcd funciona y esté accesible desde setup y loop
-  
-
-  ////
   #ifdef BATTERYMONITORING
     pinMode(VOLTAGEDIVIDER, INPUT);
     analogReference(BATTERYMONITORING_VREF_SOURCE);
@@ -656,27 +597,20 @@ void loop()
   #ifndef MFD
     //Only track if home ist set.
     if (HOME_SET) {
-    #if (START_TRACKING_DISTANCE > 0)
+      if (START_TRACKING_DISTANCE > 0){
         //Only track if tracking process started.
         if (!TRACKING_STARTED) {
           //if plane is START_TRACKING_DISTANCE meter away from tracker start tracking process.
           if (targetPosition.distance >= uint16_t(START_TRACKING_DISTANCE)) {
             TRACKING_STARTED = true;
           }
-        } else {
-    #endif
-        // only update pan value if there is new data
-        if ( NEW_HEADING ) {
+        } else if ( NEW_HEADING ) {
           getError();       // Get position error
           calculatePID();   // Calculate the PID output from the error
           SET_PAN_SERVO_SPEED(PWMOutput);
           NEW_HEADING = false;
-          #ifndef SERVOTEST
-                  calcTilt();
-          #endif
-          #if (START_TRACKING_DISTANCE > 0)
-                }
-          #endif
+          if(!SERVOTEST) calcTilt();
+        }
       }
     }
   #endif //MDF
