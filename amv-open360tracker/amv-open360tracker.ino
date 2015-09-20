@@ -113,7 +113,7 @@ geoCoordinate_t trackerPosition;
   int TILT_EASING_MILIS           = Settings[S_TILT_EASING_MILIS];
   // Pan Settings
   int PAN_0                       = Settings[S_PAN_0]*10;
-  uint8_t MIN_PAN_SPEED           = Settings[S_MIN_PAN_SPEED]*10;
+  int8_t MIN_PAN_SPEED            = getParamValue("min_pan_speed");//Settings[S_MIN_PAN_SPEED]*10;
   int OFFSET                      = Settings[S_OFFSET]*100;
   // LCD Settings
   uint8_t LCD_DISPLAY             = Settings[S_LCD_DISPLAY];

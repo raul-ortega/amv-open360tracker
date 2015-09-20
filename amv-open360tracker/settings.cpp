@@ -117,10 +117,14 @@ uint8_t setParamValue(String param_name,int param_value){
     divider=100;
   else
     divider=1;
-  value=param_value/divider;
-  //Serial.print(param_value);Serial.print("/");Serial.print(divider);Serial.print("=");Serial.println(value);
+  if(param_name=="min_pan_speed" && param_value<0)
+    value=abs(param_value)+100;
+  else
+    value=param_value/divider;
+
   index = getParamIndex(param_name);
   Settings[index]=value;
+  //Serial.println("min_pan_speed: ");Serial.print(value);
 }
 int getParamValue(String param_name){
   uint8_t index = getParamIndex(param_name);
@@ -132,8 +136,13 @@ int getParamValue(String param_name){
     multiplier=100;
   else
     multiplier=1;
-  if(index>0) 
+    
+  if(index>0) {
+    if(param_name=="min_pan_speed" && Settings[index]>100)
+        value=(-1)*(Settings[index]-100);
+    else   
       value=Settings[index]*multiplier;
+  }
   return value;
 }
 uint8_t getParamIndex(String param_name){
