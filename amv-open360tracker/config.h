@@ -28,7 +28,7 @@
  *  GPS_TELEMETRY -> direct NMEA input
  *  SERVOTEST
  */
-//#define SERVOTEST
+
 #define GPS_TELEMETRY
 //#define RVOSD
 /* #### Baud Rate ####
