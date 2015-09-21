@@ -118,7 +118,7 @@ Las características que se pueden activar y desactivar con el comando feature s
 
 Esta es la lista completa de los parámetros que pueden ser configurado mediante el comando set:
 
-* servotest: Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save, el tracker entrará en un modo que permite enviar comandos para mover los servos (ángulos o pulsos) y testear distiontos valores de PIDs.
+* **servotest:** Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save, el tracker entrará en un modo que permite enviar comandos para mover los servos (ángulos o pulsos) y testear distiontos valores de PIDs.
 * P,I,D: El valor de los valores PID (admite solo múltipos de 10, de 0 a 2550).
 * tilt0: Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0 (admite solo múltipos de 10, de 0 a 2550).
 * tilt90: Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 90 (admite solo múltipos de 10, de 0 a 2550).
