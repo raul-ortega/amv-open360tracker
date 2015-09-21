@@ -47,7 +47,7 @@
 * The 1602 is the correct one.
 * The default I2C address for this LCD display is 0x3F
 */
-//#define LCD_BANGGOOD_SKU166911 //default commented
+#define LCD_BANGGOOD_SKU166911 //default commented
 
 
 #endif
