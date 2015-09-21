@@ -26,8 +26,8 @@ Antes de su utilización, tenga en cuenta lo siguiente:
 * El número de versión es 0.7 para que no haya confusión con la versión master (v0.5). 
 * Se recomienda subir el firm a la controladora con los servos desconectados.
 * Al cargarse los parámetros por defecto, éstos podrían no ser adecuados para sus servos, podría haber una respuesta no esperada al inicio.
-* Este CLI está inspierado en el Naze32 con Baseflight, si estás familiarizado con él te será más fácil usarlo.
-* Aunque todos los parámetros se pueden modificar en el CLI, monitorización de la batería y gps local no tendrán efecto alguno sobre el tracker, pues aún no están implementados, en tal caso es necesario modificar el config.h.
+* Este CLI está inspierado en el de Basefilght para Naze32, si estás familiarizado con él te será más fácil usarlo.
+* Algunos parámetros no están implementados en el config.h. Estos son: DEBUG, MEGA, los protocolos y BAUDS (bauidos para el puerto serie). Es por tanto necesario modificar el config.h para modificarlos.
 * Se puede interactuar con el CLI con la herramienta Monitor serie del IDE de Arduino. La consola espera nuestras órdenes, pero antes de se recomienda activar el retorno de carro y nueva línea en la consola. También es posible interactuar con el CLI utilizando otras herramientas, como por ejemplo Hércules.
 * Esta versión solo soporta tipo LCD Display de tipo I2C, ya no está soportado el tipo SPI.
 
@@ -80,7 +80,7 @@ Una vez más, es necesario hacer un save para que los parámetros por defecto se
 
 Este comando tiene triple función:
 
-* Mostrar el listado de características activadas (entre ellas: lcd, easing, gps local, monitor de batería y servotest.
+* Mostrar el listado de características activadas.
 * Activar una característica
 * Desactivar una característica.
 
@@ -100,31 +100,43 @@ Para desactivarla podemos ejecutar cualquiera de los dos siguientes:
 * set servotest=0
 * feature servotest
 
+Las características que se pueden activar y desactivar con el comando feature son:
+
+* bat
+* easing
+* gps
+* lcd
+* servotest
+
 # Efecto Easing en Servo Tilt
 	
 * set easing=1 para usar la función out- quart
 * set easing=2 para usar la función out-circ
 * set easing=0 para desactivarlo (o también feature easing) 
 	
-# Funcionamiento Verificado
+# Parámetros configurables
 
-En estos momentos se han verificado el funcionamiento correcto cuando configuramos cualquiera de las siguientes características/parámetros:
+Esta es la lista completa de los parámetros que pueden ser configurado mediante el comando set:
 
-* servotest: tras activar la característica y salvar entra en este modo y se puede enviar comandos para mover los servos, etc...
-* P,I,D: configurables y tienen efecto tras salvar.
-* tilt0, tilt90: el cambio de los parámetros surte efecto tras salvar.
-* easing, easing_steps, easing_min_angle, easing_milis: aparentemente se aplican bien.
-* pan0: se aplica correctamente.
-* min_pan_speed: funciona, aunque aún no acepta valores negativos (en algunos modelos de servos es necesario meter valores negativos para que funcione bien).
-* offset: se aplica correctamente.
-* lcd: si lo configuramos a cero se desactiva el LCD Display tras salvar (el parámetro lcd_model no está operativo aún). Si lo configuramos a 1, el LCD Display se encenderá y mostrará datos.
-* lcd_rows: testado para 2 filas.
-* lcd_addr: ahora es necesario introducir el valor como entero decimal. Para los valores hexadecimales típicos usad:
+* servotest: Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save, el tracker entrará en un modo que permite enviar comandos para mover los servos (ángulos o pulsos) y testear distiontos valores de PIDs.
+* P,I,D: El valor de los valores PID (admite solo múltipos de 10, de 0 a 2550).
+* tilt0: Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0 (admite solo múltipos de 10, de 0 a 2550).
+* tilt90: Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 90 (admite solo múltipos de 10, de 0 a 2550).
+* easing: Puede tomar valores 0 (desactivado), 1 (efecto easing out-quart) ó 2 (efecto easing out-circ). Cuando está activo (valores 1 ó 2) el servo de tilt se mueve acelerando al principio del movimiento, y desacelarando al alcanzar el ángulo final, consiguiendo así un efecto de amortiguación. Muy útil si usas antenas muy pesadas.
+* easing_steps: Número de pasos (movimientos) para alcanzar el ángulo final aplicando el efecto de amortiguación.
+* easing_min_angle: Es el valor en grados del ángulo mínimo a partir del cual se aplicará el efecto easing cuando está activado.
+* easing_milis: es el tiempo en milisegundos que el sistema se espera entre paso y paso cuando el efecto easing está ctivado.
+* pan0: Valor del pulso en milisegundos para que el servo pan se detenga (admite solo múltipos de 10, de 0 a 2550).
+* min_pan_speed: Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición (acepta valores de -199 a 199).
+* offset: Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario. Para indicar 90 grados, es necesario introducir el valor 900 (adminte valores múltipos de 10 entre 0 y 2550). 
+* lcd: Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save el tracker se reinicia y el display se apagará o encenderá en función de su valor.
+* lcd_rows: número de filas del LCD display (valores admitidos 2 ó 4).
+* lcd_addr: es la dirección I2C del LCD display. Sólo admite valores en sistema dedicmal (base 10). Para los valores hexadecimales típicos usad:
 	- 0x20 --> 32
 	- 0x27 --> 39
 	- 0x3F --> 63
-* start_track_dist: el parámetro es configurable desde el CLI. Se ha verificado su funcionamiento.
-* declination: configurable desde el CLI, pendiente verificar su funcionamiento en campo de vuelo.
+* start_track_dist: es la distancia a partir de la cual el tracker empieza a apuntar al aeromodelo (adminte valores entre 0 y 255).
+* declination: es el valor de la declinación magnética. Visita [http://magnetic-declination.com/](http://magnetic-declination.com/), introduce tu ciudad y obtendrás el valor de la declinación magnética. Por ejemplo, 3° 2' Este, lo pasamos a formato grados.minutos *10 -> 3.2 * 10 = 32. Si no sabes el valor exacto déja esta parámetro a 0. (adminte valores entre 0 y 255).
 
 ---------------------
 Para obtener más información visita el foro:
