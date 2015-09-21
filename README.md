@@ -43,9 +43,7 @@ Si tecleamos set y pulsamos enter, mostrará un listado de todos los parámetros
 
 * set parámetro=valor
 
-No hay mucho que explicar aquí, basta con teclear exactamente el comando completo del parámetro que queremos configurar, cambiando únicamente el valor (los comandos se teclean en minúsculas siempre).
-
-Por ejemplo, si quiero poner la P de los PIDs a 400:
+Por ejemplo, para configuar el parámetro P de los PIDs a 400:
 
 * set P=400
 
@@ -53,10 +51,15 @@ y pulsamos enter.
 
 Para ver si el parámetro se ha modificado, tecleamos set y pulsamos enter, mostrándose todos los parámetros nuevamente.
 
+Al final de este REAME está la lista completa de parámetros detallada.
+
 # Salvar los cambios
 
 Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos save y pulsamos enter. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
-Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD (si está habilidada la característica), los servos, etc... En este inicio ya no entramos en el modo CLI, dejándose de mostrar información por la consola.
+
+Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD (si está habilidada la característica), los servos, etc...
+
+En este reinicio ya no entramos en el modo CLI, dejándose de mostrar información por la consola.
 
 # Entrar en modo CLI
 
