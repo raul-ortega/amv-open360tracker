@@ -53,7 +53,7 @@ char *param_names[EEPROM_SETTINGS]={
 /* 12 */"min_pan_speed",
 /* 13 */"declination",
 /* 14 */"offset",
-/* 15 */"local_gps",
+/* 15 */"gps",
 /* 16 */"gps_model",
 /* 17 */"gps_bauds",
 /* 18 */"start_track_dist",
@@ -108,7 +108,7 @@ void dumpSettings(){
   }
 }
 uint8_t setParamValue(String param_name,int param_value){
-  Serial.println(param_value);
+  //Serial.println(param_value);
   uint8_t index;
   uint8_t value;
   int divider;
@@ -142,7 +142,7 @@ int getParamValue(String param_name){
     
   if(index>0) {
     if(param_name=="min_pan_speed" && Settings[index]>100)
-        value=(-1)*(Settings[index]-100);
+        value=100-Settings[index];//value=(-1)*(Settings[index]-100);
     else if(param_name=="bat_corr")
         value=(int)((float)Settings[index]/10);
     else   
