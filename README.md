@@ -78,7 +78,7 @@ There are many improvements in this version:
 * The telemetry parser algorithm for decoding the RVOSD frames has been debugged and improved, and now it works.
 * The tilt servo movement has been improved by adding easing effects at the beginning and smoothing at the end. This will avoid damaging the tilt servo and other mechanisms when using heavy and larger antennas.
 
-We are now working on a Command Line Interface (CLI) which will facilitate setting parameters using a remote console, for example some Android app over Bluetooth.
+We are now working on a [new version with a Command Line Interface (CLI)](https://github.com/raul-ortega/amv-open360tracker/tree/remote-settings) which will facilitate setting parameters using a remote console, for example some Android app over Bluetooth.
 
 # Platform
 	
