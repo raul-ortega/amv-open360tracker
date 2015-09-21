@@ -39,9 +39,9 @@ Así que lo primero es teclear help y luego pulsar enter. Nos aparecerá un list
 
 # Modificar parámetros
 
-Si tecleamos set y pulsamos enter, mostrará un listado de todos los parámetros disponibles y su valor en la forma:
+Si tecleamos **set** y pulsamos **enter**, mostrará un listado de todos los parámetros disponibles y su valor en la forma:
 
-* set parámetro=valor
+* **set parámetro=valor**
 
 Por ejemplo, para configuar el parámetro P de los PIDs a 400:
 
@@ -55,7 +55,7 @@ Al final de este REAME está la lista completa de parámetros detallada.
 
 # Salvar los cambios
 
-Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos save y pulsamos enter. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
+Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos **save** y pulsamos **enter**. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
 
 Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD (si está habilidada la característica), los servos, etc...
 
@@ -63,7 +63,7 @@ En este reinicio ya no entramos en el modo CLI, dejándose de mostrar informaci�
 
 # Entrar en modo CLI
 
-Para volver a entrar en el modo CLI, tenemos que teclear ### y pulsar enter. La consola espera nuevamente a que enviemos comandos.
+Para volver a entrar en el modo CLI, tenemos que teclear **###** y pulsar **enter**. La consola espera nuevamente a que enviemos comandos.
 
 Estando en este modo por segunda vez, y en sucesivas veces, el tracker no dejará de realizar su cometido, seguirá en funcionamiento.
 
@@ -73,7 +73,7 @@ No salvar los cambios mientras se está haciendo uso del tracker y tenemos el av
 
 # Configuración por defecto
 
-Para volver a los valores por defecto de los parámetros de configuración, teclear defaults y pulsar enter.
+Para volver a los valores por defecto de los parámetros de configuración, teclear **defaults** y pulsar **enter**.
 
 Si hacemos uso a continuación del comando set, veremos que los parámetros por defecto se han cargado.
 
@@ -87,9 +87,9 @@ Este comando tiene triple función:
 * Activar una característica
 * Desactivar una característica.
 
-Tecleando feature y pulsando enter, muestra la lista de las que están activadas.
+Tecleando **feature** y pulsando **enter**, muestra la lista de las que están activadas.
 
-Tecleando feature y el nombre de la característica y pulsando enter, esta se activará si no lo estaba, o bien se desactivará si lo estaba.
+Tecleando **feature** y el **nombre de la característica** y pulsando **enter**, esta se activará si no lo estaba, o bien se desactivará si lo estaba.
 
 Esta función de activar/esactivar la característica también se puede realizar con el correspondiente comando set, por ejemplo, los siguientes dos comandos son equivalentes:
 
@@ -113,9 +113,9 @@ Las características que se pueden activar y desactivar con el comando feature s
 
 # Efecto Easing en Servo Tilt
 	
-* set easing=1 para usar la función out- quart
-* set easing=2 para usar la función out-circ
-* set easing=0 para desactivarlo (o también feature easing) 
+* set easing=**1** para usar la función **out- quart**
+* set easing=**2** para usar la función **out-circ**
+* set easing=**0** para **desactivarlo** (o también feature easing) 
 	
 # Parámetros configurables
 
