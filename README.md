@@ -14,7 +14,6 @@ Pleas, use this version in your opent360tracker under your own risk.
 
 * To enter in CLI mode key in ### and press enter
 * Key in help and press Enter to see a list of available commands
-* Settings on LOCAL GPS and BATTERY MONITORING, will not take effect in this release.
 
 Please, be quite carefully using this feature, it is only for experimental use.
 
