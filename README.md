@@ -119,24 +119,24 @@ Las características que se pueden activar y desactivar con el comando feature s
 Esta es la lista completa de los parámetros que pueden ser configurado mediante el comando set:
 
 * **servotest:** Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save, el tracker entrará en un modo que permite enviar comandos para mover los servos (ángulos o pulsos) y testear distiontos valores de PIDs.
-* P,I,D: El valor de los valores PID (admite solo múltipos de 10, de 0 a 2550).
-* tilt0: Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0 (admite solo múltipos de 10, de 0 a 2550).
-* tilt90: Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 90 (admite solo múltipos de 10, de 0 a 2550).
-* easing: Puede tomar valores 0 (desactivado), 1 (efecto easing out-quart) ó 2 (efecto easing out-circ). Cuando está activo (valores 1 ó 2) el servo de tilt se mueve acelerando al principio del movimiento, y desacelarando al alcanzar el ángulo final, consiguiendo así un efecto de amortiguación. Muy útil si usas antenas muy pesadas.
-* easing_steps: Número de pasos (movimientos) para alcanzar el ángulo final aplicando el efecto de amortiguación.
-* easing_min_angle: Es el valor en grados del ángulo mínimo a partir del cual se aplicará el efecto easing cuando está activado.
-* easing_milis: es el tiempo en milisegundos que el sistema se espera entre paso y paso cuando el efecto easing está ctivado.
-* pan0: Valor del pulso en milisegundos para que el servo pan se detenga (admite solo múltipos de 10, de 0 a 2550).
-* min_pan_speed: Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición (acepta valores de -199 a 199).
-* offset: Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario. Para indicar 90 grados, es necesario introducir el valor 900 (adminte valores múltipos de 10 entre 0 y 2550). 
-* lcd: Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save el tracker se reinicia y el display se apagará o encenderá en función de su valor.
-* lcd_rows: número de filas del LCD display (valores admitidos 2 ó 4).
-* lcd_addr: es la dirección I2C del LCD display. Sólo admite valores en sistema dedicmal (base 10). Para los valores hexadecimales típicos usad:
+* **P,I,D:** El valor de los valores PID (admite solo múltipos de 10, de 0 a 2550).
+* **tilt0:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0 (admite solo múltipos de 10, de 0 a 2550).
+* **tilt90:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 90 (admite solo múltipos de 10, de 0 a 2550).
+* **easing:** Puede tomar valores 0 (desactivado), 1 (efecto easing out-quart) ó 2 (efecto easing out-circ). Cuando está activo (valores 1 ó 2) el servo de tilt se mueve acelerando al principio del movimiento, y desacelarando al alcanzar el ángulo final, consiguiendo así un efecto de amortiguación. Muy útil si usas antenas muy pesadas.
+* **easing_steps:** Número de pasos (movimientos) para alcanzar el ángulo final aplicando el efecto de amortiguación.
+* **easing_min_angle:** Es el valor en grados del ángulo mínimo a partir del cual se aplicará el efecto easing cuando está activado.
+* **easing_milis:** es el tiempo en milisegundos que el sistema se espera entre paso y paso cuando el efecto easing está ctivado.
+* **pan0:** Valor del pulso en milisegundos para que el servo pan se detenga (admite solo múltipos de 10, de 0 a 2550).
+* **min_pan_speed:** Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición (acepta valores de -199 a 199).
+* **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario. Para indicar 90 grados, es necesario introducir el valor 900 (adminte valores múltipos de 10 entre 0 y 2550). 
+* **lcd:** Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save el tracker se reinicia y el display se apagará o encenderá en función de su valor.
+* **lcd_rows:** número de filas del LCD display (valores admitidos 2 ó 4).
+* **lcd_addr:** es la dirección I2C del LCD display. Sólo admite valores en sistema dedicmal (base 10). Para los valores hexadecimales típicos usad:
 	- 0x20 --> 32
 	- 0x27 --> 39
 	- 0x3F --> 63
-* start_track_dist: es la distancia a partir de la cual el tracker empieza a apuntar al aeromodelo (adminte valores entre 0 y 255).
-* declination: es el valor de la declinación magnética. Visita [http://magnetic-declination.com/](http://magnetic-declination.com/), introduce tu ciudad y obtendrás el valor de la declinación magnética. Por ejemplo, 3° 2' Este, lo pasamos a formato grados.minutos *10 -> 3.2 * 10 = 32. Si no sabes el valor exacto déja esta parámetro a 0. (adminte valores entre 0 y 255).
+* **start_track_dist:** es la distancia a partir de la cual el tracker empieza a apuntar al aeromodelo (adminte valores entre 0 y 255).
+* **declination:** es el valor de la declinación magnética. Visita [http://magnetic-declination.com/](http://magnetic-declination.com/), introduce tu ciudad y obtendrás el valor de la declinación magnética. Por ejemplo, 3° 2' Este, lo pasamos a formato grados.minutos *10 -> 3.2 * 10 = 32. Si no sabes el valor exacto déja esta parámetro a 0. (adminte valores entre 0 y 255).
 
 ---------------------
 Para obtener más información visita el foro:
