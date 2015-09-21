@@ -29,14 +29,26 @@
   #define BUZZER_PIN A1
 #endif
 
-////// Nuevas Lineas
+
+//#ifdef BATTERYMONITORING
+//  #ifndef BATTERYMONITORING_AVERAGE
+    #define BATTERYMONITORING_AVERAGE 2
+//  #endif
+//  #ifndef BATTERYMONITORING_VREF
+    #define BATTERYMONITORING_VREF 1.1
+//  #endif
+//  #ifndef BATTERYMONITORING_VREF_SOURCE
+    #define BATTERYMONITORING_VREF_SOURCE INTERNAL
+//  #endif
+
+/*////// Nuevas Lineas
 // Telemetría GPS sin GPS LOCAL
 #ifndef GPS_TELEMETRY_NO_LOCAL_GPS
   #if !defined (MFD) && !defined (FRSKY_D) && !defined (FRSKY_X)  && !defined (DIY_GPS) && !defined (HOTT) && !defined(MAVLINK) && (defined(GPS_TELEMETRY) || defined(RVOSD))
     #define GPS_TELEMETRY_NO_LOCAL_GPS
   #endif
 #endif
-////// Fin Nuevas Lineas
+////// Fin Nuevas Lineas*/
 
 
 //lat and lon required in units of millionths of a degree -> precision of 5 digits after '.'
