@@ -5,7 +5,7 @@
 #include "defines.h"
 #include <Arduino.h>
 
-enum Protocols {
+/*enum Protocols {
   P_FRSKY_D,
   P_FRSKY_X,
   P_HOTT,
@@ -13,13 +13,13 @@ enum Protocols {
   P_MFD,
   P_MAVLINK,
   P_GPS_TELEMETRY
-  };
+  };*/
   
-enum EasingFuntions {
+/*enum EasingFuntions {
   F_EASE_OUT_QRT,
   F_EASE_INOUT_QRT,
   F_EASE_OUT_CIRC,
-};
+};*/
 
 enum SupportedLCD {
   LCD_GENERIC_1602,
@@ -27,13 +27,18 @@ enum SupportedLCD {
   LCD_BANGGOOD_SKU166911_1602
 };
 
-enum GPSBaudRate {
+/*enum GPSBaudRate {
   BAUD_4800,
   BAUD_9600,
   BAUD_19200,
   BAUD_38400,
   BAUD_57600,
   BAUD_115200  
+};*/
+enum GPS_MODELS {
+  GENERIC_GPS,
+  MTK_GPS,
+  DIY_GPS
 };
 
 enum Settings_ {
@@ -53,8 +58,8 @@ enum Settings_ {
 /* 13 */ S_DECLINATION,
 /* 14 */ S_OFFSET,
 /* 15 */ S_LOCAL_GPS,
-/* 16 */ S_MTK,
-/* 17 */ S_GPS_BAUD_RATE,
+/* 16 */ S_GPS_MODEL,
+/* 17 */ S_GPS_BAUDRATE,
 /* 18 */ S_START_TRACKING_DISTANCE,
 /* 19 */ S_LCD_DISPLAY,
 /* 20 */ S_LCD_SIZE_ROW,
@@ -85,8 +90,8 @@ enum Settings_ {
 #define DEF_S_DECLINATION                       0
 #define DEF_S_OFFSET                            9 //  9*100 = 900
 #define DEF_S_LOCAL_GPS                         0
-#define DEF_S_MTK                               0
-#define DEF_S_GPS_BAUD_RATE                    96 // 960*100 = 9600 bauds
+#define DEF_S_GPS_MODEL                         0 // 0: default, 1: MTK, 2: DIY
+#define DEF_S_GPS_BAUDRATE                    96 // 960*100 = 9600 bauds
 #define DEF_S_START_TRACKING_DISTANCE          10
 #define DEF_S_LCD_DISPLAY                       1
 #define DEF_S_LCD_SIZE_ROW                      2

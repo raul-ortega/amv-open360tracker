@@ -21,8 +21,8 @@ uint8_t EEPROM_DEFAULT[EEPROM_SETTINGS]={
 /* 13 */ DEF_S_DECLINATION,
 /* 14 */ DEF_S_OFFSET,
 /* 15 */ DEF_S_LOCAL_GPS,
-/* 16 */ DEF_S_MTK,
-/* 17 */ DEF_S_GPS_BAUD_RATE,
+/* 16 */ DEF_S_GPS_MODEL,
+/* 17 */ DEF_S_GPS_BAUDRATE,
 /* 18 */ DEF_S_START_TRACKING_DISTANCE,
 /* 19 */ DEF_S_LCD_DISPLAY,
 /* 20 */ DEF_S_LCD_SIZE_ROW,
@@ -54,7 +54,7 @@ char *param_names[EEPROM_SETTINGS]={
 /* 13 */"declination",
 /* 14 */"offset",
 /* 15 */"local_gps",
-/* 16 */"gps_mtk",
+/* 16 */"gps_model",
 /* 17 */"gps_bauds",
 /* 18 */"start_track_dist",
 /* 19 */"lcd",
@@ -108,9 +108,10 @@ void dumpSettings(){
   }
 }
 uint8_t setParamValue(String param_name,int param_value){
+  Serial.println(param_value);
   uint8_t index;
   uint8_t value;
-  uint8_t divider;
+  int divider;
   if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0")
     divider=10;
   else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds" || param_name=="offset")
@@ -119,6 +120,8 @@ uint8_t setParamValue(String param_name,int param_value){
     divider=1;
   if(param_name=="min_pan_speed" && param_value<0)
     value=abs(param_value)+100;
+  else if(param_name=="bat_corr")
+    value=param_value*10;
   else
     value=param_value/divider;
 
@@ -140,6 +143,8 @@ int getParamValue(String param_name){
   if(index>0) {
     if(param_name=="min_pan_speed" && Settings[index]>100)
         value=(-1)*(Settings[index]-100);
+    else if(param_name=="bat_corr")
+        value=(int)((float)Settings[index]/10);
     else   
       value=Settings[index]*multiplier;
   }
