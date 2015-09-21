@@ -47,20 +47,7 @@
 * The 1602 is the correct one.
 * The default I2C address for this LCD display is 0x3F
 */
-#define LCD_BANGGOOD_SKU166911 //default commented
+//#define LCD_BANGGOOD_SKU166911 //default commented
 
-/* ### Battery monitoring ###
- *
- * Uncomment to monitor your Battery
- *
- * Voltage divider is required for this.
- *
- */
-/*//#define BATTERYMONITORING
-#ifdef BATTERYMONITORING
-//#define BATTERYMONITORING_RESISTOR_1 18000
-//#define BATTERYMONITORING_RESISTOR_2 1000
-//#define BATTERYMONITORING_CORRECTION 1.0    // default 1.0
-#endif*/
 
 #endif
