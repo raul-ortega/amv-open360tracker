@@ -11,6 +11,8 @@ int32_t lat;
 int32_t lon;
 int16_t sats; // nueva linea
 
+extern uint8_t LOCAL_GPS;
+
 int32_t getTargetLat() {
   return lat;
 }
@@ -46,12 +48,13 @@ void encodeTargetData(uint8_t c) {
       }
       
       ////// nuevas lineas
-      #ifdef GPS_TELEMETRY_NO_LOCAL_GPS
-      if (remoteGps.satellites() != TinyGPS::GPS_INVALID_SATELLITES) {
-        sats = int16_t(remoteGps.satellites());
-        //HAS_ALT = true;
-      }
-      #endif
+      //#ifdef GPS_TELEMETRY_NO_LOCAL_GPS
+      if(!LOCAL_GPS){
+        if (remoteGps.satellites() != TinyGPS::GPS_INVALID_SATELLITES) {
+          sats = int16_t(remoteGps.satellites());
+          //HAS_ALT = true;
+        }
+      }//#endif
       ////// fin nuevas lineas
       HAS_FIX = true;
     }
