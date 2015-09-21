@@ -59,38 +59,6 @@ geoCoordinate_t targetPosition;
 // The tracker position (lat/lon)
 geoCoordinate_t trackerPosition;
 
-//only use tinygps when local gps is used
-#ifdef LOCAL_GPS
-  uint8_t localSats;
-  
-  #ifdef MEGA
-    #define gpsSerial Serial1
-  #else
-    #include <SoftwareSerial.h>
-    SoftwareSerial gpsSerial(GPS_RX_PIN, GPS_TX_PIN);
-  #endif
-  
-  TinyGPS gps;
-  void initGps();
-  //#define START_TRACKING_DISTANCE 0
-
-#endif
-
-#ifdef BATTERYMONITORING
-  #ifndef BATTERYMONITORING_AVERAGE
-    #define BATTERYMONITORING_AVERAGE 2
-  #endif
-  #ifndef BATTERYMONITORING_VREF
-    #define BATTERYMONITORING_VREF 1.1
-  #endif
-  #ifndef BATTERYMONITORING_VREF_SOURCE
-    #define BATTERYMONITORING_VREF_SOURCE INTERNAL
-  #endif
-  uint16_t Bat_ADC_Last[BATTERYMONITORING_AVERAGE];
-  float Bat_Voltage;
-  float Bat_denominator = (float)BATTERYMONITORING_RESISTOR_2 / ((float)BATTERYMONITORING_RESISTOR_1 + (float)BATTERYMONITORING_RESISTOR_2);
-#endif
-
 #ifdef MFD
   uint16_t distance;
 #endif
@@ -100,31 +68,40 @@ geoCoordinate_t trackerPosition;
   uint8_t temp1=checkEEPROM();
   uint8_t temp2=readEEPROM();
   // PID Settings
-  int P                           = Settings[S_PID_P]*10;
-  int I                           = Settings[S_PID_I]*10;
-  int D                           = Settings[S_PID_D]*10;
-  uint8_t MAX_PID_ERROR           = Settings[S_MAX_PID_ERROR];
+  int P                             = Settings[S_PID_P]*10;
+  int I                             = Settings[S_PID_I]*10;
+  int D                             = Settings[S_PID_D]*10;
+  uint8_t MAX_PID_ERROR             = Settings[S_MAX_PID_ERROR];
   // Tilt Settings
-  int TILT_0                      = Settings[S_TILT_0]*10;
-  int TILT_90                     = Settings[S_TILT_90]*10;
-  uint8_t TILT_EASING             = Settings[S_TILT_EASING];
-  uint8_t TILT_EASING_STEPS       = Settings[S_TILT_EASING_STEPS];
-  uint8_t TILT_EASING_MIN_ANGLE   = Settings[S_TILT_EASING_MIN_ANGLE];
-  int TILT_EASING_MILIS           = Settings[S_TILT_EASING_MILIS];
+  int TILT_0                        = Settings[S_TILT_0]*10;
+  int TILT_90                       = Settings[S_TILT_90]*10;
+  uint8_t TILT_EASING               = Settings[S_TILT_EASING];
+  uint8_t TILT_EASING_STEPS         = Settings[S_TILT_EASING_STEPS];
+  uint8_t TILT_EASING_MIN_ANGLE     = Settings[S_TILT_EASING_MIN_ANGLE];
+  int TILT_EASING_MILIS             = Settings[S_TILT_EASING_MILIS];
   // Pan Settings
-  int PAN_0                       = Settings[S_PAN_0]*10;
-  int8_t MIN_PAN_SPEED            = getParamValue("min_pan_speed");//Settings[S_MIN_PAN_SPEED]*10;
-  int OFFSET                      = Settings[S_OFFSET]*100;
+  int PAN_0                         = Settings[S_PAN_0]*10;
+  int8_t MIN_PAN_SPEED              = getParamValue("min_pan_speed");//Settings[S_MIN_PAN_SPEED]*10;
+  int OFFSET                        = Settings[S_OFFSET]*100;
   // LCD Settings
-  uint8_t LCD_DISPLAY             = Settings[S_LCD_DISPLAY];
-  uint8_t LCD_MODEL               = Settings[S_LCD_MODEL];
-  uint8_t LCD_I2C_ADDR            = Settings[S_LCD_I2C_ADDR]; 
-  uint8_t LCD_SIZE_ROW            = Settings[S_LCD_SIZE_ROW];
+  uint8_t LCD_DISPLAY               = Settings[S_LCD_DISPLAY];
+  uint8_t LCD_MODEL                 = Settings[S_LCD_MODEL];
+  uint8_t LCD_I2C_ADDR              = Settings[S_LCD_I2C_ADDR]; 
+  uint8_t LCD_SIZE_ROW              = Settings[S_LCD_SIZE_ROW];
+  // Local GPS
+  uint8_t LOCAL_GPS                 = Settings[S_LOCAL_GPS];
+  int GPS_BAUDRATE                  = Settings[S_GPS_BAUDRATE]*100;
+  uint8_t GPS_MODEL                 = Settings[S_GPS_MODEL];
+  // Battery Monitoring
+  uint8_t BATTERYMONITORING         = Settings[S_BATTERYMONITORING];
+  int BATTERYMONITORING_RESISTOR_1  = Settings[S_BATTERYMONITORING_RESISTOR_1]*100;
+  int BATTERYMONITORING_RESISTOR_2  = Settings[S_BATTERYMONITORING_RESISTOR_2]*100;
+  int BATTERYMONITORING_CORRECTION  = Settings[S_BATTERYMONITORING_CORRECTION]*0.1;
   // Other Settings
-  uint8_t SERVOTEST               = Settings[S_SERVOTEST];
-  uint8_t cli_status              = Settings[S_CLI];
-  uint8_t START_TRACKING_DISTANCE = Settings[S_START_TRACKING_DISTANCE];
-  uint8_t DECLINATION             = Settings[S_DECLINATION];
+  uint8_t SERVOTEST                 = Settings[S_SERVOTEST];
+  uint8_t cli_status                = Settings[S_CLI];
+  uint8_t START_TRACKING_DISTANCE   = Settings[S_START_TRACKING_DISTANCE];
+  uint8_t DECLINATION               = Settings[S_DECLINATION];
   
   
 // Pseudo reset. This function is called after saveing settings.
@@ -143,6 +120,33 @@ geoCoordinate_t trackerPosition;
   
   char lcd_str[24];
   long lcd_time;
+
+//only use tinygps when local gps is used
+//#ifdef LOCAL_GPS
+  uint8_t localSats;
+  
+  #ifdef MEGA
+    #define gpsSerial Serial1
+  #else
+    #include <SoftwareSerial.h>
+    SoftwareSerial gpsSerial(GPS_RX_PIN, GPS_TX_PIN);
+  #endif
+  
+  TinyGPS gps;
+  void initGps();
+  //#define START_TRACKING_DISTANCE 0
+
+//#endif
+
+
+
+  uint16_t Bat_ADC_Last[BATTERYMONITORING_AVERAGE];
+  float Bat_Voltage;
+  float Bat_denominator = (float)BATTERYMONITORING_RESISTOR_2 / ((float)BATTERYMONITORING_RESISTOR_1 + (float)BATTERYMONITORING_RESISTOR_2);
+//#endif
+
+
+  
 //#endif
 
 void setup()
@@ -154,14 +158,14 @@ void setup()
     cli_welcome_message();
   }
 
-  #ifdef BATTERYMONITORING
+  if(BATTERYMONITORING){//#ifdef BATTERYMONITORING
     pinMode(VOLTAGEDIVIDER, INPUT);
     analogReference(BATTERYMONITORING_VREF_SOURCE);
     int n = 0;
     for (n = 0; n < BATTERYMONITORING_AVERAGE; n++) {
       getBatterieVoltage();
     }
-  #endif
+  }//#endif
   
   if(LCD_DISPLAY) {
     #ifdef LCD_BANGGOOD_SKU166911  // Nueva Linea introducida
@@ -244,7 +248,7 @@ void setup()
   #endif
   initCompass();
 
-  #ifdef LOCAL_GPS
+  if (LOCAL_GPS){//#ifdef LOCAL_GPS
   #ifdef DEBUG
     Serial.println("Init local GPS");
   #endif
@@ -252,7 +256,7 @@ void setup()
     //let gps serial initialize before we configure it
     delay(20);
     initGps();
-  #endif
+  }//#endif
 
   if(LCD_DISPLAY) {
     lcd.clear();
@@ -361,26 +365,15 @@ void loop()
                   
                   lcd.print(lcd_str);
                   
-                  #ifdef LOCAL_GPS
+                  if(LOCAL_GPS)//#ifdef LOCAL_GPS
                     sprintf(lcd_str, "S:%02d", localSats);
-                  #else
-                    //Si uso LCD pero no uso GPS local, el código genera un error de compilación
-                    // que me obliga a descompentar en el config.h la línea //#define LOCAL_GPS
-                    //para evitarlo introduzco este #ifdef GPS_TELEMETRY_NO_LOCAL_GPS que he definido en defines.h
-                    //Comprueba que no uso ninguno de esos protocolos, solamente uso la telemetría directa, en cuyo caso devuelvo un 0 como número de satélites.
-                    //#ifdef GPS_TELEMETRY_NO_LOCAL_GPS //nueva línea introducida
-                    //  sprintf(lcd_str, "S:%02d", getSats());  //nueva línea introducida
-                    //#else  //nueva línea introducida
+                  else//#else
                       sprintf(lcd_str, "S:%02d", getSats());  //línea original
-                    //#endif   //nueva línea introducida 
-                  #endif
+                  //#endif
                     lcd.print(lcd_str);
               #endif
               lcd.setCursor(0, 1);
-              //#ifdef GPS_TELEMETRY_NO_LOCAL_GPS
-              //  sprintf(lcd_str, "A:%05d  D:%05u", targetPosition.alt, targetPosition.distance);
-              //#else
-                sprintf(lcd_str, "A:%05d  D:%05u", targetPosition.alt, targetPosition.distance);
+              sprintf(lcd_str, "A:%05d  D:%05u", targetPosition.alt, targetPosition.distance);
               //#endif;
               lcd.print(lcd_str);
             }
@@ -403,9 +396,9 @@ void loop()
             dtostrf(targetPosition.lon / 100000.0f, 10, 5, lcd_str);
             lcd.print(lcd_str);
           }
-          #ifdef BATTERYMONITORING
+          if(BATTERYMONITORING)//#ifdef BATTERYMONITORING
             getBatterieVoltage();
-          #endif
+          //#endif
           lcd_time = millis() + 200;
         }
       }//#endif
@@ -510,7 +503,7 @@ void loop()
     PREVIOUS_STATE = CURRENT_STATE;
   }
   if(!SERVOTEST){
-    #ifndef LOCAL_GPS
+    if(!LOCAL_GPS){//#ifndef LOCAL_GPS
       //only needed if no local gps
       if (!digitalRead(HOME_BUTTON)) {
         //set home
@@ -524,7 +517,8 @@ void loop()
           //Serial.print("Lat: ");Serial.print(trackerPosition.lat);Serial.print(" Lon: ");Serial.print(trackerPosition.lon);Serial.print(" Alt: ");Serial.println(trackerPosition.alt);
         #endif //MFD
       }
-    #else
+    }
+    else {//#else
       if (gpsSerial.available()) {
         uint8_t c = gpsSerial.read();
         #ifdef DEBUG
@@ -564,7 +558,7 @@ void loop()
           }
         }
       }
-    #endif //LOCAL_GPS
+    }//#endif //LOCAL_GPS
   
     #ifdef MFD
       if (SETTING_HOME) {
@@ -706,23 +700,23 @@ void calculatePID(void)
 //#endif
 }
 
-#ifdef LOCAL_GPS
+//#ifdef LOCAL_GPS
 void initGps() {
-  #ifdef MTK
+  if(GPS_MODEL==MTK_GPS)//#ifdef MTK
     //set to 1Hz
     gpsSerial.println("$PMTK220,1000*1F");
     //delay for ack/nack as softserial cannot read and write at the same time
-    delay(20);
-  
+    //delay(20);
+  else
     //only enable GGA sentences
     gpsSerial.print("$PMTK314,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*29");
     //delay for ack/nack as softserial cannot read and write at the same time
-    delay(20);
-  #endif //MTK
+  delay(20);
+  //#endif //MTK
   }
-#endif //LOCAL_GPS
+//#endif //LOCAL_GPS
 
-#ifdef BATTERYMONITORING
+//#ifdef BATTERYMONITORING
   void getBatterieVoltage() {
     int n = 0;
     uint16_t Bat_ADC = (uint16_t)analogRead(VOLTAGEDIVIDER); //Hole Wert
@@ -738,7 +732,7 @@ void initGps() {
     Bat_Voltage = ((float)Bat_AVG / 1024.0) * BATTERYMONITORING_VREF / Bat_denominator * BATTERYMONITORING_CORRECTION;
     Serial.print("V: "); Serial.println(Bat_Voltage);
   }
-#endif
+//#endif
 
 //#ifdef TILT_EASING
   void moveServoTilt(float value){
@@ -930,13 +924,15 @@ void cli_encode_command(char c){
   }
   else if((c == '\n' || c == '\r') && parameter_started ){
     if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="local_gps" || parameter_name=="bat_mon" || parameter_name=="easing" ||  parameter_name=="servotest")) {
-      int value=getParamValue(parameter_name);
-      if(value==0)
+      int value=(getParamValue(parameter_name))?0:1;
+      /*if(value==0)
         value=1;
       else
         value=0;
+      setParamValue(parameter_name,value);*/
       setParamValue(parameter_name,value);
       list_features();
+      
      
     }
     /*else if(command_name == "feature") {
@@ -986,7 +982,7 @@ void command_help()
     Serial.println(F(" defaults  reset settings to defaults"));
     Serial.println(F(" feature   enable/disable/list features"));
     Serial.println(F(" set       list parameters"));
-    Serial.println(F(" *status   print out system status"));
+    //Serial.println(F(" *status   print out system status"));
     Serial.println(F(" version   print out firmware version"));
     Serial.println(F(" save      save settings and exit"));
     showPrompt();
