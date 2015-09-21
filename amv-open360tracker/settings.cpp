@@ -61,7 +61,7 @@ char *param_names[EEPROM_SETTINGS]={
 /* 20 */"lcd_rows",
 /* 21 */"lcd_addr",
 /* 22 */"lcd_model",
-/* 23 */"bat_mon",
+/* 23 */"bat",
 /* 24 */"bat_res1",
 /* 25 */"bat_res2",
 /* 26 */"bat_corr",

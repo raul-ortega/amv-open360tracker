@@ -923,7 +923,7 @@ void cli_encode_command(char c){
     }
   }
   else if((c == '\n' || c == '\r') && parameter_started ){
-    if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="gps" || parameter_name=="bat_mon" || parameter_name=="easing" ||  parameter_name=="servotest")) {
+    if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="gps" || parameter_name=="bat" || parameter_name=="easing" ||  parameter_name=="servotest")) {
       int value=(getParamValue(parameter_name))?0:1;
       /*if(value==0)
         value=1;
@@ -1011,14 +1011,14 @@ void command_version() {
 void list_features(){
   uint8_t value;
   Serial.println(F("Enabled features: "));
+  value=getParamValue("bat");
+  if(value>0) Serial.print(F("bat "));
   value=getParamValue("easing");
   if(value>0) Serial.print(F("easing "));
   value=getParamValue("gps");
   if(value>0) Serial.print(F("gps "));
   value=getParamValue("lcd");
   if(value>0) Serial.print(F("lcd "));
-  value=getParamValue("bat_mon");
-  if(value>0) Serial.print(F("bat_mon "));
   value=getParamValue("servotest");
   if(value>0) Serial.print(F("servotest"));
   Serial.println();
