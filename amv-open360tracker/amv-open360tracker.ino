@@ -853,16 +853,14 @@ void encodeServoTest(uint8_t c){
   }
 }
 
+String command_name = "";
+String parameter_name = "";
+uint8_t cli_header=0;
+uint8_t parameter_started=false;
+uint8_t value_started=false;
+String parameter_value="";
+uint8_t command_started=false;
 
-////////
-  String command_name = "";
-  String parameter_name = "";
-  uint8_t cli_header=0;
-  uint8_t parameter_started=false;
-  uint8_t value_started=false;
-  String parameter_value="";
-  uint8_t command_started=false;
-////////
 void cli_open_detect(char c){
   if(c == '#' && cli_header==0){
     cli_header = 1;
