@@ -143,8 +143,8 @@ Esta es la lista completa de los parámetros que pueden ser configurado mediante
 	- 0x3F --> 63
 * **lcd_model:** Este parámetro no se usa.
 * **bat:** Puede tomar los valores 0 (desactivado) ó 1 (activado). Cuando está activo, el tracker monitorizará el voltaje de la batería.
-* **bat_res1:** Valor de la resistencia R1 del divisor de tensión. Sólo admite valores múltipos de 10 entre 0 y 25500. Ejemplo, 18000 = 18 Kohmios.
-* **bat_res2:** Valor de la resistencia R2 del divisor de tensión. Sólo admite valores múltipos de 10 entre 0 y 25500. Ejemplo,  1000 =  1 Kohmios.
+* **bat_res1:** Valor de la resistencia R1 del divisor de tensión. Sólo admite valores múltipos de 100 entre 0 y 25500. Ejemplo, 18000 = 18 Kohmios.
+* **bat_res2:** Valor de la resistencia R2 del divisor de tensión. Sólo admite valores múltipos de 100 entre 0 y 25500. Ejemplo,  1000 =  1 Kohmios.
 * **bat_corr:** Valor de correción para ajustar el divisor de tensión. Admite valores entre 0 y 255. El valor introducido será divido entre 10. Por ejemplo para indicar un factor de correción 1.1 introducir set bat_corr=11.
 * **servotest:** Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save, el tracker entrará en un modo que permite enviar comandos para mover los servos (ángulos o pulsos) y testear distiontos valores de PIDs.
 
