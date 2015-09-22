@@ -155,8 +155,8 @@ int getParamValue(String param_name){
   value=(index==S_MIN_PAN_SPEED && Settings[index]>100)?100-Settings[index]:Settings[index]*multiplier;
   value=(index==S_BATTERYMONITORING_CORRECTION)?(int)((float)Settings[index]/10):value;
 
-  Serial.println(multiplier);
-  Serial.println(value);
+  //Serial.println(multiplier);
+  //Serial.println(value);
 
   return value;
 }
