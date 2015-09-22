@@ -133,7 +133,7 @@ Esta es la lista completa de los parámetros que pueden ser configurado mediante
 * **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario. Para indicar 90 grados, es necesario introducir el valor 900 (adminte valores múltipos de 10 entre 0 y 2550).
 * **gps:** Puede tomar valores 0 (desactivado) o 1 (activado).
 * **gps_model:** Pude tomar los valores 0 (gps genérico), 1 (gps MTK), 2 (DIY gps).
-* **gps_bauds:** Puede tomar los valores habituales que se usan para indciar el baud rate en las comunicaciones serie.
+* **gps_bauds:** Los valores recomendados son 4800 ó 9600 (admite valores entre 0 y 25500).
 * **start_track_dist:** es la distancia a partir de la cual el tracker empieza a apuntar al aeromodelo (adminte valores entre 0 y 255).
 * **lcd:** Puede tomar valores 0 (desactivado) o 1 (activado). Tras hacer un save el tracker se reinicia y el display se apagará o encenderá en función de su valor.
 * **lcd_rows:** número de filas del LCD display (valores admitidos 2 ó 4).
