@@ -127,7 +127,6 @@ uint8_t setParamValue(String param_name,int param_value){
 
   index = getParamIndex(param_name);
   Settings[index]=value;
-  //Serial.println("min_pan_speed: ");Serial.print(value);
 }
 int getParamValue(String param_name){
   uint8_t index = getParamIndex(param_name);

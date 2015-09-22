@@ -24,7 +24,7 @@
 #include "settings.h"
 
 extern uint8_t Settings[EEPROM_SETTINGS];
-
+extern char *param_names[];
 #ifdef Mavlink
   #include <Mavlink.h>
 #endif
@@ -923,22 +923,11 @@ void cli_encode_command(char c){
     }
   }
   else if((c == '\n' || c == '\r') && parameter_started ){
-    if(command_name == "feature" && (parameter_name=="lcd" || parameter_name=="gps" || parameter_name=="bat" || parameter_name=="easing" ||  parameter_name=="servotest")) {
-      int value=(getParamValue(parameter_name))?0:1;
-      /*if(value==0)
-        value=1;
-      else
-        value=0;
-      setParamValue(parameter_name,value);*/
-      setParamValue(parameter_name,value);
+    uint8_t index=getParamIndex(parameter_name);
+    if(command_name == "feature" && (index==S_BATTERYMONITORING || index==S_TILT_EASING || index==S_LOCAL_GPS || index==S_LCD_DISPLAY || index==S_SERVOTEST)){
+      Settings[index]=(Settings[index])?0:1;
       list_features();
-      
-     
     }
-    /*else if(command_name == "feature") {
-      //change_settings(parameter_name,parameter_value.toInt());
-      Serial.print("feature ");
-    }*/
 
     parameter_value = "";
     parameter_name = "";
@@ -975,28 +964,20 @@ void cli_encode_command(char c){
 }
 void command_help()
 {
-
     Serial.println();
-    Serial.println(F("List of available commands:"));
-    Serial.println(F(" help      list commands"));
-    Serial.println(F(" defaults  reset settings to defaults"));
-    Serial.println(F(" feature   enable/disable/list features"));
-    Serial.println(F(" set       list parameters"));
-    //Serial.println(F(" *status   print out system status"));
-    Serial.println(F(" version   print out firmware version"));
-    Serial.println(F(" save      save settings and exit"));
+    Serial.println(F("List of available commands:\n help      list commands\n defaults  reset settings to defaults\n feature   enable/disable/list features\n set       list parameters\n version   print out firmware version\n save      save settings and exit"));
     showPrompt();
 }
 void command_save()
 {
   Serial.println(F("Saving settings..."));
-  setParamValue("cli",0); // First time saving disable cli by default;
+  Settings[S_CLI]=0;//setParamValue("cli",0); // First time saving disable cli by default;
   writeEEPROM();
   Serial.println(F("Command Line Interface closed"));
   Serial.flush();
   cli_status=0;
   check_Display();
-  void clear();
+  //void clear();
   pseudoReset();
 }
 void command_defaults() {
@@ -1009,25 +990,17 @@ void command_version() {
     showPrompt();
 }
 void list_features(){
-  uint8_t value;
   Serial.println(F("Enabled features: "));
-  value=getParamValue("bat");
-  if(value>0) Serial.print(F("bat "));
-  value=getParamValue("easing");
-  if(value>0) Serial.print(F("easing "));
-  value=getParamValue("gps");
-  if(value>0) Serial.print(F("gps "));
-  value=getParamValue("lcd");
-  if(value>0) Serial.print(F("lcd "));
-  value=getParamValue("servotest");
-  if(value>0) Serial.print(F("servotest"));
-  Serial.println();
+  if(Settings[S_BATTERYMONITORING]) Serial.println(param_names[S_BATTERYMONITORING]);
+  if(Settings[S_TILT_EASING]) Serial.println(param_names[S_TILT_EASING]);
+  if(Settings[S_LOCAL_GPS]) Serial.println(param_names[S_LOCAL_GPS]);
+  if(Settings[S_LCD_DISPLAY]) Serial.println(param_names[S_LCD_DISPLAY]);
+  if(Settings[S_SERVOTEST]) Serial.print(param_names[S_SERVOTEST]);
+  Serial.println(F("Ok"));
   showPrompt();
 }
 void cli_welcome_message(){
-    Serial.println(F("amv-open360tracker"));
-    Serial.println(F("------------------"));
-    Serial.print(F(">"));
+    Serial.println(F("amv-open360tracker\n------------------\n>"));
 }
 void showPrompt(){
   Serial.print(F(">"));
