@@ -132,21 +132,32 @@ int getParamValue(String param_name){
   uint8_t index = getParamIndex(param_name);
   int value=0;
   uint8_t multiplier;
-  if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0")
+  
+  /*if(param_name=="P" || param_name=="I" || param_name=="D" || param_name=="tilt0" || param_name=="tilt90" || param_name=="pan0")
     multiplier=10;
   else if(param_name=="bat_res1" || param_name=="bat_res2" || param_name=="gps_bauds" || param_name=="offset")
     multiplier=100;
   else
-    multiplier=1;
-    
-  if(index>0) {
+    multiplier=1;*/
+
+  /*if(index>0) {
     if(param_name=="min_pan_speed" && Settings[index]>100)
-        value=100-Settings[index];//value=(-1)*(Settings[index]-100);
+        value=100-Settings[index];
     else if(param_name=="bat_corr")
         value=(int)((float)Settings[index]/10);
     else   
       value=Settings[index]*multiplier;
-  }
+  }*/
+
+  multiplier=(index==S_PID_P || index==S_PID_I || index==S_PID_D || index==S_TILT_0 || index==S_TILT_90 || index==S_PAN_0)?10:1;
+  multiplier=(index==S_BATTERYMONITORING_RESISTOR_1 || index==S_BATTERYMONITORING_RESISTOR_2 || index==S_GPS_BAUDRATE || index==S_OFFSET)?100:multiplier;
+    
+  value=(index==S_MIN_PAN_SPEED && Settings[index]>100)?100-Settings[index]:Settings[index]*multiplier;
+  value=(index==S_BATTERYMONITORING_CORRECTION)?(int)((float)Settings[index]/10):value;
+
+  Serial.println(multiplier);
+  Serial.println(value);
+
   return value;
 }
 uint8_t getParamIndex(String param_name){
