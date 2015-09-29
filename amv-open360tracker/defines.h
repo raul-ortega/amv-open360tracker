@@ -28,6 +28,11 @@
   #define BUZZER_PIN A1
 #endif
 
+#ifdef CRIUS_SE
+  #define MAG_CORRECTION 2700
+#else
+  #define MAG_CORRECTION 0
+#endif
 ////// Nuevas Lineas
 // Telemetría GPS sin GPS LOCAL
 #ifndef GPS_TELEMETRY_NO_LOCAL_GPS

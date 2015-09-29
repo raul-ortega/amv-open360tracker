@@ -14,9 +14,9 @@
 * angle is smaller or greater than this value, the angle will be corrected using PIDs.
 * 
 */ 
-#define P 5000 //5000 //default 2200
-#define I 100 //100 //default 280
-#define D 100 //1000 //default 20000
+#define P 5000 // default 5000
+#define I 100  // default 100
+#define D 1000 // default 1000
 #define MAX_PID_ERROR 10 // default 10 
 /* #### Atmega 2560 ####
  *
@@ -24,7 +24,9 @@
  *
  *  MEGA -> APM & other MEGA Boards
  */
+
 //#define MEGA
+#define CRIUS_SE //default
 
 /* #### Protocol ####
  *
@@ -101,7 +103,7 @@
  *
  *  If the servo has problems to start a rotation when the speed is slow adjust this value until the tracker moves directly from each position
  */
-#define MIN_PAN_SPEED -25 // default 50
+#define MIN_PAN_SPEED 0 // default 50
 
 /* #### Compass declination ####
  *
@@ -113,7 +115,7 @@
  *
  * set to 0 if you cannot find your declination!
  */
-#define DECLINATION 32 //default 32
+#define DECLINATION 0 //default 32
 
 /* #### Compass offset ####
  *
@@ -124,7 +126,7 @@
  * Range: 0 ... 3599
  *
  */
-#define OFFSET 2700 //default 900
+#define OFFSET 0 //default 0
 
 /* #### DIY GPS / Fix Type ####
 *

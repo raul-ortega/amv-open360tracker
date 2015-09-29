@@ -334,22 +334,15 @@ void loop()
                     //#endif
                   #endif
                   
-                  lcd.print(lcd_str);
+                  lcd.print(lcd_str);7
                   
                   #ifdef LOCAL_GPS
                     sprintf(lcd_str, "S:%02d", localSats);
                   #else
-                    //Si uso LCD pero no uso GPS local, el código genera un error de compilación
-                    // que me obliga a descompentar en el config.h la línea //#define LOCAL_GPS
-                    //para evitarlo introduzco este #ifdef GPS_TELEMETRY_NO_LOCAL_GPS que he definido en defines.h
-                    //Comprueba que no uso ninguno de esos protocolos, solamente uso la telemetría directa, en cuyo caso devuelvo un 0 como número de satélites.
-                    //#ifdef GPS_TELEMETRY_NO_LOCAL_GPS //nueva línea introducida
-                    //  sprintf(lcd_str, "S:%02d", getSats());  //nueva línea introducida
-                    //#else  //nueva línea introducida
-                      sprintf(lcd_str, "S:%02d", getSats());  //línea original
-                    //#endif   //nueva línea introducida 
+                    sprintf(lcd_str, "S:%02d", getSats());
                   #endif
-                    lcd.print(lcd_str);
+                  
+                  lcd.print(lcd_str);
               #endif
               lcd.setCursor(0, 1);
               //#ifdef GPS_TELEMETRY_NO_LOCAL_GPS
@@ -422,6 +415,10 @@ void loop()
           if (HOME_SET) {
             targetPosition.distance = TinyGPS::distance_between(trackerPosition.lat / 100000.0f, trackerPosition.lon / 100000.0f, targetPosition.lat / 100000.0f, targetPosition.lon / 100000.0f);
           }
+          /*if(trackerPosition.lon>0 && targietPosition.long>0)
+          else if(trackerPosition.lon>0 && targietPosition.long<0)
+          else if(trackerPosition.lon<0 && targietPosition.long>0)
+          else if(trackerPosition.lon<0 && targietPosition.long<0)*/
           targetPosition.heading = TinyGPS::course_to(trackerPosition.lat / 100000.0f, trackerPosition.lon / 100000.0f, targetPosition.lat / 100000.0f, targetPosition.lon / 100000.0f) * 10.0f;
       
           //calcTargetDistanceAndHeading(&trackerPosition, &targetPosition);
