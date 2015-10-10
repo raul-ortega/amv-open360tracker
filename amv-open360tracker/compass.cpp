@@ -196,10 +196,10 @@ int getHeading() {
   double heading = atan2((magADC[1]* magGain[1]) - magZero[1], (magADC[0]* magGain[0]) - magZero[0]) ;
   
   if (heading < 0)
-    heading += 2 * M_PI;
+    heading += 2 * PI;
 
-  if (heading > 2 * M_PI)
-    heading -= 2 * M_PI;
+  if (heading > 2 * PI)
+    heading -= 2 * PI;
     
-  return (int) ((heading * 1800.0 / M_PI) + MAG_CORRECTION + DECLINATION + OFFSET) % 3600;
+  return (int)(heading*1800.0/M_PI+MAG_CORRECTION+DECLINATION+OFFSET*10)%3600;
 }
