@@ -24,7 +24,6 @@
 *
 * MIN_DELTA: is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft.
 *   If the current angle is greater than this value, the pan servo will spin.
-* MIN_PAN_SPEED: is the minimum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
 * MAX_PAN_SPEED: is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
 * MAP_ANGLE: When the angle (in degrees) between the tracker and the aircraft is greater than this value, the MAX_PAN_SPEED is always applied.
 *   If the angle is less than this value, the error is mapped to a gradient of PWM pulses between MIN_PAN_SPEED and MAX_PAN_SPEED.
@@ -33,10 +32,9 @@
 */
 
 //#define NO_PID_CONTROL
-#define MIN_DELTA     0.2   //Minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
-#define MIN_PAN_SPEED  12   //Minimum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
-#define MAX_PAN_SPEED 300   //Máximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
-#define MAP_ANGLE      90 
+//#define MIN_DELTA     0.1   // default 0.2
+//#define MAX_PAN_SPEED 200   // default 200
+//#define MAP_ANGLE      90   // default 180
 
 /** PID Values
 *
@@ -139,6 +137,7 @@
  *
  * set to 0 if you cannot find your declination!
  */
+ 
 #define DECLINATION 0 //default 32
 
 /* #### Compass offset ####
@@ -150,7 +149,7 @@
  * Range: 0 ... 3599
  *
  */
-#define OFFSET 0 //default 0
+#define OFFSET 0 //default 0 
 
 /* #### DIY GPS / Fix Type ####
 *
@@ -220,7 +219,7 @@
 * The 1602 is the correct one.
 * The default I2C address for this LCD display is 0x3F
 */
-#define LCD_BANGGOOD_SKU166911 //default commented
+//#define LCD_BANGGOOD_SKU166911 //default commented
 
 /* ### Battery monitoring ###
  *
