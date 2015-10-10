@@ -334,7 +334,7 @@ void loop()
                     //#endif
                   #endif
                   
-                  lcd.print(lcd_str);7
+                  lcd.print(lcd_str);
                   
                   #ifdef LOCAL_GPS
                     sprintf(lcd_str, "S:%02d", localSats);
