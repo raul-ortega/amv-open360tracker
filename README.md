@@ -60,6 +60,7 @@ Este proyecto, que se deriva del proyecto original de  [open360tracker](https://
 * Se han corregido errores de visualización de datos y deficiencias en el funcionamiento cuando no usa GPS Local.
 * Se ha corregido y completado el algoritmo para la decodifiación de la telemetría de RVSOD, que no funcionaba en la veresión original.
 * Se ha añadido efecto de amortiguación en el servo de TILT, pudiendo elegir entre tres funciones distintas de amortiguación.
+* Resuelto el problema del valor del parámetro OFFSET.
 
 Actualmente se está trabajando en la nueva [versión con interfaz de línea de comandos (CLI)](https://github.com/raul-ortega/amv-open360tracker/blob/remote-settings/README.md) para modificar los parámetros de configuraicón desde consola serie. En el futuro se desarrollará una aplicación android para interactuar con el tracker vía Bluetooth.
 
@@ -112,6 +113,7 @@ There are many improvements in this version:
 * Solved issues when displaying data and bad functioning when a local GPS device is not present.
 * The telemetry parser algorithm for decoding the RVOSD frames has been debugged and improved, and now it works.
 * The tilt servo movement has been improved by adding easing effects at the beginning and smoothing at the end. This will avoid damaging the tilt servo and other mechanisms when using heavy and larger antennas.
+* Solved the issues with parameter OFFSET.
 
 We are now working on a [new version with a Command Line Interface (CLI)](https://github.com/raul-ortega/amv-open360tracker/tree/remote-settings) which will facilitate setting parameters using a remote console, for example some Android app over Bluetooth.
 
