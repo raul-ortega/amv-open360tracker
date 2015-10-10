@@ -2,7 +2,7 @@
 ---------------------
 # Novedades
 
-* Se ha incluído de forma experimental un sistema de control del servo PAN que no usa PID. Si usas un servo lento, este sistema podría mejorar el seguimiento del tracker, haciendo movimientos más frecisos y fluídos. El sistema es más intiutivo de configurar que el sistema PID tradicional.
+* Se ha incluído de forma experimental un sistema de control del servo PAN que no usa PID. Si usas un servo lento, este sistema podría mejorar el seguimiento del tracker, realizando movimientos más precisos y fluídos. El sistema es más intiutivo de configurar que el sistema PID tradicional.
 El sistema realiza una corrección de forma proporcional del ángulo de error entre el heading del tracker y el heading del aeromodelo, mapeando dicho error sobre un rango de pulsos PWM para el servo en base a los siguientes parámetros:
 
 	- **NO_PID_CONTROL:** Descomentando este parámetro desactivamos el sistema PID tracicional y activamos el nuevo sistema de control PAN.
@@ -28,7 +28,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 # What's new
 
-* A new experimentally control system for PAN servo has been included. If you use a slow servo, this system could better monitor the tracker, making it accurate and fluid movements. This control system is also more user friendly to set up:
+* A new experimentally control system for PAN servo has been included. If you use a slow servo, this system could better monitor the tracker, making movement more accurate and fluid . This control system is also more user friendly to set up:
 
 	- Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
 
