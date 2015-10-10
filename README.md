@@ -31,7 +31,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 * A new experimentally control system for PAN servo has been included. If you use a slow servo, this system could better monitor the tracker, making it accurate and fluid movements. This control system is also more user friendly to set up:
 
-- Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
+** Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
 
 - **MIN_DELTA:** is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
 - **MAX_PAN_SPEED:** is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
