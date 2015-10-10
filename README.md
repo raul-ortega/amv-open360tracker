@@ -31,11 +31,11 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 * A new experimentally control system for PAN servo has been included. If you use a slow servo, this system could better monitor the tracker, making it accurate and fluid movements. This control system is also more user friendly to set up:
 
--Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
+- Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
 
--**MIN_DELTA:** is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
--**MAX_PAN_SPEED:** is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
--**MAP_ANGLE:** When the angle (in degrees) between the tracker and the aircraft is greater than this value, the MAX_PAN_SPEED is always applied. If the angle is less than this value, the error is mapped to a gradient of PWM pulses between MIN_PAN_SPEED and MAX_PAN_SPEED.
+- **MIN_DELTA:** is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
+- **MAX_PAN_SPEED:** is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
+- **MAP_ANGLE:** When the angle (in degrees) between the tracker and the aircraft is greater than this value, the MAX_PAN_SPEED is always applied. If the angle is less than this value, the error is mapped to a gradient of PWM pulses between MIN_PAN_SPEED and MAX_PAN_SPEED.
 - The PAN servo will spin more and more slowly when is reaching the heading of the aircraft, and will mov as fast as posible when the difference between both headings is big.
 
 * Param **OFFSET** has been corrected/modified (for CRIUS SE board you need no more to indicate a value of 2700 when it is oriented to the front of the antenna tracker). Now the range of values for this parameter is from 0 to 359. For example, If you place the controller (or the external magnetometer of your Aurdino board) rotated 90 degrees clockwise, enter the value 90. 
