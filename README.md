@@ -1,13 +1,46 @@
-# amv-open360tracker v0.5
+# amv-open360tracker v0.6
 ---------------------
-# Novedades en esta versión:
+# Novedades
+
+* Se ha incluído de forma experimental un sistema de control del servo PAN que no usa PID. Si usas un servo lento, este sistema podría mejorar el seguimiento del tracker, haciendo movimientos más frecisos y fluídos. El sistema es más intiutivo de configurar que el sistema PID tradicional.
+El sistema realiza una corrección de forma proporcional del ángulo de error entre el heading del tracker y el heading del aeromodelo, mapeando dicho error sobre un rango de pulsos PWM para el servo en base a los siguientes parámetros:
+
+-**NO_PID_CONTROL:** Descomentando este parámetro desactivamos el sistema PID tracicional y activamos el nuevo sistema de control PAN.
+
+-**MIN_DELTA:** Angulo mínimo en grados entre el heading del tracker y el del aeromodelo, si es mayor que este ángulo movemos el tracker.
+
+-**MIN_PAN_SPEED:** Cantidad mínima en milisegundos que hay que incrementar el pulso del PAN_0 para que se mueva. Este parámetro es común a ambos sistemas de control y está localizado en el config.h donde siempre ha estado.
+
+-**MAX_PAN_SPEED:** Cantidad máxima en milisegundos que hay que incrementar el pulso del PAN_0 para que se mueva.
+
+-**MAP_ANGLE:** Ángulo en grados a partir del cual se empieza a mapear el error del ángulo al gradiente de pulsos.
+
+* También se ha corregido el **OFFSET** para la controladora Crius SE, ya no es necesario indicar un OFFSET DE 2700 cuando está mirando hacia el frente. Si se cambia de posición la controladora, habrá que indicar un OFFSET en función de los grados desplazados, sin multiplicar por 10. Por ejemplo, si giramos la controladora 90 grados hacia el Este, será necesario indicar un OFFSET igual a 90.
+
+
+# v0.5
 
 * Efecto de amortiguación para el servo tilt.
 * La telemetría RVSOD ahora funciona.
 * Problemas de compilación con LCD sin GPS local resueltos.
 * Problemas de visualización de datos resueltos.
 
-# What's new in this version:
+---------------------
+
+# What's new
+
+* A new experimentally control system for PAN servo has been included. If you use a slow servo, this system could better monitor the tracker, making it accurate and fluid movements. This control system is also more user friendly to set up:
+
+-Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
+
+-**MIN_DELTA:** is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
+-**MAX_PAN_SPEED:** is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
+-**MAP_ANGLE:** When the angle (in degrees) between the tracker and the aircraft is greater than this value, the MAX_PAN_SPEED is always applied. If the angle is less than this value, the error is mapped to a gradient of PWM pulses between MIN_PAN_SPEED and MAX_PAN_SPEED.
+- The PAN servo will spin more and more slowly when is reaching the heading of the aircraft, and will mov as fast as posible when the difference between both headings is big.
+
+* Param **OFFSET** has been corrected/modified (for CRIUS SE board you need no more to indicate a value of 2700 when it is oriented to the front of the antenna tracker). Now the range of values for this parameter is from 0 to 359. For example, If you place the controller (or the external magnetometer of your Aurdino board) rotated 90 degrees clockwise, enter the value 90. 
+
+# v0.5
 
 * Easing effect added to tilt servo movement.
 * RVSOD telemetry now works.
