@@ -1,11 +1,42 @@
-#ifndef CONFIG_H
-#define CONFIG_H
-
 /* Config file
  * created by Samuel Brucksch, edited by Raúl Ortega.
  *
  */
 //#define DEBUG
+
+#ifndef CONFIG_H
+#define CONFIG_H
+/* #### TYPE OF BOARD ####
+ *
+ *  If using an APM or Atmega 2560 we do not need softserial, so uncomment if using an atema 2560
+ *  MEGA -> APM & other MEGA Boards
+ *  
+ */
+
+#define CRIUS_SE //Default
+//#define MEGA
+/* #### CONTROLL SYSTEM FOR PAN WITHOUT PIDs (EXPERIMENTAL)####
+* 
+* If using a slow PAN servo this system could inprove your tracker with a more acurate and fluid movement.
+* This system is also more user friendly to set up
+*
+* Uncomment #define NO_PID_CONTROL for disabling PIDs system and enabling this new system.
+*
+* MIN_DELTA: is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft.
+*   If the current angle is greater than this value, the pan servo will spin.
+* MIN_PAN_SPEED: is the minimum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
+* MAX_PAN_SPEED: is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
+* MAP_ANGLE: When the angle (in degrees) between the tracker and the aircraft is greater than this value, the MAX_PAN_SPEED is always applied.
+*   If the angle is less than this value, the error is mapped to a gradient of PWM pulses between MIN_PAN_SPEED and MAX_PAN_SPEED.
+*   
+* The PAN servo will spin more and more slowly when is reaching the heading of the aircraft, and will mov as fast as posible when the difference between both headings is big.
+*/
+
+//#define NO_PID_CONTROL
+#define MIN_DELTA     0.2   //Minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
+#define MIN_PAN_SPEED  12   //Minimum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
+#define MAX_PAN_SPEED 300   //Máximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
+#define MAP_ANGLE      90 
 
 /** PID Values
 *
@@ -14,19 +45,10 @@
 * angle is smaller or greater than this value, the angle will be corrected using PIDs.
 * 
 */ 
-#define P 5000 // default 5000
-#define I 100  // default 100
-#define D 1000 // default 1000
-#define MAX_PID_ERROR 10 // default 10 
-/* #### Atmega 2560 ####
- *
- *  If using an APM or Atmega 2560 we do not need softserial, so uncomment if using an atema 2560
- *
- *  MEGA -> APM & other MEGA Boards
- */
-
-//#define MEGA
-#define CRIUS_SE //default
+#define P 5000            // default 5000
+#define I 100             // default 100
+#define D 1000            // default 1000
+#define MAX_PID_ERROR 10  // default 10 
 
 /* #### Protocol ####
  *
@@ -80,9 +102,10 @@
  * TILT_EASING_MILIS: Is the time in miliseconds spend by echa step.
  */
 #define TILT_EASING
-#define TILT_EASING_STEPS 15 // default 10
+#define TILT_EASING_STEPS 15    // default 10
 #define TILT_EASING_MIN_ANGLE 2 // default 4
-#define TILT_EASING_MILIS 15 //default 15
+#define TILT_EASING_MILIS 15    //default 15
+
 /*
  * ### Easing ecuations
  *  EASE_OUT_QRT ->  The easing effect is only applied at the end of the movement.
@@ -90,14 +113,15 @@
  *  EASE_OUT_CIRC -> The easing out circular effect.
  *  Read more: Easing ecuations by Robert Penner, http://www.gizma.com/easing/
  */
-//#define EASE_OUT_QRT // Easing Out Quart function
-//#define EASE_INOUT_QRT // Easing In Out Quart function
-#define EASE_OUT_CIRC  / Easing Out Circular function
+//#define EASE_OUT_QRT    // Easing Out Quart function
+//#define EASE_INOUT_QRT  // Easing In Out Quart function
+#define EASE_OUT_CIRC     // Easing Out Circular function (Default)
+
 /* #### Pan servo 0° adjustment ####
  *
  *  Enter PWM value of Servo for not moving
  */
-#define PAN_0 610 // default 1470
+#define PAN_0 620 // default 1470
 
 /* #### Pan servo minimum required speed ####
  *
@@ -217,7 +241,7 @@
 #error "Tilt servo range invalid. Must be between 800 and 2200."
 #endif
 
-#if OFFSET < 0 || OFFSET > 3599
+#if OFFSET < 0 || OFFSET > 359
 #error "Offset invalid. Must be between 0 and 3599."
 #endif
 
