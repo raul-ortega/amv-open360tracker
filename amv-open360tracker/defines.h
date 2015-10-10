@@ -33,7 +33,7 @@
 #else
   #define MAG_CORRECTION 0
 #endif
-////// Nuevas Lineas
+  
 // Telemetría GPS sin GPS LOCAL
 #ifndef GPS_TELEMETRY_NO_LOCAL_GPS
   #if !defined (MFD) && !defined (FRSKY_D) && !defined (FRSKY_X)  && !defined (DIY_GPS) && !defined (HOTT) && !defined(MAVLINK) && (defined(GPS_TELEMETRY) || defined(RVOSD))
