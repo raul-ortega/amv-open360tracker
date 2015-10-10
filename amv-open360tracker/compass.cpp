@@ -16,6 +16,7 @@
 #include "servos.h"
 #include "eeprom_functions.h"
 #include "defines.h"
+
 static float magGain[3] = {1.0, 1.0, 1.0};
 int16_t magADC[3];
 float smoothed[3];
@@ -200,6 +201,6 @@ int getHeading() {
 
   if (heading > 2 * PI)
     heading -= 2 * PI;
-    
-  return (int)(heading*1800.0/M_PI+MAG_CORRECTION+DECLINATION+OFFSET*10)%3600;
+ 
+  return (int)(heading*1800.0/M_PI+MAG_CORRECTION+DECLINATION-OFFSET*10)%3600;
 }
