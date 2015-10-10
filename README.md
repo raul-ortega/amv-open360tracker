@@ -17,7 +17,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 * También se ha corregido el parámetro **OFFSET**. Para la controladora Crius SE ya no es necesario indicar un valor de 2700 cuando está mirando hacia el frente. Si se cambia de posición la controladora (o el magnetómetro instalado en la placa Arduino) habrá que indicar el valor de los grados desplazados en el sentido de las agujas del reloj, pudiendo introducir únicamente valores entre 0 y 359 grados, sin multiplicar por 10. Por ejemplo, si giramos la controladora 90 grados hacia el Este, será necesario indicar un OFFSET igual a 90.
 
-# Desde la v0.5
+# Mejoras desde v0.5 incluídas
 
 * Efecto de amortiguación para el servo tilt.
 * La telemetría RVSOD ahora funciona.
@@ -42,7 +42,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 * Param **OFFSET** has been corrected/modified (for CRIUS SE board you need no more to indicate a value of 2700 when it is oriented to the front of the antenna tracker). Now the range of values for this parameter is from 0 to 359. For example, If you place the controller (or the external magnetometer of your Aurdino board) rotated 90 degrees clockwise, enter the value 90. 
 
-# From v0.5
+# Improvements also included (from  v0.5)
 
 * Easing effect added to tilt servo movement.
 * RVSOD telemetry now works.
@@ -100,7 +100,7 @@ Vista el hilo del foro para más información:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
-# amv-open360tracker v0.5 (English)
+# amv-open360tracker v0.6 (English)
 
 The AMV spanish community version (fork) of the open source antenna tracker for FPV with continuous 360 degree rotation. This project is a fork of the original firmware of the [open360tracker](https://github.com/SamuelBrucksch/open360tracker) created by SamuelBrucksch.
 
