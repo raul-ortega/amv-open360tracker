@@ -17,8 +17,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 * También se ha corregido el parámetro **OFFSET**. Para la controladora Crius SE ya no es necesario indicar un valor de 2700 cuando está mirando hacia el frente. Si se cambia de posición la controladora (o el magnetómetro instalado en la placa Arduino) habrá que indicar el valor de los grados desplazados en el sentido de las agujas del reloj, pudiendo introducir únicamente valores entre 0 y 359 grados, sin multiplicar por 10. Por ejemplo, si giramos la controladora 90 grados hacia el Este, será necesario indicar un OFFSET igual a 90.
 
-
-# v0.5
+# Desde la v0.5
 
 * Efecto de amortiguación para el servo tilt.
 * La telemetría RVSOD ahora funciona.
@@ -43,7 +42,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 * Param **OFFSET** has been corrected/modified (for CRIUS SE board you need no more to indicate a value of 2700 when it is oriented to the front of the antenna tracker). Now the range of values for this parameter is from 0 to 359. For example, If you place the controller (or the external magnetometer of your Aurdino board) rotated 90 degrees clockwise, enter the value 90. 
 
-# v0.5
+# From v0.5
 
 * Easing effect added to tilt servo movement.
 * RVSOD telemetry now works.
