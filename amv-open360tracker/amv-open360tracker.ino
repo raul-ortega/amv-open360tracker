@@ -635,75 +635,107 @@ void calcTilt() {
 
 void getError(void)
 {
-  // shift error values
-  for (byte i = 0; i < 10; i++) {
-    Error[i + 1] = Error[i];
-  }
 
-  int16_t delta = targetPosition.heading - trackerPosition.heading;
+  #ifdef NO_PID_CONTROL
+    int16_t delta=trackerPosition.heading-targetPosition.heading;
+  #else
+    int16_t delta = targetPosition.heading - trackerPosition.heading;
+    // shift error values
+    for (byte i = 0; i < 10; i++) {
+      Error[i + 1] = Error[i];
+    }
+  #endif
+  
   if (delta > 1800) {
-    delta -= 3600;
+  delta -= 3600;
   }
   else if (delta < -1800) {
-    delta += 3600;
+  delta += 3600;
   }
   // load new error into top array spot
   Error[0] = delta;
+
+
+
+
 }
 
 void calculatePID(void)
 {
-#ifndef MAX_PID_ERROR
-  #define MAX_PID_ERROR 10
-#endif
-  // Calculate the PID
-#ifdef SERVOTEST
-  PID = Error[0] * p;     // start with proportional gain
-  Accumulator += Error[0];  // accumulator is sum of errors
-  if (Accumulator > 5000)
-    Accumulator = 5000;
-  if (Accumulator < -5000)
-    Accumulator = -5000;
-  PID += i * Accumulator; // add integral gain and error accumulation
-  Dk = d * (Error[0] - Error[10]);
-  PID += Dk; // differential gain comes next
-  PID = PID >> Divider; // scale PID down with divider
-  // limit the PID to the resolution we have for the PWM variable
-  if (PID >= 500)
-    PID = 500;
-  if (PID <= -500)
-    PID = -500;
-  if (Error[0] > MAX_PID_ERROR) {
-    PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
-  } else if (Error[0] < -1*MAX_PID_ERROR) {
-    PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
-  } else {
-    PWMOutput = PAN_0;
-  }
-#else
-  PID = Error[0] * P;     // start with proportional gain
-  Accumulator += Error[0];  // accumulator is sum of errors
-  if (Accumulator > 5000)
-    Accumulator = 5000;
-  if (Accumulator < -5000)
-    Accumulator = -5000;
-  PID += I * Accumulator; // add integral gain and error accumulation
-  Dk = D * (Error[0] - Error[10]);
-  PID += Dk; // differential gain comes next
-  PID = PID >> Divider; // scale PID down with divider
-  // limit the PID to the resolution we have for the PWM variable
-  if (PID >= 500)
-    PID = 500;
-  if (PID <= -500)
-    PID = -500;
-  if (Error[0] > MAX_PID_ERROR) {
-    PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
-  } else if (Error[0] < -1*MAX_PID_ERROR) {
-    PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
-  } else {
-    PWMOutput = PAN_0;
-  }
-#endif
+  #ifndef NO_PID_CONTROL 
+    #ifndef MAX_PID_ERROR
+      #define MAX_PID_ERROR 10
+    #endif
+      // Calculate the PID
+    #ifdef SERVOTEST
+      PID = Error[0] * p;     // start with proportional gain
+      Accumulator += Error[0];  // accumulator is sum of errors
+      if (Accumulator > 5000)
+        Accumulator = 5000;
+      if (Accumulator < -5000)
+        Accumulator = -5000;
+      PID += i * Accumulator; // add integral gain and error accumulation
+      Dk = d * (Error[0] - Error[10]);
+      PID += Dk; // differential gain comes next
+      PID = PID >> Divider; // scale PID down with divider
+      // limit the PID to the resolution we have for the PWM variable
+      if (PID >= 500)
+        PID = 500;
+      if (PID <= -500)
+        PID = -500;
+      if (Error[0] > MAX_PID_ERROR) {
+        PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
+      } else if (Error[0] < -1*MAX_PID_ERROR) {
+        PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
+      } else {
+        PWMOutput = PAN_0;
+      }
+    #else
+      PID = Error[0] * P;     // start with proportional gain
+      Accumulator += Error[0];  // accumulator is sum of errors
+      if (Accumulator > 5000)
+        Accumulator = 5000;
+      if (Accumulator < -5000)
+        Accumulator = -5000;
+      PID += I * Accumulator; // add integral gain and error accumulation
+      Dk = D * (Error[0] - Error[10]);
+      PID += Dk; // differential gain comes next
+      PID = PID >> Divider; // scale PID down with divider
+      // limit the PID to the resolution we have for the PWM variable
+      if (PID >= 500)
+        PID = 500;
+      if (PID <= -500)
+        PID = -500;
+      if (Error[0] > MAX_PID_ERROR) {
+        PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
+      } else if (Error[0] < -1*MAX_PID_ERROR) {
+        PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
+      } else {
+        PWMOutput = PAN_0;
+      }
+    #endif
+  #else
+	  
+	  int16_t PAN_SPEED;
+
+    
+    if(abs(Error[0])>=MAP_ANGLE*10)
+      PAN_SPEED=MAX_PAN_SPEED;
+    else
+      PAN_SPEED=map(abs(Error[0]), 0, MAP_ANGLE*10, MIN_PAN_SPEED, MAX_PAN_SPEED);
+    if(abs(Error[0])<=MIN_DELTA)
+      PWMOutput = PAN_0;
+    if (Error[0]<0)
+      PWMOutput = PAN_0 + PAN_SPEED;
+    else if(Error[0]>0)
+      PWMOutput = PAN_0 - PAN_SPEED;
+
+    #if SERVOTEST
+      Serial.print(" PAN_0: ");Serial.print(PAN_0);
+      Serial.print(" PAN_SPEED: ");Serial.print(PAN_SPEED);
+      Serial.print(" PWMOutput: ");Serial.println(PWMOutput);
+    #endif    
+  #endif
 }
 
 #ifdef LOCAL_GPS
@@ -777,15 +809,6 @@ void initGps() {
     if(_servo_tilt_must_move<0) _tilt_pos=0;
     if(!_servo_tilt_has_arrived && _servo_tilt_must_move>-1){
       if(abs(_lasttilt-_servo_tilt_must_move)>TILT_EASING_MIN_ANGLE) {
-        /*#ifdef DEBUG
-          Serial.println("Easing tilt...");
-        #endif*/
-        /*#ifdef DEBUG && TILT_EASING && SERVOTEST
-            Serial.print(" _tilt_pos: "); Serial.print(_tilt_pos);
-            Serial.print(" _servo_tilt_must_move: "); Serial.print(_servo_tilt_must_move);
-            Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
-            Serial.print(" TILT_EASING_STEPS: "); Serial.println(TILT_EASING_STEPS);
-        #endif*/
         if(_tilt_pos<TILT_EASING_STEPS){
           if(_lasttilt<=_servo_tilt_must_move)
             easingout=_lasttilt+easeTilt(_tilt_pos, 0, _servo_tilt_must_move-_lasttilt, TILT_EASING_STEPS);
