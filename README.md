@@ -15,7 +15,7 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 	- **MAP_ANGLE:** Ángulo en grados a partir del cual se empieza a mapear el error del ángulo al gradiente de pulsos.
 
-* También se ha corregido el **OFFSET** para la controladora Crius SE, ya no es necesario indicar un OFFSET DE 2700 cuando está mirando hacia el frente. Si se cambia de posición la controladora, habrá que indicar un OFFSET en función de los grados desplazados, sin multiplicar por 10. Por ejemplo, si giramos la controladora 90 grados hacia el Este, será necesario indicar un OFFSET igual a 90.
+* También se ha corregido el parámetro **OFFSET**. Para la controladora Crius SE ya no es necesario indicar un valor de 2700 cuando está mirando hacia el frente. Si se cambia de posición la controladora (o el magnetómetro instalado en la placa Arduino) habrá que indicar el valor de los grados desplazados en el sentido de las agujas del reloj, pudiendo introducir únicamente valores entre 0 y 359 grados, sin multiplicar por 10. Por ejemplo, si giramos la controladora 90 grados hacia el Este, será necesario indicar un OFFSET igual a 90.
 
 
 # v0.5
