@@ -95,9 +95,9 @@ int8_t getIndex() {
   return index;
 }
 
-uint16_t getAzimut() {
+/*uint16_t getAzimut() {
   return (uint16_t)heading;
-}
+}*/
 
 void encodeTargetData(uint8_t c) {
   if (c == '$' && !frame_started){
