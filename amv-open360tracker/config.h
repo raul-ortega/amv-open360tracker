@@ -32,9 +32,9 @@
 */
 
 //#define NO_PID_CONTROL
-//#define MIN_DELTA     0.1   // default 0.2
-//#define MAX_PAN_SPEED 200   // default 200
-//#define MAP_ANGLE      90   // default 180
+#define MIN_DELTA     0.1   // default 0.2
+#define MAX_PAN_SPEED 200   // default 200
+#define MAP_ANGLE      90   // default 180
 
 /** PID Values
 *
@@ -62,8 +62,11 @@
  *  SERVOTEST
  */
 //#define SERVOTEST
-#define GPS_TELEMETRY
+#define GPS_TELEMETRY // Default
+//#define MAVLINK
 //#define RVOSD
+//#define FRSKY_D
+
 /* #### Baud Rate ####
  *
  * baud rate of telemetry input
@@ -78,13 +81,13 @@
  *
  *  Enter PWM value of Servo for pointing straight forward
  */
-#define TILT_0 1125 // 1200 // default 1050
+#define TILT_0 1125 // default 1050
 
 /* #### Tilt servo 90° adjustment ####
  *
  *  Enter PWM value of Servo for pointing 90° up
  */
-#define TILT_90 2100 // 1500 // default 2025
+#define TILT_90 2100 // default 2025
 
 /* ### Easing effect for tilt movements (EXPERIMENTAL)
  *
@@ -99,8 +102,8 @@
  * TILT_EASING_MIN_ANGLE: Easing is applied if the difference between last and new tilt position is greater than TILT_EASING_MIN_ANGLE grade.
  * TILT_EASING_MILIS: Is the time in miliseconds spend by echa step.
  */
-#define TILT_EASING
-#define TILT_EASING_STEPS 15    // default 10
+//#define TILT_EASING
+#define TILT_EASING_STEPS 10    // default 10
 #define TILT_EASING_MIN_ANGLE 2 // default 4
 #define TILT_EASING_MILIS 15    //default 15
 
