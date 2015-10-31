@@ -21,7 +21,7 @@ uint16_t getAzimuth();
 int32_t getTargetLat();
 int32_t getTargetLon();
 int16_t getSats();
-uint16_t getAzimut();
+/*uint16_t getAzimut();*/
 #endif
 
 
