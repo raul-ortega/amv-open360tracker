@@ -1,21 +1,15 @@
-# amv-open360tracker v0.6
+# amv-open360tracker v0.7
 ---------------------
 # Novedades
 
-* Se ha incluído de forma experimental un sistema de control del servo PAN que no usa PID. Si usas un servo lento, este sistema podría mejorar el seguimiento del tracker, realizando movimientos más precisos y fluídos. El sistema es más intiutivo de configurar que el sistema PID tradicional.
-El sistema realiza una corrección de forma proporcional del ángulo de error entre el heading del tracker y el heading del aeromodelo, mapeando dicho error sobre un rango de pulsos PWM para el servo en base a los siguientes parámetros:
+* Se ha mejorado el protocolo FRSKY_D para el escenario NAZE32 + Cleanflight + módulo tx DJT FrSKY + MOD. BLUETOOTH.
+  Con la inestimable colaboración de Samuel Brucksch, se ha depurado y mejorado el parser frsky.cpp para evitar datos de posición y altitud erróneos como consecuencia de las tramas o bytes no válidos que llegan a la UART de la controladora, con origen posiblemente en colisiones entre receptor y emisor FrSky D provocados por ruido en el ambiente.
+  
+# Mejoras desde v0.6 incluídas
 
-	- **NO_PID_CONTROL:** Descomentando este parámetro desactivamos el sistema PID tracicional y activamos el nuevo sistema de control PAN.
-
-	- **MIN_DELTA:** Angulo mínimo en grados entre el heading del tracker y el del aeromodelo, si es mayor que este ángulo movemos el tracker.
-
-	- **MIN_PAN_SPEED:** Cantidad mínima en milisegundos que hay que incrementar el pulso del PAN_0 para que se mueva. Este parámetro es común a ambos sistemas de control y está localizado en el config.h donde siempre ha estado.
-
-	- **MAX_PAN_SPEED:** Cantidad máxima en milisegundos que hay que incrementar el pulso del PAN_0 para que se mueva.
-
-	- **MAP_ANGLE:** Ángulo en grados a partir del cual se empieza a mapear el error del ángulo al gradiente de pulsos.
-
-* También se ha corregido el parámetro **OFFSET**. Para la controladora Crius SE ya no es necesario indicar un valor de 2700 cuando está mirando hacia el frente. Si se cambia de posición la controladora (o el magnetómetro instalado en la placa Arduino) habrá que indicar el valor de los grados desplazados en el sentido de las agujas del reloj, pudiendo introducir únicamente valores entre 0 y 359 grados, sin multiplicar por 10. Por ejemplo, si giramos la controladora 90 grados hacia el Este, será necesario indicar un OFFSET igual a 90.
+* Sistema de Control de Servo PAN sin PIDs (Opcional y experimental).
+* El parámetro OFFSET corregido para Crius SE ya no es necesario
+* OFFSET toma ahora valores entre 0 y 359 grados.
 
 # Mejoras desde v0.5 incluídas
 
@@ -28,19 +22,14 @@ El sistema realiza una corrección de forma proporcional del ángulo de error en
 
 # What's new
 
-* A new experimentally control system for PAN servo has been included. If you use a slow servo, this system could better monitor the tracker, making movement more accurate and fluid . This control system is also more user friendly to set up:
+* FRSKY_D parser improved for scenario: NAZE32 + Cleanflight + DJT FrSKY transmitter + BLUETOOTH mod.
 
-	- Uncomment **#define NO_PID_CONTROL** to disable PIDs system and enable this new control system.
+# Improvements also included (from  v0.6)
 
-	- **MIN_DELTA:** is the minimum angle in degrees between the heading of the tracker and the heading of the aircraft. If the current angle is greater than this value, the pan servo will spin.
-	
-	- **MAX_PAN_SPEED:** is the maximum value in milliseconds which is necessary to increase the PAN_0 PWM to move the PAN servo.
-	
-	- **MAP_ANGLE:** When the angle (in degrees) between the tracker and the aircraft is greater than this value, the MAX_PAN_SPEED is always applied. If the angle is less than this value, the error is mapped to a gradient of PWM pulses between MIN_PAN_SPEED and MAX_PAN_SPEED.
-	
-	- The PAN servo will spin more and more slowly when is reaching the heading of the aircraft, and will mov as fast as posible when the difference between both headings is big.
+* experimentally control system for PAN servo
+* Parameter OFFSET has been corrected for Crius SE board.
+* Range of values for OFFSET: 0 to 359.
 
-* Param **OFFSET** has been corrected/modified (for CRIUS SE board you need no more to indicate a value of 2700 when it is oriented to the front of the antenna tracker). Now the range of values for this parameter is from 0 to 359. For example, If you place the controller (or the external magnetometer of your Aurdino board) rotated 90 degrees clockwise, enter the value 90. 
 
 # Improvements also included (from  v0.5)
 
