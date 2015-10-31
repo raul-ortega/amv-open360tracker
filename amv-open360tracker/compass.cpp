@@ -15,7 +15,12 @@
 #include <EEPROM.h>
 #include "servos.h"
 #include "eeprom_functions.h"
-#include "defines.h"
+
+#ifdef CRIUS_SE
+  #define MAG_CORRECTION 2700
+#else
+  #define MAG_CORRECTION 0
+#endif
 
 static float magGain[3] = {1.0, 1.0, 1.0};
 int16_t magADC[3];
@@ -197,10 +202,10 @@ int getHeading() {
   double heading = atan2((magADC[1]* magGain[1]) - magZero[1], (magADC[0]* magGain[0]) - magZero[0]) ;
   
   if (heading < 0)
-    heading += 2 * PI;
+    heading += 2 * M_PI;
 
-  if (heading > 2 * PI)
-    heading -= 2 * PI;
+  if (heading > 2 * M_PI)
+    heading -= 2 * M_PI;
  
-  return (int)(heading*1800.0/M_PI+MAG_CORRECTION+DECLINATION-OFFSET*10)%3600;
+  return (int) ((heading * 1800.0 / M_PI) + MAG_CORRECTION + DECLINATION - OFFSET*10)%3600;
 }
