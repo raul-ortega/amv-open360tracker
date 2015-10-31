@@ -48,7 +48,7 @@ int32_t gpsToLong(int8_t neg, uint16_t bp, uint16_t ap);
 #define TELEMETRY_OK      1
 #define TELEMETRY_KO      2
 
-#define FRSKY_RX_PACKET_SIZE 9
+#define FRSKY_RX_PACKET_SIZE 19
 
 uint8_t frskyRxBuffer[FRSKY_RX_PACKET_SIZE];
 uint8_t telemetryState = TELEMETRY_INIT;
