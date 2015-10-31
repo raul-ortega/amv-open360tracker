@@ -10,7 +10,7 @@
  * Easing Ecuations by Robert Penner http://www.gizma.com/easing/
  */
  
-#include <LiquidCrystal_I2C.h>
+
 #include <EEPROM.h>
 #include "defines.h"
 #include "config.h"
@@ -129,7 +129,6 @@ void setup()
     }
   #endif
   #ifdef LCD_DISPLAY
-
     #ifdef LCD_BANGGOOD_SKU166911  // Nueva Linea introducida
       lcd.init();                           // Nueva línea introducida
       lcd.backlight();                      // Nueva línea introducida
@@ -415,11 +414,13 @@ void loop()
           if (HOME_SET) {
             targetPosition.distance = TinyGPS::distance_between(trackerPosition.lat / 100000.0f, trackerPosition.lon / 100000.0f, targetPosition.lat / 100000.0f, targetPosition.lon / 100000.0f);
           }
-          /*if(trackerPosition.lon>0 && targietPosition.long>0)
-          else if(trackerPosition.lon>0 && targietPosition.long<0)
-          else if(trackerPosition.lon<0 && targietPosition.long>0)
-          else if(trackerPosition.lon<0 && targietPosition.long<0)*/
+          
           targetPosition.heading = TinyGPS::course_to(trackerPosition.lat / 100000.0f, trackerPosition.lon / 100000.0f, targetPosition.lat / 100000.0f, targetPosition.lon / 100000.0f) * 10.0f;
+
+          /*if(trackerPosition.lon>0 && targetPosition.lon>0)
+            targetPosition.heading=3600-targetPosition.heading;//targetPosition.heading+=0;
+          else if(trackerPosition.lon>0 && targetPosition.lon<0)
+            targetPosition.heading=3600-targetPosition.heading;*/
       
           //calcTargetDistanceAndHeading(&trackerPosition, &targetPosition);
       
