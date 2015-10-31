@@ -10,7 +10,7 @@
 #include <inttypes.h>
 #include "config.h"
 
-#define FMW_VERSION "0.6"
+#define FMW_VERSION "0.7"
 
 #ifdef MEGA
   #define HOME_BUTTON 8
@@ -28,15 +28,9 @@
   #define BUZZER_PIN A1
 #endif
 
-#ifdef CRIUS_SE
-  #define MAG_CORRECTION 2700
-#else
-  #define MAG_CORRECTION 0
-#endif
-  
 // Telemetría GPS sin GPS LOCAL
 #ifndef GPS_TELEMETRY_NO_LOCAL_GPS
-  #if !defined (MFD) && !defined (FRSKY_D) && !defined (FRSKY_X)  && !defined (DIY_GPS) && !defined (HOTT) && !defined(MAVLINK) && (defined(GPS_TELEMETRY) || defined(RVOSD))
+  #if !defined (MFD) && !defined (FRSKY_X)  && !defined (DIY_GPS) && !defined (HOTT) && !defined(MAVLINK) && (defined(GPS_TELEMETRY) || defined(RVOSD) || defined (FRSKY_D))
     #define GPS_TELEMETRY_NO_LOCAL_GPS
   #endif
 #endif
