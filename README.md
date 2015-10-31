@@ -2,7 +2,7 @@
 ---------------------
 # Novedades
 
-* Se ha mejorado el protocolo FRSKY_D para el escenario NAZE32 + Cleanflight + módulo tx DJT FrSKY + MOD. BLUETOOTH.
+* Se ha mejorado el protocolo FRSKY_D para el escenario [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + MOD. BLUETOOTH.
   Con la inestimable colaboración de Samuel Brucksch, se ha depurado y mejorado el parser frsky.cpp para evitar datos de posición y altitud erróneos como consecuencia de las tramas o bytes no válidos que llegan a la UART de la controladora, con origen posiblemente en colisiones entre receptor y emisor FrSky D provocados por ruido en el ambiente.
   
 # Mejoras desde v0.6 incluídas
@@ -22,7 +22,7 @@
 
 # What's new
 
-* FRSKY_D parser improved for scenario: NAZE32 + Cleanflight + DJT FrSKY transmitter + BLUETOOTH mod.
+* FRSKY_D parser improved for scenario: [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + BLUETOOTH mod.
 
 # Improvements also included (from  v0.6)
 
