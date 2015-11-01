@@ -13,7 +13,7 @@
 
 # Mejoras desde v0.5 incluídas
 
-* Efecto de amortiguación para el servo tilt.
+* [Efecto de amortiguación (Easing Effect)](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/Efecto-Easing-en-Servo-TILT-para-antenas-pesadas.pdf) para el servo tilt.
 * La telemetría RVSOD ahora funciona.
 * Problemas de compilación con LCD sin GPS local resueltos.
 * Problemas de visualización de datos resueltos.
