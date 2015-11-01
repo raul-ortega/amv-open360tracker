@@ -100,8 +100,8 @@ int32_t getTargetLon() {
 }
 
 int16_t getTargetAlt() {
-  printf("%d,%d ",prevAlt,alt);
-  if(prevAlt > alt && (prevAlt-alt)>500 && prevAlt > 0 && alt > 0 ) alt=prevAlt;
+  //printf("%d,%d ",prevAlt,alt);
+  if(((prevAlt-alt)>500 || (alt-prevAlt)>500)  && prevAlt > 0 && alt > 0 ) alt=prevAlt;
   prevAlt=alt;
   return alt;
 }
