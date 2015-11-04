@@ -8,7 +8,7 @@
 # Mejoras desde v0.6 incluídas
 
 * [Sistema de Control de Servo PAN sin PIDs](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NO-PID-Control-PAN-Servo.md) (Opcional y experimental).
-* El parámetro OFFSET corregido para Crius SE ya no es necesario
+* El parámetro OFFSET corregido para Crius SE.
 * OFFSET toma ahora valores entre 0 y 359 grados.
 
 # Mejoras desde v0.5 incluídas
