@@ -62,11 +62,11 @@
  *  SERVOTEST
  */
 //#define SERVOTEST
-#define GPS_TELEMETRY // Default
+//#define GPS_TELEMETRY // Default
 //#define MAVLINK
 //#define RVOSD
-//#define FRSKY_D
-
+#define FRSKY_D
+//#define FRSKY_X
 /* #### Baud Rate ####
  *
  * baud rate of telemetry input
@@ -222,7 +222,7 @@
 * The 1602 is the correct one.
 * The default I2C address for this LCD display is 0x3F
 */
-//#define LCD_BANGGOOD_SKU166911 //default commented
+#define LCD_BANGGOOD_SKU166911 //default commented
 
 /* ### Battery monitoring ###
  *
