@@ -65,8 +65,9 @@
 //#define GPS_TELEMETRY // Default
 //#define MAVLINK
 //#define RVOSD
-#define FRSKY_D
+//#define FRSKY_D
 //#define FRSKY_X
+#define LTM
 /* #### Baud Rate ####
  *
  * baud rate of telemetry input
