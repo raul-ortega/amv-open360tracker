@@ -6,16 +6,6 @@
 
 //bool HAS_FIX=false;
 
-//
-#define LTM_HEADER_START1 0x24 //$
-#define LTM_HEADER_START2 0x54 //T
-#define LTM_GFRAME 0x47 //G Frame
-
-#define LTM_GFRAME_LENGTH 18
-/*#define LIGHTTELEMETRY_AFRAMELENGTH 10
-#define LIGHTTELEMETRY_SFRAMELENGTH 11
-#define LIGHTTELEMETRY_OFRAMELENGTH 18*/
-
 // Enum machine states
 enum LtmDataState {
     IDLE,
@@ -23,7 +13,13 @@ enum LtmDataState {
     STATE_START2,
     STATE_MSGTYPE,
     STATE_DATA
-  };
+};
+  
+//
+#define LTM_HEADER_START1 0x24 //$
+#define LTM_HEADER_START2 0x54 //T
+#define LTM_GFRAME 0x47 //G Frame
+#define LTM_GFRAME_LENGTH 18
 
 //
 static uint8_t LTM_Buffer[LTM_GFRAME_LENGTH-4];
@@ -37,8 +33,6 @@ static uint8_t dataState = IDLE;
 //data needed to buffer
 
 static int16_t alt;
-//static int8_t latsign;
-//static int8_t lonsign;
 static int32_t lat = 0;
 static int32_t lon = 0;
 static uint8_t sats = 0;
@@ -87,14 +81,10 @@ void encodeTargetData(uint8_t c) {
              dataState = STATE_MSGTYPE;
              break;
            case 'A':
-             /*LTM_frame_length = LIGHTTELEMETRY_AFRAMELENGTH;
-             dataState = STATE_MSGTYPE;*/
              dataState=IDLE;
              return;
              break;
            case 'S':
-             /*LTM_frame_length = LIGHTTELEMETRY_SFRAMELENGTH;
-             dataState = STATE_MSGTYPE;*/
              dataState=IDLE;
              return;
              break;
@@ -106,18 +96,14 @@ void encodeTargetData(uint8_t c) {
       }
       else if (dataState == STATE_MSGTYPE) {
       if(LTM_Index == 0) {
-      LTM_chk = c;
+        LTM_chk = c;
       }
       else {
-      LTM_chk ^= c;
+        LTM_chk ^= c;
       }
         if(LTM_Index == LTM_frame_length-4) {   // received checksum byte
           if(LTM_chk == 0) {
-            //printf("Telemetry ok\n");
-            /*telemetry_ok = true;
-              lastpacketreceived = millis();
-              protocol = "LTM";
-              ltm_check();*/
+            //Telemetry ok
             LTM_read_index = 0;
             parseLTM_GFRAME();
               dataState = IDLE;
@@ -132,11 +118,8 @@ void encodeTargetData(uint8_t c) {
 }
 
 void parseLTM_GFRAME() {
-
-
   if (LTM_cmd==LTM_GFRAME)
   {
-
     lat = (int32_t)ltmread_u32();lat=(int32_t)round(lat/100.0);
     lon = (int32_t)ltmread_u32();lon=(int32_t)round(lon/100.0);
     uint8_t groundspeedms = ltmread_u8();
@@ -147,7 +130,6 @@ void parseLTM_GFRAME() {
     uint8_t fix_type = satsfix & 0b00000011;
     //printf("Lat/Lon: %d, %d, Alt: %d, Sats: %d, FixType:%d\n", lat, lon,alt,sats,fix_type);
     if(sats>=5) HAS_FIX = true;
-
   }
 }
 uint8_t ltmread_u8()  {
