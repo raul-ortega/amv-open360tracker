@@ -1,18 +1,15 @@
-# amv-open360tracker v0.7
+# amv-open360tracker v0.8
 ---------------------
 # Novedades
 
-* Se ha mejorado el protocolo FRSKY_D para el escenario [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + MOD. BLUETOOTH.
-  Con la inestimable colaboración de Samuel Brucksch, se ha depurado y mejorado el parser frsky.cpp para evitar datos de posición y altitud erróneos como consecuencia de las tramas o bytes no válidos que llegan a la UART de la controladora, con origen posiblemente en colisiones entre receptor y emisor FrSky D provocados por ruido en el ambiente.
+Se ha añadido soporte para el protocolo Light Telemetry (LTM). 
   
-# Mejoras desde v0.6 incluídas
+# Mejoras desde v0.7 y anteriores incluídas
 
+* Se ha mejorado el protocolo FRSKY_D para el escenario [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + MOD. BLUETOOTH.
 * [Sistema de Control de Servo PAN sin PIDs](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NO-PID-Control-PAN-Servo.md) (Opcional y experimental).
 * El parámetro OFFSET corregido para Crius SE.
 * OFFSET toma ahora valores entre 0 y 359 grados.
-
-# Mejoras desde v0.5 incluídas
-
 * [Efecto de amortiguación (Easing Effect)](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/Efecto-Easing-en-Servo-TILT-para-antenas-pesadas.pdf) para el servo tilt.
 * La telemetría RVSOD ahora funciona.
 * Problemas de compilación con LCD sin GPS local resueltos.
@@ -22,17 +19,14 @@
 
 # What's new
 
+Light Telemetry protocol supported now.
+
+# Improvements also included (from  v0.8 and older)
+
 * FRSKY_D parser improved for scenario: [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + BLUETOOTH mod.
-
-# Improvements also included (from  v0.6)
-
 * experimentally control system for PAN servo
 * Parameter OFFSET has been corrected for Crius SE board.
 * Range of values for OFFSET: 0 to 359.
-
-
-# Improvements also included (from  v0.5)
-
 * Easing effect added to tilt servo movement.
 * RVSOD telemetry now works.
 * Some compilation issues solved.
