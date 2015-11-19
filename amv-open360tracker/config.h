@@ -52,13 +52,14 @@
  *
  *  FRSKY_D, FRSKY_X, HOTT, EXTERNAL
  *
- *  FRSKY_D -> D-Series
- *  FRSKY_X -> Taranis / XJT
+ *  FRSKY_D -> D-Series 
+ *  FRSKY_X -> Taranis / XJT 
  *  HOTT -> MX12, MX16 and all other HoTT transmitters with telemetry
  *  RVOSD
  *  MFD -> MFD protocol will not work with local GPS!!!!
  *  MAVLINK -> Mavlink protocol (APM/Pixhawk/...)
  *  GPS_TELEMETRY -> direct NMEA input
+ *  LTM -> Light Telemetry 
  *  SERVOTEST
  */
 //#define SERVOTEST
