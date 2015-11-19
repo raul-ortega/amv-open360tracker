@@ -21,7 +21,7 @@ Se ha añadido soporte para el protocolo Light Telemetry (LTM).
 
 Light Telemetry protocol supported now.
 
-# Improvements also included (from  v0.8 and older)
+# Improvements also included (from  v0.7 and older)
 
 * FRSKY_D parser improved for scenario: [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + BLUETOOTH mod.
 * experimentally control system for PAN servo
@@ -84,7 +84,7 @@ Vista el hilo del foro para más información:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
-# amv-open360tracker v0.6 (English)
+# amv-open360tracker v0.8 (English)
 
 The AMV spanish community version (fork) of the open source antenna tracker for FPV with continuous 360 degree rotation. This project is a fork of the original firmware of the [open360tracker](https://github.com/SamuelBrucksch/open360tracker) created by SamuelBrucksch.
 
@@ -92,6 +92,14 @@ The AMV spanish community version (fork) of the open source antenna tracker for 
 
 There are many improvements in this version:
 
+* Light Telemetry protocol supported now.
+* FRSKY_D parser improved for scenario: [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + BLUETOOTH mod.
+* experimentally control system for PAN servo
+* Parameter OFFSET has been corrected for Crius SE board.
+* Range of values for OFFSET: 0 to 359.
+* Easing effect added to tilt servo movement.
+* RVSOD telemetry now works.
+* Some data visualization issues solved.
 * Solved compilation issues regarding when using LCD Display, and a local GPS is not present.
 * Solved issues when displaying data and bad functioning when a local GPS device is not present.
 * The telemetry parser algorithm for decoding the RVOSD frames has been debugged and improved, and now it works.
