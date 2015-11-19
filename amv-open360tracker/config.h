@@ -191,7 +191,7 @@
  * It is recommended to start tracking only if plane moved a few meters already. Default: 10m
  *
  */
-#define START_TRACKING_DISTANCE 10 //default 10
+#define START_TRACKING_DISTANCE 1//10 //default 10
 
 /* ### LCD Display ###
  *

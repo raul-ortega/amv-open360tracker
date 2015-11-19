@@ -58,14 +58,6 @@ int16_t getSats() {
   return (int16_t)sats;
 }
 
-/*int8_t getIndex() {
-  return index;
-}*/
-
-/*uint16_t getAzimut() {
-  return (uint16_t)heading;
-}*/
-
 void encodeTargetData(uint8_t c) {
 
       if (dataState == IDLE && c == '$') {
@@ -123,13 +115,16 @@ void parseLTM_GFRAME() {
     lat = (int32_t)ltmread_u32();lat=(int32_t)round(lat/100.0);
     lon = (int32_t)ltmread_u32();lon=(int32_t)round(lon/100.0);
     uint8_t groundspeedms = ltmread_u8();
-    int32_t temp_alt = (int32_t)ltmread_u32();//10000000;
+    int32_t temp_alt = (int32_t)ltmread_u32();
     alt=(int)(temp_alt/100.0f);
     uint8_t satsfix = ltmread_u8();
     sats = (satsfix >> 2) & 0xFF;
     uint8_t fix_type = satsfix & 0b00000011;
     //printf("Lat/Lon: %d, %d, Alt: %d, Sats: %d, FixType:%d\n", lat, lon,alt,sats,fix_type);
-    if(sats>=5) HAS_FIX = true;
+    if(sats>=5) {
+      HAS_FIX = true;
+      HAS_ALT = true;
+    }
   }
 }
 uint8_t ltmread_u8()  {
