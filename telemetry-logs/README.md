@@ -8,6 +8,7 @@ Los archivos .log que encuentras en esta carpeta contienen capturas de datos de 
 * En el archivo config.h del firmware del amv-open360tracker debemos definir los baudios a los que vayamos a transmitir, y el protocolo que queremos testear. Por ejemplo:
 
 	`#define LTM`
+	
 	`#define BAUDS 9600`
 
 * Un programa de comunicaciones serie que permita el envío de archivos, como por ejemplo [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe).
