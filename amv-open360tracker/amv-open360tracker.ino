@@ -382,7 +382,8 @@ void loop()
     
         // mfd has all the data at once, so we do not have to wait for valid lat/lon
         #ifdef MFD
-            distance = getDistance();
+            distance = getDistance(); // Possible deletion
+            targetPosition.distance=getDistance(); // New Line
             targetPosition.heading = getAzimuth() * 10;
             #ifdef DEBUG
                 Serial.print("Target alt: "); Serial.print(targetPosition.alt);
@@ -546,7 +547,8 @@ void loop()
       }
     
       if (!HOME_SET && TEST_MODE && NEW_HEADING) {
-        distance = getDistance();
+        distance = getDistance(); //Possible deletion
+        targetPosition.distance = getDistance(); //New line
         targetPosition.alt = getTargetAlt();
         targetPosition.heading = getAzimuth() * 10;
     
@@ -559,8 +561,9 @@ void loop()
       if (HOME_SET && HAS_FIX && NEW_HEADING && !TEST_MODE) {
         targetPosition.alt = getTargetAlt();
         targetPosition.heading = getAzimuth() * 10;
-        distance = getDistance();
-    
+        distance = getDistance(); //Possible deletion
+        targetPosition.distance = getDistance(); //New line
+        
         getError();
         calculatePID();
         SET_PAN_SERVO_SPEED(PWMOutput);
