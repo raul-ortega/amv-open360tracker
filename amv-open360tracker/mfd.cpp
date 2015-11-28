@@ -55,7 +55,7 @@ void encodeTargetData(uint8_t c) {
     //checksum
     state = 4;
     return;
-  } else if (c == '\r') {
+  } else if (c == '\n') {
     //newline
 #ifdef DEBUG
     Serial.print("\nDebug values: [Dist "); Serial.print(mfd_distance); Serial.print("] [Alt "); Serial.print(alt_neg * alt); Serial.print("] [Azimuth "); Serial.print(azimuth); Serial.print("] [Read"); Serial.print(read_checksum); Serial.print("] [Calc"); Serial.print(calc_checksum); Serial.println("]");
