@@ -569,6 +569,7 @@ void loop()
         SET_PAN_SERVO_SPEED(PWMOutput);
         calcTilt();
         NEW_HEADING = false;
+        HAS_FIX = false;
       }
     #endif //MFD
   #endif //SERVOTEST
