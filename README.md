@@ -1,11 +1,17 @@
-# amv-open360tracker v0.8
+# amv-open360tracker v0.9
 ---------------------
 # Novedades
 
-Se ha añadido soporte para el protocolo Light Telemetry (LTM). 
-  
-# Mejoras desde v0.7 y anteriores incluídas
+Se han realizado mejoras para el protocolo MFD:
 
+	* Ahora el protocolo MFD funciona correctamente tras corregir un fallo del código fuente. Ha sido probado y confirmado por los compañeros en vuelo.
+	* Se han eliminado la visualización de los datos de LAT y LON no son usados en MFD.
+	* Se ha corregido la visualización de datos en el arranque, antes de empezar a recibir telemetría MFD, que mostraba los títulos con 3 letras y ocasionaba que quedaran muchos ceros a la derecha del dato de Azimut.
+	* Cuando está activo el MODO TEST se muestra en el display el mensaje TEST a la derecha del dato de azimut, en la primera fila.
+  
+# Mejoras desde v0.8 y anteriores incluídas
+
+* Se ha añadido soporte para el protocolo Light Telemetry (LTM). 
 * Se ha mejorado el protocolo FRSKY_D para el escenario [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + MOD. BLUETOOTH.
 * [Sistema de Control de Servo PAN sin PIDs](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NO-PID-Control-PAN-Servo.md) (Opcional y experimental).
 * El parámetro OFFSET corregido para Crius SE.
@@ -19,10 +25,16 @@ Se ha añadido soporte para el protocolo Light Telemetry (LTM).
 
 # What's new
 
-Light Telemetry protocol supported now.
+Some improvements for MFD protocol:
 
-# Improvements also included (from  v0.7 and older)
+	* The MFD protocol now works fine.
+	* LAT and LON data is not displayed any more.
+	* Data display in start up has been corrected.
+	* TEST message is displayed while TEST MODE is active.
 
+# Improvements also included (from  v0.8 and older)
+
+* Light Telemetry protocol supported now.
 * FRSKY_D parser improved for scenario: [NAZE32 + Cleanflight + módulo tx DJT FrSKY](https://github.com/raul-ortega/amv-open360tracker/blob/master/docs/NAZE32%2BCleanflight%2BGPS%2BFrSkyD.pdf) + BLUETOOTH mod.
 * experimentally control system for PAN servo
 * Parameter OFFSET has been corrected for Crius SE board.
