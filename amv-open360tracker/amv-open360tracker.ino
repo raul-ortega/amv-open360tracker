@@ -220,7 +220,7 @@ void setup()
   #ifdef LCD_DISPLAY
     lcd.clear();
     lcd.setCursor(0, 0);
-    sprintf(lcd_str, "HDG:%03u AZI:%03u", 0, 0);
+    sprintf(lcd_str, "H:%03u A:%03u", 0, 0);
     lcd.print(lcd_str);
     lcd.setCursor(0, 1);
     sprintf(lcd_str, "A:%05d D:%05u", 0, 0);
@@ -319,7 +319,10 @@ void loop()
             //headings, alt, distance, sats
             lcd.setCursor(0, 0);
             #ifdef MFD
-                  sprintf(lcd_str, "H:%03u A:%03u", trackerPosition.heading / 10, targetPosition.heading / 10);
+                  if(TEST_MODE)
+                    sprintf(lcd_str, "H:%03u A:%03u TEST", trackerPosition.heading / 10, targetPosition.heading / 10);
+                  else
+                    sprintf(lcd_str, "H:%03u A:%03u     ", trackerPosition.heading / 10, targetPosition.heading / 10);
                   lcd.print(lcd_str);
             #else
                   #ifdef BATTERYMONITORING
@@ -334,13 +337,11 @@ void loop()
                   #endif
                   
                   lcd.print(lcd_str);
-                  
                   #ifdef LOCAL_GPS
                     sprintf(lcd_str, "S:%02d", localSats);
                   #else
                     sprintf(lcd_str, "S:%02d", getSats());
                   #endif
-                  
                   lcd.print(lcd_str);
               #endif
               lcd.setCursor(0, 1);
@@ -351,6 +352,7 @@ void loop()
               //#endif;
               lcd.print(lcd_str);
             }
+          #ifndef MFD
           if (lcd_nr == 0 || lcd_nr == 2) {
             //lat, lon
             #if LCD_SIZE_ROW == 4
@@ -370,6 +372,7 @@ void loop()
             dtostrf(targetPosition.lon / 100000.0f, 10, 5, lcd_str);
             lcd.print(lcd_str);
           }
+          #endif
           #ifdef BATTERYMONITORING
             getBatterieVoltage();
           #endif
@@ -546,7 +549,7 @@ void loop()
         SETTING_HOME = 0;
       }
     
-      if (!HOME_SET && TEST_MODE && NEW_HEADING) {
+      if (TEST_MODE && NEW_HEADING) {//if (!HOME_SET && TEST_MODE && NEW_HEADING) {
         distance = getDistance(); //Possible deletion
         targetPosition.distance = getDistance(); //New line
         targetPosition.alt = getTargetAlt();
