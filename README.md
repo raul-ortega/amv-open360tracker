@@ -4,10 +4,10 @@
 
 Se han realizado mejoras para el protocolo MFD:
 
-	* Ahora el protocolo MFD funciona correctamente tras corregir un fallo del código fuente. Ha sido probado y confirmado por los compañeros en vuelo.
-	* Se han eliminado la visualización de los datos de LAT y LON no son usados en MFD.
-	* Se ha corregido la visualización de datos en el arranque, antes de empezar a recibir telemetría MFD, que mostraba los títulos con 3 letras y ocasionaba que quedaran muchos ceros a la derecha del dato de Azimut.
-	* Cuando está activo el MODO TEST se muestra en el display el mensaje TEST a la derecha del dato de azimut, en la primera fila.
+* Ahora el protocolo MFD funciona correctamente tras corregir un fallo del código fuente. Ha sido probado y confirmado por los compañeros en vuelo.
+* Se han eliminado la visualización de los datos de LAT y LON no son usados en MFD.
+* Se ha corregido la visualización de datos en el arranque, antes de empezar a recibir telemetría MFD, que mostraba los títulos con 3 letras y ocasionaba que quedaran muchos ceros a la derecha del dato de Azimut.
+* Cuando está activo el MODO TEST se muestra en el display el mensaje TEST a la derecha del dato de azimut, en la primera fila.
   
 # Mejoras desde v0.8 y anteriores incluídas
 
