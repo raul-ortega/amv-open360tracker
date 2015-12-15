@@ -67,7 +67,6 @@ geoCoordinate_t trackerPosition;
   
   TinyGPS gps;
   void initGps();
-  #define START_TRACKING_DISTANCE 0
 
 #endif
 
