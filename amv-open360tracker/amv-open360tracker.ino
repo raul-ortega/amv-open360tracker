@@ -348,7 +348,7 @@ void loop()
               //  sprintf(lcd_str, "A:%05d  D:%05u", targetPosition.alt, targetPosition.distance);
               //#else
                 sprintf(lcd_str, "A:%05d  D:%05u", targetPosition.alt, targetPosition.distance);
-              //#endif;
+              //#endif
               lcd.print(lcd_str);
             }
           #ifndef MFD
@@ -737,7 +737,7 @@ void calculatePID(void)
     else if(Error[0]>0)
       PWMOutput = PAN_0 - PAN_SPEED;
 
-    #if SERVOTEST
+    #ifdef SERVOTEST
       Serial.print(" PAN_0: ");Serial.print(PAN_0);
       Serial.print(" PAN_SPEED: ");Serial.print(PAN_SPEED);
       Serial.print(" PWMOutput: ");Serial.println(PWMOutput);
@@ -794,7 +794,7 @@ void initGps() {
           easingout=_lasttilt-easeTilt(pos, 0, _lasttilt-value, TILT_EASING_STEPS);
         _pwmpulse=(int)map(easingout,0,90,TILT_0,TILT_90);
         SET_TILT_SERVO_SPEED(_pwmpulse);
-        #ifdef DEBUG && TILT_EASING 
+        #if defined(DEBUG) && defined(TILT_EASING)
           Serial.print(" dur: "); Serial.print(TILT_EASING_STEPS);
           Serial.print(" pos: "); Serial.print(pos);
           Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
@@ -823,7 +823,7 @@ void initGps() {
             easingout=_lasttilt-easeTilt(_tilt_pos, 0, _lasttilt-_servo_tilt_must_move, TILT_EASING_STEPS);
           _pwmpulse=(int)map(easingout,0,90,TILT_0,TILT_90);
           SET_TILT_SERVO_SPEED(_pwmpulse);
-          #ifdef DEBUG && TILT_EASING
+          #if defined(DEBUG) && defined(TILT_EASING)
             Serial.print(" dur: "); Serial.print(TILT_EASING_STEPS);
             Serial.print(" pos: "); Serial.print(_tilt_pos);
             Serial.print(" _lasttilt: "); Serial.print(_lasttilt);
@@ -831,17 +831,17 @@ void initGps() {
             Serial.print(" easingout: "); Serial.print(easingout);    
             Serial.print(" pwmpulse: "); Serial.println(_pwmpulse);
           #endif
-          #if TILT_EASING_MILIS
+          #ifdef TILT_EASING_MILIS
           delay(TILT_EASING_MILIS);
-          #endif;
+          #endif
           _tilt_pos++;
         }
         else {
           if(_tilt_pos==TILT_EASING_STEPS){
             SET_TILT_SERVO_SPEED(map(_servo_tilt_must_move,0,90, TILT_0, TILT_90));
-            #if TILT_EASING_MILIS
+            #ifdef TILT_EASING_MILIS
             delay(TILT_EASING_MILIS);
-            #endif;
+            #endif
             _lasttilt=(float)_servo_tilt_must_move;
             _tilt_pos=0;
             _servo_tilt_has_arrived=true;
