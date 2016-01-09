@@ -825,7 +825,7 @@ void initGps() {
             Serial.print(" easingout: "); Serial.print(easingout);    
             Serial.print(" pwmpulse: "); Serial.println(_pwmpulse);
           #endif
-          #ifdef TILT_EASING
+          #if TILT_EASING_MILIS
           delay(TILT_EASING_MILIS);
           #endif
           _tilt_pos++;
@@ -833,7 +833,7 @@ void initGps() {
         else {
           if(_tilt_pos==TILT_EASING_STEPS){
             SET_TILT_SERVO_SPEED(map(_servo_tilt_must_move,0,90, TILT_0, TILT_90));
-            #ifdef TILT_EASING
+            #if TILT_EASING_MILIS
             delay(TILT_EASING_MILIS);
             #endif
             _lasttilt=(float)_servo_tilt_must_move;
