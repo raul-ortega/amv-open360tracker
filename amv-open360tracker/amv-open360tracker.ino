@@ -724,7 +724,6 @@ void calculatePID(void)
   #else
 	  
 	  int16_t PAN_SPEED;
-
     
     if(abs(Error[0])>=MAP_ANGLE*10)
       PAN_SPEED=MAX_PAN_SPEED;
@@ -737,11 +736,6 @@ void calculatePID(void)
     else if(Error[0]>0)
       PWMOutput = PAN_0 - PAN_SPEED;
 
-    #ifdef SERVOTEST
-      Serial.print(" PAN_0: ");Serial.print(PAN_0);
-      Serial.print(" PAN_SPEED: ");Serial.print(PAN_SPEED);
-      Serial.print(" PWMOutput: ");Serial.println(PWMOutput);
-    #endif    
   #endif
 }
 
