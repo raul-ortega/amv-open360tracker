@@ -1,12 +1,12 @@
 # amv-open60tracker-32bits v1.1.0
 ---------------------------------
-# EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
+## EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
 
 Esta es la versión de 32bits del Seguidor de Antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
 
 Por favor, antes de usar este software, lea atentamente las siguientes notas y las instrucciones de instalación que se detallan más abajo.
 
-# Plataforma Hardware
+## Plataforma Hardware
 
 Esta nueva versión, completamente experimental, soporta controladoras de 32bits basadas en **Naze32**. Actualmente se ha probado el firmware sobre la popular controladora **Flip32**, que incorpora su propio magnetómetro.
 
@@ -14,13 +14,13 @@ También es posible que pueda funcionar sobre otras controladoras basadas en Naz
 
 En esta versión preliminar, no se hace uso de LCD ni de GPS Local. Además, los botones de calibración y home no han sido implementados aún.
 
-# PROTOCOLOS DE TELEMETRÍA SOPORTADOS
+## PROTOCOLOS DE TELEMETRÍA SOPORTADOS
 
 En estos momentos, el único protocolo de telemetría implementado es el protocolo **MFD**.
 
 El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una nueva versión disponible que implementará algunas de sus funciones. No obstante, por las nuevas características que incorpora la versión actual, algunas de las funciones de SERVOTEST ya no serán necesarias, pues están implícitas en en algunas de sus nuevas funcionalidades.
 
-# Interfaz de Línea de Comandos (Command Line Interface, o CLI)
+## Interfaz de Línea de Comandos (Command Line Interface, o CLI)
 
 A efectos de configuración, ésta es la principal **novedad** que incorpora esta nueva versión, característica que se ya se había implemetnado en una de las versiones del firmware para plataformas basadas en Arduino, la cual no tuvo continuidad por falta de memoria en los procesadores atmega328p.
 
