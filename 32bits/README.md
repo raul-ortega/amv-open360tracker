@@ -54,6 +54,8 @@ Además, los parámetros de configuración pueden ser guardados en un archivo de
 
 - Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a usar algunos de esos valores.
 
+![Flip32](https://github.com/raul-ortega/amv-open360tracker/blob/master/32bits/amv-open360tracker-Flip32.png)
+
 **Parámetros de configuración**
 
 Antes de continuar, tómate tu tiempo y copia todas estos comandos e instrucciones en un archivo de texto y sálvalo.
