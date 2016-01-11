@@ -61,13 +61,8 @@ Además, los parámetros de configuración pueden ser guardados en un archivo de
 Antes de continuar, tómate tu tiempo y copia todas estos comandos e instrucciones en un archivo de texto y sálvalo.
 
 Luego sustituye los valores de los parametros por los equivalentes del archivo config.h de la versión de 8bits (Si es la primera vez que te acercas al proyecto, más abajo se explica que es cada parámetro):
-```
-# dump configuration
 
-# feature
 feature EASING
-
-# set
 set p = 2500
 set i = 20
 set d = 250
@@ -81,7 +76,7 @@ set easing = 1
 set easing_steps = 10
 set easing_min_angle = 4
 set easing_milis = 15
-```
+
 
 * El número de versión es 0.7 para que no haya confusión con la versión master (v0.5). 
 * Se recomienda subir el firm a la controladora con los servos desconectados.
