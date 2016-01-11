@@ -98,8 +98,8 @@ El firmware puedes descargarlos desde aquí: [amv-open360tracker-32bits-v1.1.0](
 ```
 1.- Coloca el jumper en los pines boot
 2.- Conecta el cable Micro USB a la controladora y al PC
-3.- Abre el programa [Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=)
-4.- Sigue las instrucciones del modo boot del [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
+3.- Abre el programa Flash Loader Demonstrator
+4.- Sigue las instrucciones del modo boot del manual de la NAZE32
 5.- Cierra el programa Flash Loader Demonstrator
 6.- Desconecta el cable Micro USB.
 7.- Quita el Jumper.
@@ -139,16 +139,19 @@ Ahora debemos entrar en modo CLI, para ello:
 
 4.- Tecleamos el caracter % y pulsamos enter
 
-    Aparecerá el mensaje Entering CLI Mode, type 'exit' to return, or 'help'. ¡Enhorabuena, ya has entrado al modo CLI!.
+    Aparecerá el mensaje Entering CLI Mode, type 'exit' to return, or 'help'.
+	¡Enhorabuena, ya has entrado al modo CLI!.
 
 5.- Abre el archivo con los parámetros de configuración y copia su contenido.
 
-6.- PEga los parámetros de configuración en el interior de la ventana y pulsa enter para que también acepte la última línea.
+6.- Pega los parámetros de configuración en el interior de la ventana y pulsa 
+    enter para que también acepte la última línea.
 
 7.- Teclea save y pulsa enter
 
-    Se mostrará un mensaje saving seguido de rebooting
-```	
+    Se mostrará un mensaje saving seguido de rebooting.
+```
+	
 	¡Enhorabuena, tu tracker ha sido configurado!.
 
 # Comandos del modo CLI
