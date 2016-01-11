@@ -24,9 +24,11 @@ El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una
 
 A efectos de configuración, ésta es la principal **novedad** que incorpora esta nueva versión, característica que se ya se había implemetnado en una de las versiones del firmware para plataformas basadas en Arduino, la cual no tuvo continuidad por falta de memoria en los procesadores atmega328p.
 
-La **mejora** princial tras la incorporación de esta interfaz de línea de comandos es que **ya no será necesario compilar el código y subirlo a la controladora** cada vez que se modifique un parámetro, con todas las ventajas que ello conlleva. Tan sólo será necesario subir una única vez el firmware, o cuando haya alguna actualización importante.
+La **mejora** tras la incorporación de esta interfaz de línea de comandos es que **ya no será necesario compilar el código y subirlo a la controladora** cada vez que se modifique un parámetro, con todas las ventajas que ello conlleva. Tan sólo será necesario subir una única vez el firmware, o cuando haya alguna actualización importante.
 
 Además, los parámetros de configuración pueden ser guardados en un archivo de texto, los cuales pueden ser transferidos en cualquier momento a la controladora a través de consola serie, sin necesidad de teclear un solo comando, salvo que queramos modificar algún parámetro de forma puntual o en el caso de la primera instalación.
+
+Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si estás familiarizado con él te será más fácil usarlo.
 
 # Instrucciones de intalación
 
@@ -34,7 +36,7 @@ Además, los parámetros de configuración pueden ser guardados en un archivo de
 
 - Para esta versión reliminar la instalación de la controladora es muy sencilla, en especial si ya eres usuario de la versión de 8bits.
 
-- El firm se subirá a la controladora usando el programa [Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=) de STMicroelectronics, yal y como se explica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
+- El firm se subirá a la controladora usando el programa [Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=) de STMicroelectronics, tal y como se explica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
 
 - Para comunicarnos con la controladora en modo CLI, podemos usar cualquier software de consola serie. Podemos usar [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe), que ya lo conoce nuestra comunidad y que nos permite copiar, pegar, volcar hacia/desde un archivo... 
 
@@ -83,13 +85,38 @@ set easing_min_angle = 4
 set easing_milis = 15
 ```
 
-* El número de versión es 0.7 para que no haya confusión con la versión master (v0.5). 
-* Se recomienda subir el firm a la controladora con los servos desconectados.
-* Al cargarse los parámetros por defecto, éstos podrían no ser adecuados para sus servos, podría haber una respuesta no esperada al inicio.
-* Este CLI está inspierado en el de Basefilght para Naze32, si estás familiarizado con él te será más fácil usarlo.
-* Algunos parámetros no están implementados en el config.h. Estos son: DEBUG, MEGA, los protocolos y BAUDS (bauidos para el puerto serie). Es por tanto necesario modificar el config.h para modificarlos.
-* Se puede interactuar con el CLI con la herramienta Monitor serie del IDE de Arduino. La consola espera nuestras órdenes, pero antes de se recomienda activar el retorno de carro y nueva línea en la consola. También es posible interactuar con el CLI utilizando otras herramientas, como por ejemplo Hércules.
-* Esta versión solo soporta tipo LCD Display de tipo I2C, ya no está soportado el tipo SPI.
+Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar.
+
+Si preparamos los valores para cada parámetro y los cargamos a través del CLI antes de conectar los servos, una vez conectados y conectar alimentación sólo debería moverse el servo pan un instante y pararse, quedando el tracker a espera de telemetría MFD u órdenes vía CLI.
+
+# Carga del firmware
+
+Sigue con exactitud estos pasos para instalar el firmware en la controladora.
+
+El firmware puedes descargarlos desde aquí: [amv-open360tracker-32bits-v1.1.0]()
+
+```
+1.- **Coloca** el **jumper** en los pines boot
+2.- **Conecta** el cable **Micro USB** a la controladora y al PC
+3.- Abre el programa **[Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=)**
+4.- Sigue las instrucciones de **carga en modo boot** paso por paso tal y como se indica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
+5.- **Cierra** el programa **Flash Loader Demonstrator**
+6.- **Desconecta** el cable **Micro USB**.
+7.- Quita el Jumper.
+8.- Vuelve a conectar el cable **Micro USB**.
+```
+
+**Arranque
+
+Los leds verde y rojo deberían parpadear siguiendo esta secuencia de arranque:
+
+```
+1.- Varios parpadeos del rojo y el verde, pero alternándose entre ellos mismos
+2.- Varios parpadeos sólo del led rojo
+3.- Tres parpadeos de ambos leds a la vez
+4.- A continuación parpadearán juntos 3 veces y se apagan.
+5.- Se enciende el led azul, la secuencia de arranque ha finalizado.
+```
 
 # Primer Inicio
 
