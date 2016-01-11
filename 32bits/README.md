@@ -2,7 +2,7 @@
 ---------------------------------
 # EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
 
-Esta es la versión de 32bits del Seguidor de Antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
+Esta es la versión de 32bits del Seguidor de Antena para FPV con rotación contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
 
 Por favor, antes de usar este software, lea atentamente las siguientes notas y las instrucciones de instalación que se detallan más abajo.
 
@@ -35,7 +35,7 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 **Preparación**
 
-- Para esta versión reliminar la instalación de la controladora es muy sencilla, en especial si ya eres usuario de la versión de 8bits.
+- Para esta versión preliminar la instalación de la controladora es muy sencilla, en especial si ya eres usuario de la versión de 8bits.
 
 - El firm se subirá a la controladora usando el programa [Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=) de STMicroelectronics, tal y como se explica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
 
