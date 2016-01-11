@@ -1,12 +1,12 @@
 # amv-open60tracker-32bits v1.1.0
 ---------------------------------
-## EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
+# EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
 
 Esta es la versión de 32bits del Seguidor de Antena para FPV con rotaicón contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
 
 Por favor, antes de usar este software, lea atentamente las siguientes notas y las instrucciones de instalación que se detallan más abajo.
 
-## Plataforma Hardware
+# Plataforma Hardware
 
 Esta nueva versión, completamente experimental, soporta controladoras de 32bits basadas en **Naze32**. Actualmente se ha probado el firmware sobre la popular controladora **Flip32**, que incorpora su propio magnetómetro.
 
@@ -14,13 +14,13 @@ También es posible que pueda funcionar sobre otras controladoras basadas en Naz
 
 En esta versión preliminar, no se hace uso de LCD ni de GPS Local. Además, los botones de calibración y home no han sido implementados aún.
 
-## PROTOCOLOS DE TELEMETRÍA SOPORTADOS
+# PROTOCOLOS DE TELEMETRÍA SOPORTADOS
 
 En estos momentos, el único protocolo de telemetría implementado es el protocolo **MFD**.
 
 El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una nueva versión disponible que implementará algunas de sus funciones. No obstante, por las nuevas características que incorpora la versión actual, algunas de las funciones de SERVOTEST ya no serán necesarias, pues están implícitas en en algunas de sus nuevas funcionalidades.
 
-## Interfaz de Línea de Comandos (Command Line Interface, o CLI)
+# Interfaz de Línea de Comandos: modo CLI 
 
 A efectos de configuración, ésta es la principal **novedad** que incorpora esta nueva versión, característica que se ya se había implemetnado en una de las versiones del firmware para plataformas basadas en Arduino, la cual no tuvo continuidad por falta de memoria en los procesadores atmega328p.
 
@@ -34,15 +34,28 @@ Además, los parámetros de configuración pueden ser guardados en un archivo de
 
 - Para esta versión reliminar la instalación de la controladora es muy sencilla, en especial si ya eres usuario de la versión de 8bits.
 
-- En cualquier caso, vamos a necesitar un **cable Micro USB** para subir el firmware por primera vez a la controladora, y para comunicarnos vía interfaz de línea de comandos para su configuración.
+- En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos para la **primera configuración**.
 
-- Tan sólo necesitaremos conectar los dos servos de 360º con giro contínuo, y conectar el dispositivo serie a través del cual se recibirán los datos de telemetría.
+- Necesitarás **soldar los pines** para **motores/servos**, **boot** y **uart1**, según se indica en la imagen.
+
+- Ten a mano un jumper para colocar en los pines boot, pues lo necesitarás para subir por primera vez el firware.
+
+- La controladora se alimentará por los pines GND y +5V a donde mismo se conectan los motores/servos de la controladora.
+
+- En esta versión tan sólo necesitaremos **conectar los dos servos** de 360º con giro contínuo, y conectar al **puerto uart1** el dispositivo serie a través del cual se recibirán los datos de telemetría.
 
 **Se recomienda no conectar los servos la primera vez, hasta que no nos hayamos familiarizado con la forma de configurar los parámetros**.
 
-- 
+- Una vez configurada instalada la controladora, conectados los servos y el dispositivo serie para la recepción de telemetría, el cable Micro USB ya no será necesario, salvo que necesitemos subir nuevamente el firmware.
 
-Si sólo deseas probar el funcionamiento de la interfaz de línea de comandos, y no deseas conectar los servos ni ningún otro dispositivo serie, salvo el PC para su configuración, tan sólo necesitas un cable Micro USB.
+- Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a usar algunos de esos valores.
+
+** Parámetros configurables **
+
+Antes de continuar, tómate tu tiempo y copia todas estos comandos e instrucciones en un archivo de texto, y sustituye los valores de los parametros que ya conoces. Si es la primera vez que te acercas este proyecto, más abajo se explica que es cada parámetro.
+
+
+
 
 * El número de versión es 0.7 para que no haya confusión con la versión master (v0.5). 
 * Se recomienda subir el firm a la controladora con los servos desconectados.
