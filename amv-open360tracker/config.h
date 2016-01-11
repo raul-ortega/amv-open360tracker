@@ -43,9 +43,9 @@
 * angle is smaller or greater than this value, the angle will be corrected using PIDs.
 * 
 */ 
-#define P 5000            // default 5000
-#define I 100             // default 100
-#define D 1000            // default 1000
+#define P 6500//2500            // default 5000
+#define I 0//20             // default 100
+#define D 250//200            // default 1000
 #define MAX_PID_ERROR 10  // default 10 
 
 /* #### Protocol ####
@@ -68,7 +68,8 @@
 //#define RVOSD
 //#define FRSKY_D
 //#define FRSKY_X
-#define LTM
+#define MFD
+//#define LTM
 /* #### Baud Rate ####
  *
  * baud rate of telemetry input
@@ -124,7 +125,7 @@
  *
  *  Enter PWM value of Servo for not moving
  */
-#define PAN_0 620 // default 1470
+#define PAN_0 1528 //620 // default 1470
 
 /* #### Pan servo minimum required speed ####
  *
