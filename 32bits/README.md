@@ -106,7 +106,7 @@ El firmware puedes descargarlos desde aquí: [amv-open360tracker-32bits-v1.1.0](
 8.- Vuelve a conectar el cable Micro USB.
 ```
 
-**Arranque
+**Arranque**
 
 Los leds verde y rojo deberían parpadear siguiendo esta secuencia de arranque:
 
@@ -154,7 +154,7 @@ Ahora debemos entrar en modo CLI, para ello:
 ```
 # Comandos del modo CLI
 
-**Modificar parámetros
+**Modificar parámetros**
 
 Si tecleamos **set** y pulsamos **enter**, mostrará un listado de todos los parámetros disponibles y su valor en la forma:
 
@@ -170,7 +170,7 @@ Para ver si el parámetro se ha modificado, tecleamos set y pulsamos enter, most
 
 Al final de este REAME está la lista completa de parámetros detallada.
 
-**Salvar los cambios
+**Salvar los cambios**
 
 Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos **save** y pulsamos **enter**. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
 
@@ -178,13 +178,13 @@ Al salvar la controladora hace un reinicio, realiza la carga de los parámetros,
 
 La controladora queda a la espera de recibir datos de telemetría, o entrar nuevamente en modo CLI.
 
-**Configuración por defecto
+**Configuración por defecto**
 
 Para volver a los valores por defecto de los parámetros de configuración, teclear **defaults** y pulsar **enter**.
 
 La controladora se reinicia y se vuelven a cargar los parámetros por defecto, por lo que el tracker podría empezar a moverse sin control. La configuración que hubiésemos realizado se pierde si no la hemos guardado en un archivo de texto previamente.
 
-**Comando feature
+**Comando feature**
 
 Este comando tiene triple función:
 
