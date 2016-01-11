@@ -34,6 +34,10 @@ Además, los parámetros de configuración pueden ser guardados en un archivo de
 
 - Para esta versión reliminar la instalación de la controladora es muy sencilla, en especial si ya eres usuario de la versión de 8bits.
 
+- El firm se subirá a la controladora usando el programa [Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=) de STMicroelectronics, yal y como se explica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
+
+- Para comunicarnos con la controladora en modo CLI, podemos usar cualquier software de consola serie. Podemos usar [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe), que ya lo conoce nuestra comunidad y que nos permite copiar, pegar, volcar hacia/desde un archivo... 
+
 - En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos para la **primera configuración**.
 
 - Necesitarás **soldar los pines** para **motores/servos**, **boot** y **uart1**, según se indica en la imagen.
@@ -50,11 +54,31 @@ Además, los parámetros de configuración pueden ser guardados en un archivo de
 
 - Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a usar algunos de esos valores.
 
-** Parámetros configurables **
+**Parámetros de configuración**
 
-Antes de continuar, tómate tu tiempo y copia todas estos comandos e instrucciones en un archivo de texto, y sustituye los valores de los parametros que ya conoces. Si es la primera vez que te acercas este proyecto, más abajo se explica que es cada parámetro.
+Antes de continuar, tómate tu tiempo y copia todas estos comandos e instrucciones en un archivo de texto y sálvalo.
 
+Luego sustituye los valores de los parametros por los equivalentes del archivo config.h de la versión de 8bits (Si es la primera vez que te acercas al proyecto, más abajo se explica que es cada parámetro):
 
+# dump configuration
+
+# feature
+feature EASING
+
+# set
+set p = 2500
+set i = 20
+set d = 250
+set max_pid_error = 10
+set pan0 = 1528
+set min_pan_speed = 0
+set offset =  90
+set tilt0 = 1125
+set tilt90 = 2025
+set easing = 1
+set easing_steps = 10
+set easing_min_angle = 4
+set easing_milis = 15
 
 
 * El número de versión es 0.7 para que no haya confusión con la versión master (v0.5). 
