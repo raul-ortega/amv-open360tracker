@@ -47,13 +47,13 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - Ten a mano un jumper para colocar en los pines boot, pues lo necesitarás para subir por primera vez el firware.
 
-- La controladora se alimentará por los pines GND y +5V a donde mismo se conectan los motores/servos de la controladora.
+- La controladora se alimentará por los pines GND y +5V a donde mismo se conectan los motores/servos.
 
 - En esta versión tan sólo necesitaremos **conectar los dos servos**, y conectar al **puerto uart1** el dispositivo serie a través del cual se recibirán los datos de telemetría.
 
 **Se recomienda no conectar los servos la primera vez, hasta que no nos hayamos familiarizado con la forma de configurar los parámetros**.
 
-- Una vez configurada instalada la controladora, conectados los servos y el dispositivo serie para la recepción de telemetría, el cable Micro USB ya no será necesario, salvo que necesitemos subir nuevamente el firmware.
+- Una vez que esté configurada la controladora, conectados los servos y el dispositivo serie para la recepción de telemetría, el cable Micro USB ya no será necesario, salvo que necesitemos subir nuevamente el firmware.
 
 - Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a usar algunos de esos valores.
 
