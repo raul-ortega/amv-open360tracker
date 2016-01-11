@@ -151,7 +151,6 @@ Ahora debemos entrar en modo CLI, para ello:
 	
 	¡Enhorabuena, tu tracker ha sido configurado!.
 
-```
 # Comandos del modo CLI
 
 **Modificar parámetros**
