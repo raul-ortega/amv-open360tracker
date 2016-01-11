@@ -99,7 +99,7 @@ El firmware puedes descargarlos desde aquí: [amv-open360tracker-32bits-v1.1.0](
 1.- **Coloca** el **jumper** en los pines boot
 2.- **Conecta** el cable **Micro USB** a la controladora y al PC
 3.- Abre el programa **[Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=)**
-4.- Sigue las instrucciones de **carga en modo boot** paso por paso tal y como se indica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
+4.- Sigue las instrucciones del modo boot del [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
 5.- **Cierra** el programa **Flash Loader Demonstrator**
 6.- **Desconecta** el cable **Micro USB**.
 7.- Quita el Jumper.
@@ -118,13 +118,43 @@ Los leds verde y rojo deberían parpadear siguiendo esta secuencia de arranque:
 5.- Se enciende el led azul, la secuencia de arranque ha finalizado.
 ```
 
-# Primer Inicio
+# Primer inicio: modo CLI
 
-La primera vez que se inicia la controladora tras la carga del firmware, entrará automáticamente en modo CLI. El motivo es simple, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que se pondría poner a girar sin parar.
+Ahora debemos entrar en modo CLI, para ello:
 
-Así que lo primero es teclear help y luego pulsar enter. Nos aparecerá un listado con todos los comandos disponibles. Los que lleven un asterisco delante no funcionan.
+```
+1.- **Iniciamos** el programa **Hércules**
+2.- Seleccionamos los parámetros de comunicaciones:
 
-# Modificar parámetros
+    Name(Puerto): **COM8**
+    Baud: **9600**
+	Data size: **8**
+    Parity: **none**
+    Handshake: **OFF**
+    Mode: **Free**
+
+3.- Pulsamos **Open**
+
+    Debería aparecer el mensaje "Serial por COM opened" en color verde.
+	
+4.- Tecleamos el caracter **%** y pulsamos **enter**
+
+    Aparecerá el mensaje **Entering CLI Mode, type 'exit' to return, or 'help'**. ¡Enhorabuena, ya has entrado al modo CLI!.
+	
+5.- Abre el **archivo con los parámetros** de configuración y copia su contenido.
+
+6.- **Péga** los parámetros de configuración en **el interior de la ventana** y pulsa **enter** para que también acepte la última línea.
+
+7.- Teclea **save** y pulsa **enter**
+
+    Se mostrará un mensaje **saving** seguido de **rebooting**
+	
+	¡Enhorabuena, tu tracker ha sido configurado!.
+
+```
+# Comandos del modo CLI
+
+**Modificar parámetros
 
 Si tecleamos **set** y pulsamos **enter**, mostrará un listado de todos los parámetros disponibles y su valor en la forma:
 
@@ -132,7 +162,7 @@ Si tecleamos **set** y pulsamos **enter**, mostrará un listado de todos los par
 
 Por ejemplo, para configuar el parámetro P de los PIDs a 400:
 
-* set P=400
+* set p=400
 
 y pulsamos enter.
 
@@ -140,33 +170,21 @@ Para ver si el parámetro se ha modificado, tecleamos set y pulsamos enter, most
 
 Al final de este REAME está la lista completa de parámetros detallada.
 
-# Salvar los cambios
+**Salvar los cambios
 
 Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos **save** y pulsamos **enter**. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
 
-Al salvar la controladora hace un pseudo reinicio, realiza la carga de los parámetros, e inicia el LCD (si está habilidada la característica), los servos, etc...
+Al salvar la controladora hace un reinicio, realiza la carga de los parámetros, e inicia todo el hardware, incluidos los servos.
 
-En este reinicio ya no entramos en el modo CLI, dejándose de mostrar información por la consola.
+La controladora queda a la espera de recibir datos de telemetría, o entrar nuevamente en modo CLI.
 
-# Entrar en modo CLI
-
-Para volver a entrar en el modo CLI, tenemos que teclear **###** y pulsar **enter**. La consola espera nuevamente a que enviemos comandos.
-
-Estando en este modo por segunda vez, y en sucesivas veces, el tracker no dejará de realizar su cometido, seguirá en funcionamiento.
-
-Los cambios no tendrá efecto sobre el tracker hasta que no hagamos save nuevamente, tras lo cual se producirá un reinicio. No es por tanto neceario recalcar la importancia de:
-
-No salvar los cambios mientras se está haciendo uso del tracker y tenemos el avión en vuelo.
-
-# Configuración por defecto
+**Configuración por defecto
 
 Para volver a los valores por defecto de los parámetros de configuración, teclear **defaults** y pulsar **enter**.
 
-Si hacemos uso a continuación del comando set, veremos que los parámetros por defecto se han cargado.
+La controladora se reinicia y se vuelven a cargar los parámetros por defecto, por lo que el tracker podría empezar a moverse sin control. La configuración que hubiésemos realizado se pierde si no la hemos guardado en un archivo de texto previamente.
 
-Una vez más, es necesario hacer un save para que los parámetros por defecto se guarden, el tracker se reinicie y tengan efecto sobre él.
-
-# Comando feature
+**Comando feature
 
 Este comando tiene triple función:
 
@@ -178,31 +196,21 @@ Tecleando **feature** y pulsando **enter**, muestra la lista de las que están a
 
 Tecleando **feature** y el **nombre de la característica** y pulsando **enter**, esta se activará si no lo estaba, o bien se desactivará si lo estaba.
 
-Esta función de activar/esactivar la característica también se puede realizar con el correspondiente comando set, por ejemplo, los siguientes dos comandos son equivalentes:
+Por ejemplo, para activar easing en el servo tilt:
 
-* set servotest=1
-* feature servotest
+* feature esaing
 
 suponiendo que esté desactivada.
 
-Para desactivarla podemos ejecutar cualquiera de los dos siguientes:
+Para desactivarla:
 
-* set servotest=0
-* feature servotest
-
-Las características que se pueden activar y desactivar con el comando feature son:
-
-* bat
-* easing
-* gps
-* lcd
-* servotest
+* feature -esaing
 
 # Efecto Easing en Servo Tilt
 	
 * set easing=**1** para usar la función **out- quart**
 * set easing=**2** para usar la función **out-circ**
-* set easing=**0** para **desactivarlo** (o también feature easing) 
+* set easing=**0** para **desactivarlo** (además es necesario ejecutar feature -easing) 
 	
 # Parámetros configurables
 
