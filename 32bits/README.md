@@ -125,28 +125,28 @@ Ahora debemos entrar en modo CLI, para ello:
 ```
 1.- Iniciamos el programa Hércules
 2.- Seleccionamos los parámetros de comunicaciones:
-```
+
     Name(Puerto): **COM8**
     Baud: **9600**
 	Data size: **8**
     Parity: **none**
     Handshake: **OFF**
     Mode: **Free**
-```
+
 3.- Pulsamos Open
-```
+
     Debería aparecer el mensaje "Serial por COM opened" en color verde.
-```	
+
 4.- Tecleamos el caracter % y pulsamos enter
-```
+
     Aparecerá el mensaje Entering CLI Mode, type 'exit' to return, or 'help'. ¡Enhorabuena, ya has entrado al modo CLI!.
-```	
+
 5.- Abre el archivo con los parámetros de configuración y copia su contenido.
-```
-6.- Péga los parámetros de configuración en el interior de la ventana y pulsa enter para que también acepte la última línea.
-```
+
+6.- PEga los parámetros de configuración en el interior de la ventana y pulsa enter para que también acepte la última línea.
+
 7.- Teclea save y pulsa enter
-```
+
     Se mostrará un mensaje saving seguido de rebooting
 	
 	¡Enhorabuena, tu tracker ha sido configurado!.
