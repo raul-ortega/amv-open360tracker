@@ -14,7 +14,7 @@ También es posible que pueda funcionar sobre otras controladoras basadas en Naz
 
 En esta versión preliminar, no se hace uso de LCD ni de GPS Local. Además, los botones de calibración y home no han sido implementados aún.
 
-# PROTOCOLOS DE TELEMETRÍA SOPORTADOS
+# Protocolos de telemetría soportados
 
 En estos momentos, el único protocolo de telemetría implementado es el protocolo **MFD**.
 
@@ -148,7 +148,7 @@ Ahora debemos entrar en modo CLI, para ello:
 7.- Teclea save y pulsa enter
 
     Se mostrará un mensaje saving seguido de rebooting
-	
+```	
 	¡Enhorabuena, tu tracker ha sido configurado!.
 
 # Comandos del modo CLI
