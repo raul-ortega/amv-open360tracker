@@ -61,7 +61,7 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 **Parámetros de configuración**
 
-Antes de continuar, tómate tu tiempo y copia todas estos comandos e instrucciones en un archivo de texto y sálvalo.
+Antes de continuar, tómate tu tiempo y copia todos estos comandos y parámetros en un archivo de texto y sálvalo.
 
 Luego sustituye los valores de los parametros por los equivalentes del archivo config.h de la versión de 8bits (Si es la primera vez que te acercas al proyecto, más abajo se explica que es cada parámetro):
 
@@ -94,7 +94,7 @@ Si preparamos los valores para cada parámetro y los cargamos a través del CLI 
 
 Sigue con exactitud estos pasos para instalar el firmware en la controladora.
 
-El firmware puedes descargarlos desde aquí: [amv-open360tracker-32bits-v1.1.0]()
+El firmware puedes descargarlo desde aquí: [amv-open360tracker-32bits-v1.1.0]()
 
 ```
 1.- Coloca el jumper en los pines boot
@@ -153,7 +153,9 @@ Ahora debemos entrar en modo CLI, para ello:
     Se mostrará un mensaje saving seguido de rebooting.
 ```
 	
-	Tu tracker ha sido configurado, pero aún nos falta ajustar el valor de pan0 y realizar la calibración. Continúa leyendo...
+	Tu tracker ha sido configurado, pero aún nos falta ajustar el valor de pan0 y realizar la calibración.
+	
+	Continúa leyendo...
 	
 # Ajustando pan0
 
@@ -166,10 +168,10 @@ El tracker girará durante no más de un segundo, y no muy rápido, tras lo que 
 Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos configurado el parámetro pan0 a un valor que que conocíamos como el centro, es cuestión de ir ajustando ese valor. Para ello:
 
 ```
-1.- Entrar al **modo CLI**
-2.- Ejecutar comando **set pan0=valor**
+1.- Entrar al modo CLI
+2.- Ejecutar comando set pan0=valor
 3.- Si el servo no se detiene, volvemso al paso 2 ajustando nuevamente el valor.
-4.- Guardamos con **save** 
+4.- Guardamos con save 
 ```
 
 **Nota:** El paso 4 se puede omitir pues vamos a realizar la calibración a continuación.
@@ -179,12 +181,12 @@ Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos conf
 Aún necesitamos un paso adicional para tener nuestro tracker funcionando. Es necesario calibrar el magnetómetro:
 
 ```
-1.- Entrar al **modo CLI**
-2.- Ejecutar comando **calibrate**
+1.- Entrar al modo CLI
+2.- Ejecutar comando calibrate
 
-Durante el proceso de calibración el tracker girará durante **30 segundos en un único sentido**, tras lo cual se parará.
+Durante el proceso de calibración el tracker girará durante 30 segundos en un único sentido, tras lo cual se parará.
 
-3.- Guardamos con **save** 
+3.- Guardamos con save 
 ```
 
 Ahora sí tenemos nuestro tracker configurado.
@@ -253,7 +255,7 @@ Para desactivarla:
 # Parámetros configurables
 ---------------------------------
 
-Esta es la lista completa de los parámetros que pueden ser configurado mediante el comando set:
+Esta es la lista completa de los parámetros que pueden ser configurados mediante el comando set:
 
 * **p,i,d:** El valor de los valores PID.
 * **tilt0:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0.
