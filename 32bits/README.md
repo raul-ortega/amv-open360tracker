@@ -248,7 +248,7 @@ Para desactivarla:
 
 **Efecto Easing en Servo Tilt**
 
-No basta con ejecutar **feature easing** para activarlo. También es necesario indicar que función de easing quieres usar, que por:
+No basta con ejecutar **feature easing** para activarlo. También es necesario indicar que función de easing quieres usar:
 
 * set easing=**1** para usar la función **out- quart**
 * set easing=**2** para usar la función **out-circ**
