@@ -1,36 +1,42 @@
 # amv-open60tracker-32bits v1.1.0
 ---------------------------------
-# EXPERIMENTAL (Úsala bajo tu propio riesgo/Use it under your own risk).
+# EXPERIMENTAL
 
-Esta es la versión de 32bits del Seguidor de Antena para FPV con rotación contínua de 360º de la [comunidad española de AMV](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
+**Úsala bajo tu propio riesgo/Use it under your own risk)**
 
-Por favor, antes de usar este software, lea atentamente las siguientes notas y las instrucciones de instalación que se detallan más abajo.
+Esta es la versión de 32bits del seguidor de antena para FPV con rotación contínua de 360º de la [comunidad española de aeromodelismo virtual](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
+
+Por favor, antes de usar este software lea atentamente esta guía, aquí encontrará detallada toda la información necesaria para poner en marcha su seguirdor de antena con esta versión del firmware. Preste especial atención a las las instrucciones de instalación y las notas de recomendación para no dañar sus dispositivos.
 
 # Plataforma Hardware
 
-Esta nueva versión, completamente experimental, soporta controladoras de 32bits basadas en **Naze32**. Actualmente se ha probado el firmware sobre la popular controladora **Flip32**, que incorpora su propio magnetómetro.
+Esta nueva versión es completamente experimental, y da soporte a controladoras con microprocesadores STM32F de 32bits basadas en la popular plataforma hardware **Naze32**. Actualmente se ha probado el firmware la controladora **Flip32** que incorpora su propio magnetómetro.
 
-También es posible que pueda funcionar sobre otras controladoras basadas en Naze32 sin magnetómetro, siendo necesario por tanto la conexión de un magnetómetro externo. Bajo estas circustancias el firmware aún no ha sido testado.
+También es posible que pueda funcionar sobre otras controladoras basadas en Naze32 que no disponga de magnetómetro integrado en placa, siendo indispensable por tanto la conexión de un magnetómetro externo. Bajo estas circustancias el firmware aún no ha sido testado.
 
-En esta versión preliminar, no se hace uso de LCD ni de GPS Local. Además, los botones de calibración y home no han sido implementados aún.
+En esta versión preliminar no se hace uso de dispositivo LCD, ni de receptor GPS Local. Además, los botones de calibración y home no han sido implementados aún (la calibración se puede realizar en modo CLI como se explica más adelante).
+
+El objetivo que se sigue con esta primera versión es la realización de pruebas por parte de los usuarios de la comunidad, con el fin de recopilar información derivada de la experiencia en su uso que sirva para determinar la viabilidad del proyecto.
+
+Si decides usar este firmware, hazlo bajo tu propia responsabilidad, pues los dispositivos usados podrían terminar dañados, especialmente si no se siguen las instrucciones y recomendaciones dadas.
 
 # Protocolos de telemetría soportados
 
-En estos momentos, el único protocolo de telemetría implementado es el protocolo **MFD**.
+En estos momentos el único protocolo de telemetría implementado es el protocolo **MFD** a 9600 baudios.
 
 El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una nueva versión disponible que implementará algunas de sus funciones. No obstante, por las nuevas características que incorpora la versión actual, algunas de las funciones de SERVOTEST ya no serán necesarias, pues están implícitas en algunas de sus nuevas funcionalidades.
 
 # Interfaz de Línea de Comandos: modo CLI 
 
-A efectos de configuración, ésta es la principal **novedad** que incorpora esta nueva versión, característica que ya se había implemetnado en una de las versiones del firmware para plataformas basadas en Arduino, la cual no tuvo continuidad por falta de memoria en los procesadores atmega328p.
+A efectos de configuración ésta es la principal **novedad** que incorpora esta nueva versión, característica que ya se había implemetnado en una [versión del firmware](https://github.com/raul-ortega/amv-open360tracker/tree/remote-settings) para plataformas basadas en Arduino, la cual no ha tenido continuidad por falta de memoria en los procesadores atmega328p.
 
-La **mejora** tras la incorporación de esta interfaz de línea de comandos es que **ya no será necesario compilar el código y subirlo a la controladora** cada vez que se modifique un parámetro, con todas las ventajas que ello conlleva. Tan sólo será necesario subir una única vez el firmware, o cuando haya alguna actualización importante.
+La **mejora** tras la incorporación de esta interfaz de línea de comandos es que **ya no será necesario compilar el código y subirlo a la controladora** cada vez que se modifique un parámetro, con todas las ventajas que ello conlleva. Tan sólo será necesario subir el firmware una vez, o cuando haya alguna actualización importante.
 
-Además, los parámetros de configuración pueden ser guardados en un archivo de texto, los cuales pueden ser transferidos en cualquier momento a la controladora a través de consola serie, sin necesidad de teclear un solo comando, salvo que queramos modificar algún parámetro de forma puntual o en el caso de la primera instalación.
+Además, los parámetros de configuración pueden ser guardados en un archivo de texto, los cuales pueden ser transferidos en cualquier momento a la controladora a través de consola serie sin necesidad de teclear un solo comando, salvo que queramos modificar algún parámetro de forma puntual o en el caso de la primera instalación.
 
 Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si estás familiarizado con él te será más fácil usarlo.
 
-# Instrucciones de intalación
+# Instalación
 ---------------------------------
 
 **Preparación**
@@ -41,7 +47,7 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - Para comunicarnos con la controladora en modo CLI podemos usar cualquier software de consola serie. Podemos usar [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe), que ya lo conoce nuestra comunidad y que nos permite copiar, pegar, volcar hacia/desde un archivo... 
 
-- En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos para la **primera configuración**.
+- En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos durante para la **primera configuración**.
 
 - Necesitarás **soldar los pines** para **motores/servos**, **boot** y **uart1**, según se indica en la imagen.
 
@@ -51,7 +57,7 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - En esta versión tan sólo necesitaremos **conectar los dos servos**, y conectar al **puerto uart1** el dispositivo serie a través del cual se recibirán los datos de telemetría.
 
-**Se recomienda no conectar los servos la primera vez, hasta que no nos hayamos familiarizado con la forma de configurar los parámetros**.
+**Se recomienda no conectar los servos la primera vez, al menos hasta que no nos hayamos familiarizado con la forma de configurar los parámetros**.
 
 - Una vez que esté configurada la controladora, conectados los servos y el dispositivo serie para la recepción de telemetría, el cable Micro USB ya no será necesario, salvo que necesitemos subir nuevamente el firmware.
 
