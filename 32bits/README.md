@@ -22,7 +22,7 @@ El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una
 
 # Interfaz de Línea de Comandos: modo CLI 
 
-A efectos de configuración, ésta es la principal **novedad** que incorpora esta nueva versión, característica que se ya se había implemetnado en una de las versiones del firmware para plataformas basadas en Arduino, la cual no tuvo continuidad por falta de memoria en los procesadores atmega328p.
+A efectos de configuración, ésta es la principal **novedad** que incorpora esta nueva versión, característica que ya se había implemetnado en una de las versiones del firmware para plataformas basadas en Arduino, la cual no tuvo continuidad por falta de memoria en los procesadores atmega328p.
 
 La **mejora** tras la incorporación de esta interfaz de línea de comandos es que **ya no será necesario compilar el código y subirlo a la controladora** cada vez que se modifique un parámetro, con todas las ventajas que ello conlleva. Tan sólo será necesario subir una única vez el firmware, o cuando haya alguna actualización importante.
 
@@ -39,7 +39,7 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - El firm se subirá a la controladora usando el programa [Flash Loader Demonstrator](https://code.google.com/p/afrodevices/downloads/detail?name=stm32-stm8_flash_loader_demo.zip&can=2&q=) de STMicroelectronics, tal y como se explica en el [manual de la NAZE32](http://www.abusemark.com/downloads/naze32_rev3.pdf).
 
-- Para comunicarnos con la controladora en modo CLI, podemos usar cualquier software de consola serie. Podemos usar [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe), que ya lo conoce nuestra comunidad y que nos permite copiar, pegar, volcar hacia/desde un archivo... 
+- Para comunicarnos con la controladora en modo CLI podemos usar cualquier software de consola serie. Podemos usar [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe), que ya lo conoce nuestra comunidad y que nos permite copiar, pegar, volcar hacia/desde un archivo... 
 
 - En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos para la **primera configuración**.
 
@@ -246,11 +246,15 @@ Para desactivarla:
 
 * feature -esaing
 
-# Efecto Easing en Servo Tilt
-	
+**Efecto Easing en Servo Tilt**
+
+No basta con ejecutar **feature easing** para activarlo. También es necesario indicar que función de easing quieres usar, que por:
+
 * set easing=**1** para usar la función **out- quart**
 * set easing=**2** para usar la función **out-circ**
-* set easing=**0** para **desactivarlo** (además es necesario ejecutar feature -easing) 
+* set easing=**0** para **desactivarlo**
+
+Para desactivarlo basta con emplear el comando **featurea -easing**.
 	
 # Parámetros configurables
 ---------------------------------
