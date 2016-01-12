@@ -18,7 +18,7 @@ En esta versión preliminar, no se hace uso de LCD ni de GPS Local. Además, los
 
 En estos momentos, el único protocolo de telemetría implementado es el protocolo **MFD**.
 
-El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una nueva versión disponible que implementará algunas de sus funciones. No obstante, por las nuevas características que incorpora la versión actual, algunas de las funciones de SERVOTEST ya no serán necesarias, pues están implícitas en en algunas de sus nuevas funcionalidades.
+El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una nueva versión disponible que implementará algunas de sus funciones. No obstante, por las nuevas características que incorpora la versión actual, algunas de las funciones de SERVOTEST ya no serán necesarias, pues están implícitas en algunas de sus nuevas funcionalidades.
 
 # Interfaz de Línea de Comandos: modo CLI 
 
