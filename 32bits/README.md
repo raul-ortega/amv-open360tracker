@@ -2,7 +2,7 @@
 ---------------------------------
 # EXPERIMENTAL
 
-**Úsala bajo tu propio riesgo/Use it under your own risk)**
+**Úsala bajo tu propio riesgo/Use it under your own risk.**
 
 Esta es la versión de 32bits del seguidor de antena para FPV con rotación contínua de 360º de la [comunidad española de aeromodelismo virtual](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
 
