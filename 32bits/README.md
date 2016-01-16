@@ -63,7 +63,7 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a esos mismos valores.
 
-![Flip32](https://github.com/raul-ortega/amv-open360tracker/blob/master/32bits/amv-open360tracker-Flip32.png)
+![Flip32](https://github.com/raul-ortega/amv-open360tracker/blob/master/32bits/Flip32-montaje.png)
 
 **Parámetros de configuración**
 
@@ -74,21 +74,20 @@ Luego sustituye los valores de los parametros por los equivalentes del archivo c
 ```
 # dump configuration
 
-# feature
 feature EASING
 
-# set 
 set p = 2500
 set i = 50
 set d = 250
 set max_pid_error = 10
 set pan0 = 1528
+set pan0_callibrated = 0
 set min_pan_speed = 0
 set offset = 90.000
 set tilt0 = 1050
 set tilt90 = 2025
 set easing = 1
-set easing_steps = 30
+set easing_steps = 40
 set easing_min_angle = 4
 set easing_milis = 15
 set telemetry_baud = 2
