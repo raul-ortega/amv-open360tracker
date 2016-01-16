@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.3.0
+# amv-open60tracker-32bits v1.1.0
 ---------------------------------
 # EXPERIMENTAL
 
@@ -10,21 +10,21 @@ Por favor, antes de usar este software lea atentamente esta guía, aquí encontr
 
 # Plataforma Hardware
 
-Esta nueva versión es completamente experimental, y da soporte a controladoras con microprocesadores STM32F de 32bits basadas en la popular plataforma hardware **Naze32**. Actualmente se ha probado el firmware en la controladora **Flip32** que incorpora su propio magnetómetro.
+Esta nueva versión es completamente experimental, y da soporte a controladoras con microprocesadores STM32F de 32bits basadas en la popular plataforma hardware **Naze32**. Actualmente se ha probado el firmware la controladora **Flip32** que incorpora su propio magnetómetro.
 
-También es posible que pueda funcionar sobre otras controladoras basadas en Naze32 que no dispongan de magnetómetro integrado en placa, siendo indispensable por tanto la conexión de un magnetómetro externo. Bajo estas circustancias el firmware aún no ha sido testado.
+También es posible que pueda funcionar sobre otras controladoras basadas en Naze32 que no disponga de magnetómetro integrado en placa, siendo indispensable por tanto la conexión de un magnetómetro externo. Bajo estas circustancias el firmware aún no ha sido testado.
 
 En esta versión preliminar no se hace uso de dispositivo LCD, ni de receptor GPS Local. Además, los botones de calibración y home no han sido implementados aún (la calibración se puede realizar en modo CLI como se explica más adelante).
 
-El objetivo que se persigue con esta primera versión es la realización de pruebas por parte de los usuarios de la comunidad, con el fin de recopilar información derivada de la experiencia en su uso que sirva para determinar la viabilidad del proyecto.
+El objetivo que se sigue con esta primera versión es la realización de pruebas por parte de los usuarios de la comunidad, con el fin de recopilar información derivada de la experiencia en su uso que sirva para determinar la viabilidad del proyecto.
 
-Si decides usar este firmware, hazlo bajo tu propia responsabilidad, pues los dispositivos usados podrían terminar dañados, especialmente si no se siguen las instrucciones y recomendaciones que se dan en este documento.
+Si decides usar este firmware, hazlo bajo tu propia responsabilidad, pues los dispositivos usados podrían terminar dañados, especialmente si no se siguen las instrucciones y recomendaciones dadas.
 
 # Protocolos de telemetría soportados
 
-En estos momentos el único protocolo de telemetría implementado es el protocolo **MFD**.
+En estos momentos el único protocolo de telemetría implementado es el protocolo **MFD** a 9600 baudios.
 
-Las funciones equivalentes al procolo **SERVOTEST** están disponibles **desde el modo CLI**, pero ahora se ejecutan de forma distinta.
+El protocol **SERVOTEST no está implementado** aún, aunque en breve habrá una nueva versión disponible que implementará algunas de sus funciones. No obstante, por las nuevas características que incorpora la versión actual, algunas de las funciones de SERVOTEST ya no serán necesarias, pues están implícitas en algunas de sus nuevas funcionalidades.
 
 # Interfaz de Línea de Comandos: modo CLI 
 
@@ -32,7 +32,7 @@ A efectos de configuración ésta es la principal **novedad** que incorpora esta
 
 La **mejora** tras la incorporación de esta interfaz de línea de comandos es que **ya no será necesario compilar el código y subirlo a la controladora** cada vez que se modifique un parámetro, con todas las ventajas que ello conlleva. Tan sólo será necesario subir el firmware una vez, o cuando haya alguna actualización importante.
 
-Además, los parámetros de configuración pueden ser guardados en un archivo de texto, los cuales pueden ser transferidos en cualquier momento a la controladora a través de consola serie sin necesidad de teclear un solo comando, salvo que queramos modificar algún parámetro de forma puntual, o en el caso de la primera instalación.
+Además, los parámetros de configuración pueden ser guardados en un archivo de texto, los cuales pueden ser transferidos en cualquier momento a la controladora a través de consola serie sin necesidad de teclear un solo comando, salvo que queramos modificar algún parámetro de forma puntual o en el caso de la primera instalación.
 
 Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si estás familiarizado con él te será más fácil usarlo.
 
@@ -47,11 +47,11 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - Para comunicarnos con la controladora en modo CLI podemos usar cualquier software de consola serie. Podemos usar [Hércules](http://new.hwg.cz/files/download/sw/version/hercules_3-2-8.exe), que ya lo conoce nuestra comunidad y que nos permite copiar, pegar, volcar hacia/desde un archivo... 
 
-- En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos durante la **primera configuración**.
+- En cualquier caso, vamos a necesitar un **cable Micro USB** para **subir por primera vez el firmware a la controladora**, y para comunicarnos vía interfaz de línea de comandos durante para la **primera configuración**.
 
 - Necesitarás **soldar los pines** para **motores/servos**, **boot** y **uart1**, según se indica en la imagen.
 
-- Ten a mano un jumper para colocar en los pines boot, pues lo necesitarás para subir por primera vez el firmware.
+- Ten a mano un jumper para colocar en los pines boot, pues lo necesitarás para subir por primera vez el firware.
 
 - La controladora se alimentará por los pines GND y +5V a donde mismo se conectan los motores/servos.
 
@@ -61,13 +61,13 @@ Este CLI está inspirado en el CLI basefilght y cleanflight para Naze32, si est�
 
 - Una vez que esté configurada la controladora, conectados los servos y el dispositivo serie para la recepción de telemetría, el cable Micro USB ya no será necesario, salvo que necesitemos subir nuevamente el firmware.
 
-- Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a esos mismos valores.
+- Si eres usuario de de la versión de 8 bits, y vas a probar esta versión de 32bits, **ten a mano los valores de los parámetros de configuración del config.h.**, pues vamos a usar algunos de esos valores.
 
 ![Flip32](https://github.com/raul-ortega/amv-open360tracker/blob/master/32bits/amv-open360tracker-Flip32.png)
 
 **Parámetros de configuración**
 
-Antes de continuar, tómate tu tiempo y copia todos estos comandos y parámetros de configuración en un archivo de texto y sálvalo.
+Antes de continuar, tómate tu tiempo y copia todos estos comandos y parámetros en un archivo de texto y sálvalo.
 
 Luego sustituye los valores de los parametros por los equivalentes del archivo config.h de la versión de 8bits (Si es la primera vez que te acercas al proyecto, más abajo se explica que es cada parámetro):
 
@@ -77,40 +77,37 @@ Luego sustituye los valores de los parametros por los equivalentes del archivo c
 # feature
 feature EASING
 
-# set 
 set p = 2500
-set i = 50
+set i = 20
 set d = 250
 set max_pid_error = 10
 set pan0 = 1528
 set min_pan_speed = 0
-set offset = 90.000
-set tilt0 = 1050
+set offset =  90
+set tilt0 = 1125
 set tilt90 = 2025
 set easing = 1
-set easing_steps = 30
+set easing_steps = 10
 set easing_min_angle = 4
 set easing_milis = 15
-set telemetry_baud = 2
-set start_tracking_distance = 10
 ```
 
 Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar.
 
-Si preparamos los valores para cada parámetro y los cargamos a través del CLI antes de conectar los servos, una vez conectados y conectar alimentación sólo debería moverse el servo PAN un instante y pararse, quedando el tracker a espera de telemetría u órdenes vía CLI.
+Si preparamos los valores para cada parámetro y los cargamos a través del CLI antes de conectar los servos, una vez conectados y conectar alimentación sólo debería moverse el servo pan un instante y pararse, quedando el tracker a espera de telemetría MFD u órdenes vía CLI.
 
 # Carga del firmware
 
 Sigue con exactitud estos pasos para instalar el firmware en la controladora.
 
-El firmware puedes descargarlo desde aquí: [amv-open360tracker-32bits-v1.3.0](https://github.com/raul-ortega/amv-open360tracker/blob/master/32bits/amv-open360tracker_NAZE-v1.3.0.hex)
+El firmware puedes descargarlo desde aquí: [amv-open360tracker-32bits-v1.1.0]()
 
 ```
-1.- Coloca el jumper en los pines boot.
-2.- Conecta el cable Micro USB a la controladora y al PC.
-3.- Abre el programa Flash Loader Demonstrator.
-4.- Sigue las instrucciones del modo boot del manual de la NAZE32.
-5.- Cierra el programa Flash Loader Demonstrator.
+1.- Coloca el jumper en los pines boot
+2.- Conecta el cable Micro USB a la controladora y al PC
+3.- Abre el programa Flash Loader Demonstrator
+4.- Sigue las instrucciones del modo boot del manual de la NAZE32
+5.- Cierra el programa Flash Loader Demonstrator
 6.- Desconecta el cable Micro USB.
 7.- Quita el Jumper.
 8.- Vuelve a conectar el cable Micro USB.
@@ -162,11 +159,7 @@ Ahora debemos entrar en modo CLI, para ello:
     Se mostrará un mensaje saving seguido de rebooting.
 ```
 	
-	Tu tracker ha sido configurado, pero aún nos faltan algunos detalles para que funcione correctamente:
-	
-* A justar el valor de pan0 para que el servo se detenga.
-* Realizar la calibración del magentómetro.
-* Ajustar el parámetro offset para que apunte al norte.
+	Tu tracker ha sido configurado, pero aún nos falta ajustar el valor de pan0 y realizar la calibración.
 	
 	Continúa leyendo...
 	
@@ -187,10 +180,7 @@ Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos conf
 4.- Guardamos con save 
 ```
 
-**Notas:** 
-
-* Al entrar en modo CLI, el tracker se orienta al norte por defecto. Pero como aún no hemos calibrado ni ajustado el offset, es posible que no lo haga correctamente.
-* El paso 4 se puede omitir pues vamos a realizar la calibración a continuación.
+**Nota:** El paso 4 se puede omitir pues vamos a realizar la calibración a continuación.
 
 # Calibración
 
