@@ -178,35 +178,55 @@ Conectamos la baetía al tracker, iniciándose la secuencia de arranque.
 
 El tracker girará durante no más de un segundo, y no muy rápido, tras lo que debería detenerse, justo cuando el led azul se queda fijo, indicando que la secuencia de arranque ha finalizado.
 
-Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos configurado el parámetro pan0 a un valor que que conocíamos como el centro, es cuestión de ir ajustando ese valor. Para ello:
+Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos configurado el parámetro pan0 a un valor que conocíamos como el centro, es cuestión de ir ajustando ese valor. Para ello:
 
 ```
 1.- Entrar al modo CLI
 2.- Ejecutar comando set pan0=valor
 3.- Si el servo no se detiene, volvemso al paso 2 ajustando nuevamente el valor.
-4.- Guardamos con save 
+4.- Si el servo se detiene, ejecutamos el comando set pan0_calibrated=1
+5.- Guardamos con save 
 ```
 
 **Notas:** 
 
-* Al entrar en modo CLI, el tracker se orienta al norte por defecto. Pero como aún no hemos calibrado ni ajustado el offset, es posible que no lo haga correctamente.
-* El paso 4 se puede omitir pues vamos a realizar la calibración a continuación.
+* Al entrar en modo CLI, el tracker se orienta a 0 grados (Norte) por defecto. Pero como aún no hemos calibrado ni ajustado el offset, es posible que no esté apuntando a la dirección correcta.
+* Puedes guardar la configuración si lo deseas, pero como vamos a realizar la calibración a continuación, y después ajustar algunos valores, podemos dejarlo para el final.
 
 # Calibración
 
-Aún necesitamos un paso adicional para tener nuestro tracker funcionando. Es necesario calibrar el magnetómetro:
+Una vez ajustado el valor de pan0, es necesario calibrar el magnetómetro:
 
 ```
 1.- Entrar al modo CLI
 2.- Ejecutar comando calibrate
+3.- Guardamos con save 
 
 Durante el proceso de calibración el tracker girará durante 30 segundos en un único sentido, tras lo cual se parará.
+```
 
+Tras la calibración, procedemos a ajustar el valor del offset.
+
+# Ajustar OFFSET
+
+Cuando entramos en modo CLI, el tracker intenta apuntar a los 0 grados (norte). Si no lo hace, y ajustastes convenientemente los parámetros y calibraste, tendrás que ajustar el offset.
+
+Si montaste la controladora con el magnetómetro alineado con el norte, es posible que no necesites tocar este parámetro, salvo que desees ajustarlo aún mejor.
+
+Pero si montaste la controladora en una posición distinta, porque necesitabas sacar el conector micro usb hacia un lado de la caja del tracker, entonces necesitas ajustar este parámetro.
+
+```
+1.- Entrar al modo CLI
+2.- Ejecutar comando set offset=90 (si giraste la controladora 90 grados, por ejemplo).
 3.- Guardamos con save 
 ```
 
-Ahora sí tenemos nuestro tracker configurado.
-	
+Nos queda ajustar los PIDs
+
+# Ajustar PIDs
+
+
+
 # Comandos del modo CLI
 ---------------------------------
 
