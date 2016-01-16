@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.3.0
+# amv-open60tracker-32bits v1.3
 ---------------------------------
 # EXPERIMENTAL
 
@@ -209,6 +209,8 @@ Tras la calibración, procedemos a ajustar el valor del offset.
 
 # Ajustar OFFSET
 
+Este paso podríamos hacerlo después del ajuste de PIDs.
+
 Cuando entramos en modo CLI, el tracker intenta apuntar a los 0 grados (norte). Si no lo hace, y ajustastes convenientemente los parámetros y calibraste, tendrás que ajustar el offset.
 
 Si montaste la controladora con el magnetómetro alineado con el norte, es posible que no necesites tocar este parámetro, salvo que desees ajustarlo aún mejor.
@@ -221,11 +223,17 @@ Pero si montaste la controladora en una posición distinta, porque necesitabas s
 3.- Guardamos con save 
 ```
 
-Nos queda ajustar los PIDs
+Nos queda ajustar los PIDs.
 
 # Ajustar PIDs
 
+Los valores de p, i y d por defecto, al igual que el resto de parámetros de configuración, están ajustados para un servo TowerPro MG996R.
 
+Si tu tracker oscila para alcancar el objetivo, se pasa del objetivo ligeramente, o no llega necesitas ajustar estos parámetros.
+
+No es propósito de este manual explicar como se ajustan los PIDs, pues la forma de proceder es similar a al sistema empleado en otros dispositivos.
+
+Los valóres máximo y mínimo están indicados más adelante en este mismo documento.
 
 # Comandos del modo CLI
 ---------------------------------
@@ -300,14 +308,16 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **p,i,d:** El valor de los valores PID.
 * **tilt0:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0.
 * **tilt90:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 90.
-* **easing:** Puede tomar valores 0 (desactivado), 1 (efecto easing out-quart) ó 2 (efecto easing out-circ). Cuando está activo (valores 1 ó 2) el servo de tilt se mueve acelerando al principio del movimiento, y desacelarando al alcanzar el ángulo final, consiguiendo así un efecto de amortiguación. Muy útil si usas antenas muy pesadas.
-* **easing_steps:** Número de pasos (movimientos) para alcanzar el ángulo final aplicando el efecto de amortiguación.
+* **easing:** Puede tomar valores 1 (efecto easing out-quart) ó 2 (efecto easing out-circ). Para activar el efecto amortiguación es obligatorio ejecutar el comando **feature easing** durante la configuración. Cuando está activo el servo de tilt se mueve acelerando al principio del movimiento, y desacelarando al alcanzar el ángulo final, consiguiendo así un efecto de amortiguación. Muy útil si usas antenas muy pesadas.
+* **easing_steps:** Número de pasos (movimientos) para alcanzar el ángulo final aplicando el efecto de amortiguación. Usa un valor entre 40 y 60 para comprobar su efecto.
 * **easing_min_angle:** Es el valor en grados del ángulo mínimo a partir del cual se aplicará el efecto easing cuando está activado.
 * **easing_milis:** es el tiempo en milisegundos que el sistema se espera entre paso y paso cuando el efecto easing está ctivado.
-* **pan0:** Valor del pulso en milisegundos para que el servo pan se detenga.
+* **pan0:** Valor del pulso en milisegundos para que el servo pan se detenga. Es fundamental tener este parámetro bien ajustado para que el tracker funciona de forma óptima.
+* **pan0_calibrated:** Al cargar el firmware, por defect este parámetro está a 0, los PIDs no actuan sobre el movimiento del servo PAN, de este modo podemos probar distintos valores de set pan0 para encontrar el pulso en el que el servo se detiene. Una vez que conseguimos deter el servo, debemos poner este parámetro pan0_calibrated a valor 1. Si no lo hacemos nuestro tracker no va a responder a ningún comando de heading desde modo CLI, ni a ningún cambio ordenado por la telemetría.
 * **min_pan_speed:** Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición.
 * **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario (de 1 a 360º).
-
+* **telemetry_baud:** Es el valor de los baudios a los que se va a recibir los datos de telemetría, o los baudios a los que nos comunicamos con el tracker en modo CLI. Por defecto tiene el valor 2 (9600 bauds) y acepta valores entre 1 (4800 bauds) y 6 (250000 bauds).
+* **start_tracking_distance:** Es la distancia mínima a partir de la cual el tracker empieza a realizar el seguimiento del aeromodelo.
 
 ---------------------
 Para obtener más información visita el foro:
