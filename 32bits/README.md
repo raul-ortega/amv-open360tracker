@@ -230,9 +230,14 @@ Los valores de p, i y d por defecto, al igual que el resto de parámetros de con
 
 Si tu tracker oscila para alcancar el objetivo, se pasa del objetivo ligeramente, o no llega necesitas ajustar estos parámetros.
 
-No es propósito de este manual explicar como se ajustan los PIDs, pues la forma de proceder es similar a al sistema empleado en otros dispositivos.
+Aquí una explicación práctica de como ajustar los PIDs, por el compañero Simba:
 
-Los valóres máximo y mínimo están indicados más adelante en este mismo documento.
+```
+La técnica consiste en aumentar la P hasta que cuando llegue al final tienda a oscilar.
+Una vez conseguido, se baja el valor hasta que cesen las oscilaciones con margen de seguridad.
+Luego aumentas la I hasta que veas que rebota sobre el final pero se amortigua.
+Luego aumentas la D para conseguir que reaccione con viveza pero siempre sin que oscile sobre el final.
+```
 
 # Comandos del modo CLI
 ---------------------------------
