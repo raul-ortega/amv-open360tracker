@@ -292,11 +292,8 @@ Para desactivarla:
 
 **Efecto Easing en Servo Tilt**
 
-No basta con ejecutar **feature easing** para activarlo. También es necesario indicar que función de easing quieres usar:
-
 * set easing=**1** para usar la función **out- quart**
 * set easing=**2** para usar la función **out-circ**
-* set easing=**0** para **desactivarlo**
 
 Para desactivarlo basta con emplear el comando **featurea -easing**.
 	
