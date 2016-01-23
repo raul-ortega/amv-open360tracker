@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.3
+# amv-open60tracker-32bits v1.4.2
 ---------------------------------
 # EXPERIMENTAL
 
@@ -22,7 +22,14 @@ Si decides usar este firmware, hazlo bajo tu propia responsabilidad, pues los di
 
 # Protocolos de telemetría soportados
 
-En estos momentos el único protocolo de telemetría implementado es el protocolo **MFD**.
+En estos momentos los protocolos de telemetría implementados son:
+
+- **MFD** 
+- **GPS TELEMETRY**
+
+El resto de protocolos soportados en la versión 8 bits, están en fase de integración en esta nueva versión de 32bits.
+
+**Nota**: El uso de GPS Local aún no está implementado y es necesario activar el botón HOME para iniciar el seguimiento del aeromodelo.
 
 Las funciones equivalentes al procolo **SERVOTEST** están disponibles **desde el modo CLI**, pero ahora se ejecutan de forma distinta.
 
@@ -77,13 +84,13 @@ Luego sustituye los valores de los parametros por los equivalentes del archivo c
 feature EASING
 
 set p = 2500
-set i = 50
+set i = 20
 set d = 250
 set max_pid_error = 10
 set pan0 = 1528
-set pan0_callibrated = 0
+set pan0_calibrated = 0
 set min_pan_speed = 0
-set offset = 90.000
+set offset =  90.000
 set tilt0 = 1050
 set tilt90 = 2025
 set easing = 1
@@ -91,7 +98,10 @@ set easing_steps = 40
 set easing_min_angle = 4
 set easing_milis = 15
 set telemetry_baud = 2
+set telemetry_protocol = 8
 set start_tracking_distance = 10
+set mag_declination = 0
+set init_servos = 0
 ```
 
 Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar.
@@ -226,7 +236,7 @@ Nos queda ajustar los PIDs.
 
 # Ajustar PIDs
 
-Los valores de p, i y d por defecto, al igual que el resto de parámetros de configuración, están ajustados para un servo TowerPro MG996R.
+Los valores de p, i y d por defecto, al igual que el resto de parámetros de configuración, están ajustados para un servo TowerPro MG996R modificado para que gire 360º. Éstos valores van a depender de muchos factores: las resistencias que hayamos usado, la mecánica usada en el tracker, cuan ajustados estén todos los elementos, holguras, etc... 
 
 Si tu tracker oscila para alcancar el objetivo, se pasa del objetivo ligeramente, o no llega necesitas ajustar estos parámetros.
 
@@ -238,6 +248,21 @@ Una vez conseguido, se baja el valor hasta que cesen las oscilaciones con margen
 Luego aumentas la I hasta que veas que rebota sobre el final pero se amortigua.
 Luego aumentas la D para conseguir que reaccione con viveza pero siempre sin que oscile sobre el final.
 ```
+
+# Selección del protocolo de telemetría
+
+Por defecto, nuestro tracker está configurado con el protocolo GPS TELEMETRY.
+
+Para cambiar de protocolo:
+
+```
+1.- Entrar al modo CLI
+2.- Ejecutar comando set telemtry_protocol=valor (4 para MFD, y 8 para GPS TELEMETRY)
+3.- Configurar los bauidos para la telemetría con set telemetry_baud=valor (ver lista de parámetros al final de este documento)
+4.- Guardamos con save 
+```
+
+Una vez seleccionado el protocolo, no olvides configurar la uart1 a los bauidos necesarios. Al final de esta lista 
 
 # Comandos del modo CLI
 ---------------------------------
@@ -317,9 +342,10 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **pan0_calibrated:** Al cargar el firmware, por defect este parámetro está a 0, los PIDs no actuan sobre el movimiento del servo PAN, de este modo podemos probar distintos valores de set pan0 para encontrar el pulso en el que el servo se detiene. Una vez que conseguimos deter el servo, debemos poner este parámetro pan0_calibrated a valor 1. Si no lo hacemos nuestro tracker no va a responder a ningún comando de heading desde modo CLI, ni a ningún cambio ordenado por la telemetría.
 * **min_pan_speed:** Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición.
 * **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario (de 1 a 360º).
+* **telemetry_protocol:** Inicamos el valor 4 para activar el protocolo MFD, y 8 para el protocolo GPS TELEMETRY. 
 * **telemetry_baud:** Es el valor de los baudios a los que se va a recibir los datos de telemetría, o los baudios a los que nos comunicamos con el tracker en modo CLI. Por defecto tiene el valor 2 (9600 bauds) y acepta valores entre 1 (4800 bauds) y 6 (250000 bauds).
 * **start_tracking_distance:** Es la distancia mínima a partir de la cual el tracker empieza a realizar el seguimiento del aeromodelo.
-
+* **init_servos:** Permite activar/desactivar el inicio de los servos durante el arranque. Si está activado, durante el inicio enviará al servo PAN el pulso de parada (pan0), y en el caso del servo TILT, enviará el pulso para que se mueva ala posición horizontal 0º (tilt0). Por defecto el valor de este parámetro es 0. Si usas una antena muy pesada no se recomienda la activación de este parámetro, salvo que hayas activado y configurado previamente el efecto easing para el servo tilt, y hayas ajustado el valor de pan0.
 ---------------------
 Para obtener más información visita el foro:
 
