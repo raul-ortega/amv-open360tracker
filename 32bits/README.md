@@ -157,7 +157,7 @@ Ahora debemos entrar en modo CLI, para ello:
 
     Debería aparecer el mensaje "Serial por COM opened" en color verde.
 
-4.- Tecleamos el caracter % y pulsamos enter
+4.- Tecleamos 3 VECES la letra R (en mayúsculas) y pulsamos enter.
 
     Aparecerá el mensaje Entering CLI Mode, type 'exit' to return, or 'help'.
 	¡Enhorabuena, ya has entrado al modo CLI!.
