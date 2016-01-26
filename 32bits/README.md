@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.6.0
+# amv-open60tracker-32bits v1.6
 ---------------------------------
 # EXPERIMENTAL
 
