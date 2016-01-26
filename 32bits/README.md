@@ -333,7 +333,7 @@ Esta característica en estos momentos está en fase de implementación, pero ya
 
 La característica se está probando con los siguiente display OLED:
 
-* 0.96 Inch 4Pin White IIC I2C OLED Display Module 12864 LED For Arduino (Banggood SKU187245 $6.50)
+* [http://www.banggood.com/0_96-Inch-4Pin-White-IIC-I2C-OLED-Display-Module-12864-LED-For-Arduino-p-958196.html](0.96 Inch 4Pin White IIC I2C OLED Display Module 12864 LED For Arduino), (Banggood, SKU187245, $6.50)
 	
 # Parámetros configurables
 ---------------------------------
