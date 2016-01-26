@@ -329,7 +329,7 @@ Para desactivarlo basta con emplear el comando **featurea -easing**.
 
 # Display OLED
 
-Esta característica en esto momentos está en fase de desarrollo, pero ya es posible activarla y visualizar datos de ejemplo.
+Esta característica en estos momentos está en fase de implementación, pero ya es posible activarla y visualizar datos de ejemplo.
 
 La característica se está probando con los siguiente display OLED:
 
