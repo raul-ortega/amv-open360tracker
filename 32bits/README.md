@@ -329,11 +329,11 @@ Para desactivarlo basta con emplear el comando **featurea -easing**.
 
 # Display OLED
 
-Esta característica en estos momentos está en fase de , pero ya es posible activarla y visualizar datos de ejemplo.
+Esta característica en estos momentos está en fase de imp, pero ya es posible activarla y visualizar datos de ejemplo.
 
-La característica se está probando con los siguiente display OLED:
+La característica se está probando con los siguientes displays OLED:
 
-* 0.96 Inch 4Pin White IIC I2C OLED Display Module 12864 LED For Arduino [http://www.banggood.com/0_96-Inch-4Pin-White-IIC-I2C-OLED-Display-Module-12864-LED-For-Arduino-p-958196.html](Banggood SKU187245 $6.50)
+* 0.96 Inch 4Pin White IIC I2C OLED Display Module 12864 LED For Arduino (Banggood SKU187245 $6.50)
 	
 # Parámetros configurables
 ---------------------------------
