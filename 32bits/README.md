@@ -14,7 +14,7 @@ Esta nueva versión es completamente experimental, y da soporte a controladoras 
 
 También es posible que pueda funcionar sobre otras controladoras basadas en Naze32 que no dispongan de magnetómetro integrado en placa, siendo indispensable por tanto la conexión de un magnetómetro externo. Bajo estas circustancias el firmware aún no ha sido testado.
 
-En esta versión preliminar no se hace uso de dispositivo LCD, ni de receptor GPS Local. Además, los botones de calibración y home no han sido implementados aún (la calibración se puede realizar en modo CLI como se explica más adelante).
+En esta versión preliminar no se hace uso de dispositivo LCD, si embargo se está preparada para funcionar con dispositivos OLED (más adelante, en este mismo documento, encontrará más información sobre los dispositivos OLED compatibles). El GPS Local para la detección automática de HOME aún no está implementada, pero está previsto su uso.
 
 El objetivo que se persigue con esta primera versión es la realización de pruebas por parte de los usuarios de la comunidad, con el fin de recopilar información derivada de la experiencia en su uso que sirva para determinar la viabilidad del proyecto.
 
@@ -27,8 +27,9 @@ En estos momentos los protocolos de telemetría implementados son:
 - **MFD** 
 - **GPS TELEMETRY**
 - **MAVLINK**
+- **FRSKY D**
 
-El resto de protocolos soportados en la versión 8 bits, están en fase de integración en esta nueva versión de 32bits.
+El resto de protocolos soportados en la versión 8 bits están en fase de integración en esta nueva versión de 32bits.
 
 **Nota**: El uso de GPS Local aún no está implementado y es necesario activar el botón HOME para iniciar el seguimiento del aeromodelo.
 
@@ -88,7 +89,7 @@ set p = 2500
 set i = 20
 set d = 250
 set max_pid_error = 10
-set pan0 = 1528
+set pan0 = 1500
 set pan0_calibrated = 0
 set min_pan_speed = 0
 set offset =  90.000
@@ -105,9 +106,9 @@ set mag_declination = 0
 set init_servos = 0
 ```
 
-Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar.
+Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar. 
 
-Si preparamos los valores para cada parámetro y los cargamos a través del CLI antes de conectar los servos, una vez conectados y conectar alimentación sólo debería moverse el servo PAN un instante y pararse, quedando el tracker a espera de telemetría u órdenes vía CLI.
+El valor 0 en parámetro init_servos, por defecto, impide que los servos giren durante el arranque. Si ese parámetro lo configuramos a valor 0, una vez conectados los servos y suministres alimentación, sólo debería moverse el servo PAN un instante y pararse, y el servo tilt debería moverse hasta alcanzar la posición horizontal, cero grados de inclinación, quedando el tracker a espera de telemetría u órdenes vía CLI.
 
 # Carga del firmware
 
@@ -186,9 +187,11 @@ Es el momento de **conectar los servos**, y el adaptador serie a través del cua
 
 Conectamos la baetía al tracker, iniciándose la secuencia de arranque.
 
-El tracker girará durante no más de un segundo, y no muy rápido, tras lo que debería detenerse, justo cuando el led azul se queda fijo, indicando que la secuencia de arranque ha finalizado.
+Si configuraste el parámetro init_servos a valor 1, el tracker girará durante no más de un segundo, y no muy rápido, tras lo que debería detenerse, justo cuando el led azul se queda fijo, indicando que la secuencia de arranque ha finalizado.
 
-Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos configurado el parámetro pan0 a un valor que conocíamos como el centro, es cuestión de ir ajustando ese valor. Para ello:
+Si configuraste el parámetro init_servos a valor 0, durante la secuencia de arranque ninguno de los servos debería moverse.
+
+En cualquier caso, si tras la sercuencai de arranque el tracker continua girando, no debería hacerlo muy rápido, pues hemos configurado el parámetro pan0 a un valor que conocíamos como el centro, es cuestión de ir ajustando ese valor. Para ello:
 
 ```
 1.- Entrar al modo CLI
@@ -200,6 +203,7 @@ Si el tracker continua girando, no debería hacerlo muy rápido, pues hemos conf
 
 **Notas:** 
 
+* Tras ajuar el valor de pan0, debemos configurar el valor pan0_calibrated=1, de lo contrario, el tracker no se moverá cuando esté recibiendo telemetria.
 * Al entrar en modo CLI, el tracker se orienta a 0 grados (Norte) por defecto. Pero como aún no hemos calibrado ni ajustado el offset, es posible que no esté apuntando a la dirección correcta.
 * Puedes guardar la configuración si lo deseas, pero como vamos a realizar la calibración a continuación, y después ajustar algunos valores, podemos dejarlo para el final.
 
@@ -216,6 +220,10 @@ Durante el proceso de calibración el tracker girará durante 30 segundos en un 
 ```
 
 Tras la calibración, procedemos a ajustar el valor del offset.
+
+**Notas:** 
+
+* Si no calibramos el magnetómetro, el tracker no se moverá cuando esté recibiendo telemetría.
 
 # Ajustar OFFSET
 
@@ -263,7 +271,7 @@ Para cambiar de protocolo:
 4.- Guardamos con save 
 ```
 
-Una vez seleccionado el protocolo, no olvides configurar la uart1 a los bauidos necesarios. Al final de esta lista 
+Una vez seleccionado el protocolo, no olvides configurar la uart1 a los bauidos necesarios (la lista completa de valores está al final de este documento).
 
 # Comandos del modo CLI
 ---------------------------------
@@ -282,13 +290,13 @@ y pulsamos enter.
 
 Para ver si el parámetro se ha modificado, tecleamos set y pulsamos enter, mostrándose todos los parámetros nuevamente.
 
-Al final de este REAME está la lista completa de parámetros detallada.
+Al final de este docuemtno está la lista completa de parámetros detallada.
 
 **Salvar los cambios**
 
 Para que los cambios realizados en la configuraicón tengan efecto, hay que salvarlos primero. Para ello tecleamos **save** y pulsamos **enter**. Todos los parámetros serán guardados permanentemente en la EEPROM, así que, aunque quitemos la alimentación, estos se cargarán en el próximo inicio.
 
-Al salvar la controladora hace un reinicio, realiza la carga de los parámetros, e inicia todo el hardware, incluidos los servos.
+Al salvar la configuración, la controladora hace un reinicio, realiza la carga de los parámetros, e inicia todo el hardware (los servos se inician sólo si configuraste el parámetro init_servos a valor 1).
 
 La controladora queda a la espera de recibir datos de telemetría, o entrar nuevamente en modo CLI.
 
@@ -329,7 +337,7 @@ Para desactivarlo basta con emplear el comando **featurea -easing**.
 
 # Display OLED
 
-Esta característica en estos momentos está en fase de implementación, pero ya es posible activarla y visualizar datos de ejemplo.
+Esta característica en estos momentos está en fase de implementación, pero ya es posible activarla y visualizar datos básicos de telemetría.
 
 Para activarla:
 
@@ -343,6 +351,12 @@ La característica se está probando con los siguientes displays OLED:
 
 * [0.96 Inch 4Pin White IIC I2C OLED Display Module 12864 LED For Arduino](http://www.banggood.com/0_96-Inch-4Pin-White-IIC-I2C-OLED-Display-Module-12864-LED-For-Arduino-p-958196.html)
 * [0.96 Inch 4Pin IIC I2C Blue OLED Display Module For Arduino](http://www.banggood.com/0_96-Inch-4Pin-IIC-I2C-Blue-OLED-Display-Module-For-Arduino-p-969147.html)
+
+Cuando el tracker está a la espera de telemetría, la barrita que hay a la derecha del título de la página está quieta. Una vez que se reciben datos de telemetría por el puerto serie uart1, la barrita empieza a girar. Se detiene si deja de recibir datos por el puerto serie.
+
+Notas:
+
+* Está prevista la visualización de varias páginas de datos, pasando de una a otra de forma cíclica. En estos momentos sólo se visualiza la página de bienvenida durante el arranque, y la página TELEMETRY mostrando los datos de telemetría. Notarás un parpadeo de la página TELEMETRY cada x segundos, es normal, es porque intenta pasar a la siguiente página que aún no están implementada.
 
 # Parámetros configurables
 ---------------------------------
