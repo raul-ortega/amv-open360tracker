@@ -106,9 +106,11 @@ set easing_milis = 15
 
 # INIT SERVOS
 set init_servos = 0
+
 # MAGNETOMETER
 set offset =  90.000
 set mag_declination = 0
+
 # TELEMETRY
 set telemetry_baud = 2
 set telemetry_protocol = 8
