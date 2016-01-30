@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.7
+# amv-open60tracker-32bits v1.8
 ---------------------------------
 # EXPERIMENTAL
 
@@ -14,7 +14,9 @@ Esta nueva versión es completamente experimental, y da soporte a controladoras 
 
 También es posible que pueda funcionar sobre otras controladoras basadas en Naze32 que no dispongan de magnetómetro integrado en placa, siendo indispensable por tanto la conexión de un magnetómetro externo. Bajo estas circustancias el firmware aún no ha sido testado.
 
-En esta versión preliminar no se hace uso de dispositivo LCD, si embargo se está preparada para funcionar con dispositivos OLED (más adelante, en este mismo documento, encontrará más información sobre los dispositivos OLED compatibles). El GPS Local para la detección automática de HOME aún no está implementada, pero está previsto su uso.
+En esta versión se hace el uso de display OLED para mostrar los datos de telemetría, y otros datos de información (más adelante, en este mismo documento, encontrará más información sobre los dispositivos OLED compatibles). No es compatible con el uso de dispositivos LCD. 
+
+El GPS Local ya está integrado de forma experimental, aunque aún no está implementada la detección automática de la posición HOME.
 
 El objetivo que se persigue con esta primera versión es la realización de pruebas por parte de los usuarios de la comunidad, con el fin de recopilar información derivada de la experiencia en su uso que sirva para determinar la viabilidad del proyecto.
 
@@ -81,29 +83,41 @@ Antes de continuar, tómate tu tiempo y copia todos estos comandos y parámetros
 Luego sustituye los valores de los parametros por los equivalentes del archivo config.h de la versión de 8bits (Si es la primera vez que te acercas al proyecto, más abajo se explica que es cada parámetro):
 
 ```
-# dump configuration
-
-feature EASING
-
+# PID CONTROL
 set p = 2500
 set i = 20
 set d = 250
 set max_pid_error = 10
+
+# PAN SERVO
 set pan0 = 1500
 set pan0_calibrated = 0
 set min_pan_speed = 0
-set offset =  90.000
+# TILT SERVO
 set tilt0 = 1050
 set tilt90 = 2025
+
+# TILT EASING
+feature EASING
 set easing = 1
 set easing_steps = 40
 set easing_min_angle = 4
 set easing_milis = 15
+
+# INIT SERVOS
+set init_servos = 0
+# MAGNETOMETER
+set offset =  90.000
+set mag_declination = 0
+# TELEMETRY
 set telemetry_baud = 2
 set telemetry_protocol = 8
 set start_tracking_distance = 10
-set mag_declination = 0
-set init_servos = 0
+
+# GPS
+feature GPS
+gps_baud = 2
+gps_provider = NMEA
 ```
 
 Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar. 
@@ -357,6 +371,20 @@ Cuando el tracker está a la espera de telemetría, la barrita que hay a la dere
 Notas:
 
 * Está prevista la visualización de varias páginas de datos, pasando de una a otra de forma cíclica. En estos momentos sólo se visualiza la página de bienvenida durante el arranque, y la página TELEMETRY mostrando los datos de telemetría. Notarás un parpadeo de la página TELEMETRY cada x segundos, es normal, es porque intenta pasar a la siguiente página que aún no están implementada.
+
+# GPS Local
+
+En uso de GPS Local está integrado en en esta versión del firmware, y aunque aún no se realiza la autodetección de la posición HOME, ya es posible la monitorización de la correcta recepción de datos de GPS.
+
+En el esquema de conexiones se describe como deben ir conectado el GPS. Para recibir datos de GPS sólo es necesario conectar en el pin RX de la controladora (pin nº 4) el cable TX del GPS, así como el cable de alimentación +5V y GND. No obstante, con el objetivo de poder configurar el GPS de forma automática, también es necesario conectar el pin TX de la controladora al cable RX del GPS.
+
+Inicialmente estos son los parámetros a tener en cuenta para su correcto funcionamiento:
+
+* **feature GPS** para activar la característica GPS
+* **gps_baud=valor ** para configurar los baudios (tecleando el comando help podemos ver la lista de valores y los baudios que le corresponden).
+* **gps_provider=protocolo** para configurar el formato de tramas, que puede ser NMEA o UBLOX.
+
+Para más información sobre los modelos de GPS soportados, consulte la información reportada por los usuarios de nuestra comunidad: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
 # Parámetros configurables
 ---------------------------------
