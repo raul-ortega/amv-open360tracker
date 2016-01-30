@@ -16,7 +16,7 @@ También es posible que pueda funcionar sobre otras controladoras basadas en Naz
 
 En esta versión se hace el uso de display OLED para mostrar los datos de telemetría, y otros datos de información (más adelante, en este mismo documento, encontrará más información sobre los dispositivos OLED compatibles). No es compatible con el uso de dispositivos LCD. 
 
-El GPS Local ya está integrado de forma experimental, aunque aún no está implementada la detección automática de la posición HOME.
+El GPS Local ya está integrado de forma experimental, y está implementada la funcionalidad de activación automática del seguimiento tras obtener la posición de HOME.
 
 El objetivo que se persigue con esta primera versión es la realización de pruebas por parte de los usuarios de la comunidad, con el fin de recopilar información derivada de la experiencia en su uso que sirva para determinar la viabilidad del proyecto.
 
@@ -34,7 +34,6 @@ En estos momentos los protocolos de telemetría implementados son:
 El resto de protocolos soportados en la versión 8 bits están en fase de integración en esta nueva versión de 32bits.
 
 **Notas**:
-* Aunque el GPS Loca está integrado, **es necesario activar el botón HOME** para iniciar el seguimiento del aeromodelo.
 * Las funciones equivalentes al procolo **SERVOTEST** están disponibles **desde el modo CLI**, pero ahora se ejecutan de forma distinta.
 
 # Interfaz de Línea de Comandos: modo CLI 
@@ -376,7 +375,7 @@ Notas:
 
 # GPS Local
 
-En uso de GPS Local está integrado en en esta versión del firmware, y aunque aún no se realiza la autodetección de la posición HOME, ya es posible la monitorización de la correcta recepción de datos de GPS.
+En uso de GPS Local está integrado en en esta versión del firmware, aunque aún está en fase de pruebas. Para los protocolos de telemetría, **excepto para MFD**, se establece la posición HOME con los datos de posición obtenidos del GPS local, empezando el seguimiento de forma automática una vez que el aeromodelo se aleja una distancia mínica configurada, sin necesidad de pulsar el botón HOME. El display del tracker mostrará bastante información útil a monitorizar, que nos ayudará a decidir si es o no un buen momento para lanzar nuestro aeromodelo al aire.
 
 En el esquema de conexiones se describe como deben ir conectado el GPS. Para recibir datos de GPS sólo es necesario conectar en el pin RX de la controladora (pin nº 4) el cable TX del GPS, así como el cable de alimentación +5V y GND. No obstante, con el objetivo de poder configurar el GPS de forma automática, también es necesario conectar el pin TX de la controladora al cable RX del GPS.
 
@@ -384,9 +383,11 @@ Inicialmente estos son los parámetros a tener en cuenta para su correcto funcio
 
 * **feature GPS** para activar la característica GPS
 
-* **gps_baud=valor** para configurar los baudios (tecleando el comando help podemos ver la lista de valores y los baudios que le corresponden).
+* **set gps_baud=valor** para configurar los baudios (tecleando el comando help podemos ver la lista de valores y los baudios que le corresponden).
 
-* **gps_provider=protocolo** para configurar el formato de tramas, que puede ser NMEA o UBLOX.
+* **set gps_provider=protocolo** para configurar el formato de tramas, que puede ser NMEA o UBLOX.
+
+* **set gps_min_sats=valor** asegura tener un número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME.
 
 Los protocolos GPS soportados son NMEA y UBLOX. Para más información sobre los modelos de GPS soportados, consulte la información reportada por los usuarios de nuestra comunidad: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
@@ -410,7 +411,9 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **telemetry_baud:** Es el valor de los baudios a los que se va a recibir los datos de telemetría, o los baudios a los que nos comunicamos con el tracker en modo CLI. Por defecto tiene el valor 2 (9600 bauds) y acepta valores entre 1 (4800 bauds) y 6 (250000 bauds).
 * **start_tracking_distance:** Es la distancia mínima a partir de la cual el tracker empieza a realizar el seguimiento del aeromodelo.
 * **init_servos:** Permite activar/desactivar el inicio de los servos durante el arranque. Si está activado, durante el inicio enviará al servo PAN el pulso de parada (pan0), y en el caso del servo TILT, enviará el pulso para que se mueva ala posición horizontal 0º (tilt0). Por defecto el valor de este parámetro es 0. Si usas una antena muy pesada no se recomienda la activación de este parámetro, salvo que hayas activado y configurado previamente el efecto easing para el servo tilt, y hayas ajustado el valor de pan0.
-
+* **gps_baud:** Es el valor de los baudios a los que se va a recibir los datos del GPS local. Los valores soportados son los mismos que para telemetry_baud.
+* **gps_provider:** Puede tomar los valroes NMEA o UBLOX.
+* **gps_min_sats:** Es el número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME.
 ---------------------
 
 # Documentos gráficos
