@@ -33,9 +33,9 @@ En estos momentos los protocolos de telemetría implementados son:
 
 El resto de protocolos soportados en la versión 8 bits están en fase de integración en esta nueva versión de 32bits.
 
-**Nota**: El uso de GPS Local aún no está implementado y es necesario activar el botón HOME para iniciar el seguimiento del aeromodelo.
-
-Las funciones equivalentes al procolo **SERVOTEST** están disponibles **desde el modo CLI**, pero ahora se ejecutan de forma distinta.
+**Notas**:
+* Aunque el GPS Loca está integrado, **es necesario activar el botón HOME** para iniciar el seguimiento del aeromodelo.
+* Las funciones equivalentes al procolo **SERVOTEST** están disponibles **desde el modo CLI**, pero ahora se ejecutan de forma distinta.
 
 # Interfaz de Línea de Comandos: modo CLI 
 
@@ -381,10 +381,12 @@ En el esquema de conexiones se describe como deben ir conectado el GPS. Para rec
 Inicialmente estos son los parámetros a tener en cuenta para su correcto funcionamiento:
 
 * **feature GPS** para activar la característica GPS
-* **gps_baud=valor ** para configurar los baudios (tecleando el comando help podemos ver la lista de valores y los baudios que le corresponden).
+
+* **gps_baud=valor** para configurar los baudios (tecleando el comando help podemos ver la lista de valores y los baudios que le corresponden).
+
 * **gps_provider=protocolo** para configurar el formato de tramas, que puede ser NMEA o UBLOX.
 
-Para más información sobre los modelos de GPS soportados, consulte la información reportada por los usuarios de nuestra comunidad: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
+Los protocolos GPS soportados son NMEA y UBLOX. Para más información sobre los modelos de GPS soportados, consulte la información reportada por los usuarios de nuestra comunidad: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
 # Parámetros configurables
 ---------------------------------
