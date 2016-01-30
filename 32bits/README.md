@@ -417,7 +417,7 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 ---------------------------------
 Vídeos realizados por el compañero Guillesan, realizando las primeras pruebas de campo con protocolo Mavlink (a bordo del aeromodelo un autopiloto MyFlyDream transmitiendo telemetría Mavlink con OpelrsGitsly sobre enlace de 868 Mhz a 9600 baudios):
 
-[![ScreenShot](i.ytimg.com/vi/ApSv6SFkbRE/mqdefault.jpg)](https://www.youtube.com/watch?v=BrhzeVH2iJo)
+[![ScreenShot](http://i.ytimg.com/vi/ApSv6SFkbRE/mqdefault.jpg)](https://www.youtube.com/watch?v=BrhzeVH2iJo)
 [![ScreenShot](http://i.ytimg.com/vi/BrhzeVH2iJo/mqdefault.jpg)](https://www.youtube.com/watch?v=ApSv6SFkbRE)
 ---------------------------------
 Para obtener más información visita el foro:
