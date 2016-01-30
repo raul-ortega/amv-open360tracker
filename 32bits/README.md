@@ -118,8 +118,8 @@ set start_tracking_distance = 10
 
 # GPS
 feature GPS
-gps_baud = 2
-gps_provider = NMEA
+gps_baud = valor
+gps_provider = protocolo
 ```
 
 Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar. 
@@ -412,6 +412,14 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **init_servos:** Permite activar/desactivar el inicio de los servos durante el arranque. Si está activado, durante el inicio enviará al servo PAN el pulso de parada (pan0), y en el caso del servo TILT, enviará el pulso para que se mueva ala posición horizontal 0º (tilt0). Por defecto el valor de este parámetro es 0. Si usas una antena muy pesada no se recomienda la activación de este parámetro, salvo que hayas activado y configurado previamente el efecto easing para el servo tilt, y hayas ajustado el valor de pan0.
 
 ---------------------
+
+# Documentos gráficos
+---------------------------------
+Vídeos realizados por el compañero Guillesan, realizando las primeras pruebas de campo con protocolo Mavlink (a bordo del aeromodelo un autopiloto MyFlyDream transmitiendo telemetría Mavlink con OpelrsGitsly sobre enlace de 868 Mhz a 9600 baudios):
+
+[![ScreenShot](i.ytimg.com/vi/ApSv6SFkbRE/mqdefault.jpg)](https://www.youtube.com/watch?v=BrhzeVH2iJo)
+[![ScreenShot](http://i.ytimg.com/vi/BrhzeVH2iJo/mqdefault.jpg)](https://www.youtube.com/watch?v=ApSv6SFkbRE)
+---------------------------------
 Para obtener más información visita el foro:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
