@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.9
+# amv-open60tracker-32bits v1.10
 ---------------------------------
 # EXPERIMENTAL
 
@@ -416,6 +416,7 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 	 - 16:  MAVLINK
 	 - 32:  RVOSD
 	 - 64:  FrSKY_D
+	 - 256:	LTM
 * **telemetry_baud:** Es el valor de los baudios a los que se va a recibir los datos de telemetría, o los baudios a los que nos comunicamos con el tracker en modo CLI. Por defecto tiene el valor 2 (9600 bauds) y acepta valores entre 1 (4800 bauds) y 6 (250000 bauds).
 * **start_tracking_distance:** Es la distancia mínima a partir de la cual el tracker empieza a realizar el seguimiento del aeromodelo.
 * **init_servos:** Permite activar/desactivar el inicio de los servos durante el arranque. Si está activado, durante el inicio enviará al servo PAN el pulso de parada (pan0), y en el caso del servo TILT, enviará el pulso para que se mueva ala posición horizontal 0º (tilt0). Por defecto el valor de este parámetro es 0. Si usas una antena muy pesada no se recomienda la activación de este parámetro, salvo que hayas activado y configurado previamente el efecto easing para el servo tilt, y hayas ajustado el valor de pan0.
