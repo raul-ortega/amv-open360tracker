@@ -422,7 +422,6 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **gps_baud:** Es el valor de los baudios a los que se va a recibir los datos del GPS local. Los valores soportados son los mismos que para telemetry_baud.
 * **gps_provider:** Puede tomar los valroes NMEA o UBLOX.
 * **gps_min_sats:** Es el número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME.
----------------------
 
 # Documentos gráficos
 ---------------------------------
