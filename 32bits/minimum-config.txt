@@ -1,0 +1,80 @@
+# Mi configuración
+set pan0=1528
+calibrate
+set pan0_calibrated=1
+feature easing
+set easing_steps=50
+set init_servos=0
+feature display
+set p = 3200
+set i = 50
+set d = 200
+set max_pid_error = 1
+set max_pid_accumulator=5000
+set max_pid_gain=500
+set gps_provider = NMEA
+set gps_sbas_mode = AUTO
+set gps_auto_config = ON
+set gps_auto_baud = OFF
+set gps_min_sats=6
+feature gps
+feature -vbat
+set telemetry_protocol=8
+set mag_declination=207
+
+ 47° 24.215'N
+  8° 32.151'E
+
+# Configuración de Simba
+# set
+Current settings:
+gps_baud = 1541
+gps_provider = NMEA
+gps_sbas_mode = AUTO
+gps_auto_config = ON
+gps_auto_baud = OFF
+gps_min_sats = UBLOX
+p = 2000
+i = 15
+d = 200
+max_pid_error = 1
+max_pid_accumulator = 50000
+max_pid_gain = 500
+pan0 = 1500
+pan0_calibrated = 1
+min_pan_speed = 0
+offset = 270.000
+init_servos = 0
+tilt0 = 2025
+tilt90 = 1050
+easing = 2
+easing_steps = 40
+easing_min_angle = 4
+easing_milis = 15
+telemetry_baud = 1
+telemetry_protocol = 8
+start_tracking_distance = 10
+mag_declination = 0 
+
+
+ÚLTIMOS CAMBIOS:
+(1.7.2)
+Corregido 
+Display encendido por defecto.
+El Ticker se activa sólo cuando llegan datos por el puerto serie, y no estamos en modo servotest(cli)(1.7.2)
+(1.7.3)
+Botón calibración no funciona
+Datos de posición negativos no salen bien. Ejemplo 0.-20150
+(1.8.4)
+GOS Local activa HOME implementado
+(1.9.2)
+Mostrar en el display el nombre de la telemetría activada.
+Eliminado parpadeo del siplay si no tenemos vbat ni gps.
+Declinación magnética no se está usando.
+
+PARA CORREGIR
+
+Problemas con pan0 al activar/desactivar init_servos (no sabemos si es realmente un bug, más bien parece un problema de configuración)
+
+MEJORAS
+sacar por un puerto softserial la telemetría recibida en protocolo mavlink, por ejemplo, y así poder usar aplicaciones tipo android/ios que nos permitan ver en el smartphone o en el iPad por donde está pululando nuestro areomodelo

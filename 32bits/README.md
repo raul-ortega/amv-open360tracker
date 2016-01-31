@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.10
+# amv-open60tracker-32bits v1.11
 ---------------------------------
 # EXPERIMENTAL
 
@@ -398,7 +398,10 @@ Los protocolos GPS soportados son NMEA y UBLOX. Para más información sobre los
 
 Esta es la lista completa de los parámetros que pueden ser configurados mediante el comando set:
 
-* **p,i,d:** El valor de los valores PID.
+* **p,i,d:** El valor de los valores PID (más información de como ajustarlo en la sección "Ajustar PIDs")
+* **max_pid_error:** Es el valor máximo permitido de la componente de Error en el cálculo de PIDs. Por debajo de ese valor el pulso pwm resultante se envía al servo.
+* **max_pid_accumulator:** Valor máximo del error acumulado en el cálculo de PIDs. En algunos casos en los que no se consigue ajustar los PIDs, al subir este valor es posible realizar un ajuste más fino.
+* **max_pid_gain:** El valor máximo de ganancia de PIDs aplicado al pulso pwm del servo pan. Este valor por defecto está a 500, y es considerado como óptimo.
 * **tilt0:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 0.
 * **tilt90:** Valor del pulso en milisegundos para que el servo tilt se posicione en el ángulo 90.
 * **easing:** Puede tomar valores 1 (efecto easing out-quart) ó 2 (efecto easing out-circ). Para activar el efecto amortiguación es obligatorio ejecutar el comando **feature easing** durante la configuración. Cuando está activo el servo de tilt se mueve acelerando al principio del movimiento, y desacelarando al alcanzar el ángulo final, consiguiendo así un efecto de amortiguación. Muy útil si usas antenas muy pesadas.
@@ -415,7 +418,8 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 	 - 8:   GPS TELEMETRY
 	 - 16:  MAVLINK
 	 - 32:  RVOSD
-	 - 64:  FrSKY_D
+	 - 64:  FrSKY D
+	 - 128: FrSKY X (Smart Port)
 	 - 256:	LTM
 * **telemetry_baud:** Es el valor de los baudios a los que se va a recibir los datos de telemetría, o los baudios a los que nos comunicamos con el tracker en modo CLI. Por defecto tiene el valor 2 (9600 bauds) y acepta valores entre 1 (4800 bauds) y 6 (250000 bauds).
 * **start_tracking_distance:** Es la distancia mínima a partir de la cual el tracker empieza a realizar el seguimiento del aeromodelo.

@@ -1,0 +1,39 @@
+Detección automática del protocolo de telemetría y el cambio automático de uno a otro (Raúl).
+Corrección/trimado del heading(Simba).
+Inversión de servo pan (Turruk).
+Autotune de pan0 (Raúl)
+
+
+# Medir y representar en el dispar, la señal rssi del rx de video
+
+Hola, pues así a bote pronto tengo alguna que otra sugerencia, y creo que no sería muy difícil.
+Se trata de poder medir y representar en el dispar, la señal rssi del rx de video.
+La flip32 puede medir la señal que sacaría mis del rx de video y al poder verla el el dispar se podía ajustar con los botones de trimer la posición óptima de la antena.
+Seguro que os gusta. 
+
+ Ya la repanocha seria que hiciera el ajuste de trimer automáticamente, pero eso ya supongo que seria más difícil. 
+
+# Inversión  servo pan (Turruk)
+
+Hola, como me acuerdo a qui se cambie valores necativos.
+PID = Error[0] * P; // start with proportional gain
+Accumulator += Error[0]; // accumulator is sum of errors
+if (Accumulator > 5000)
+Accumulator = 5000;
+if (Accumulator < -5000)
+Accumulator = -5000;
+PID += I * Accumulator; // add integral gain and error accumulation
+Dk = D * (Error[0] - Error[10]);
+PID += Dk; // differential gain comes next
+PID = PID >> Divider; // scale PID down with divider
+// limit the PID to the resolution we have for the PWM variable
+if (PID >= 500)
+PID = 500;
+if (PID <= -500)
+PID = -500;
+if (Error[0] > MAX_PID_ERROR) {
+PWMOutput = PAN_0 + PID + MIN_PAN_SPEED;
+} else if (Error[0] < -1*MAX_PID_ERROR) {
+PWMOutput = PAN_0 + PID - MIN_PAN_SPEED;
+} else {
+PWMOutput = PAN_0; 
