@@ -409,6 +409,7 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **pan0_calibrated:** Al cargar el firmware, por defect este parámetro está a 0, los PIDs no actuan sobre el movimiento del servo PAN, de este modo podemos probar distintos valores de set pan0 para encontrar el pulso en el que el servo se detiene. Una vez que conseguimos deter el servo, debemos poner este parámetro pan0_calibrated a valor 1. Si no lo hacemos nuestro tracker no va a responder a ningún comando de heading desde modo CLI, ni a ningún cambio ordenado por la telemetría.
 * **min_pan_speed:** Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición.
 * **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario (de 1 a 360º).
+* **mag_declination:** Consulta el valor que se corresponde con tu zona de vuelo en [http://www.magnetic-declination.com/](http://www.magnetic-declination.com/). Ejemplo, si la declinación magnética es 2º7 el valor a introducier es 207. Para 6º24 es 624.
 * **telemetry_protocol:** Establece el protocolo de telemetría a usar. Los posibles valores soportados son:
      - 4:   MFD
 	 - 8:   GPS TELEMETRY
