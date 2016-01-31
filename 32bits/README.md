@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.8
+# amv-open60tracker-32bits v1.9
 ---------------------------------
 # EXPERIMENTAL
 
@@ -29,7 +29,9 @@ En estos momentos los protocolos de telemetría implementados son:
 - **MFD** 
 - **GPS TELEMETRY**
 - **MAVLINK**
+- **RVOSD**
 - **FRSKY D**
+- **LTM**
 
 El resto de protocolos soportados en la versión 8 bits están en fase de integración en esta nueva versión de 32bits.
 
@@ -407,7 +409,12 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **pan0_calibrated:** Al cargar el firmware, por defect este parámetro está a 0, los PIDs no actuan sobre el movimiento del servo PAN, de este modo podemos probar distintos valores de set pan0 para encontrar el pulso en el que el servo se detiene. Una vez que conseguimos deter el servo, debemos poner este parámetro pan0_calibrated a valor 1. Si no lo hacemos nuestro tracker no va a responder a ningún comando de heading desde modo CLI, ni a ningún cambio ordenado por la telemetría.
 * **min_pan_speed:** Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición.
 * **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario (de 1 a 360º).
-* **telemetry_protocol:** Inicamos el valor 4 para activar el protocolo MFD, 8 para el protocolo GPS TELEMETRY, 16 para MAVLINK, y 64 para FrSKY_D. 
+* **telemetry_protocol:** Establece el protocolo de telemetría a usar. Los posibles valores soportados son:
+     - 4:   MFD
+	 - 8:   GPS TELEMETRY
+	 - 16:  MAVLINK
+	 - 32:  RVOSD
+	 - 64:  FrSKY_D
 * **telemetry_baud:** Es el valor de los baudios a los que se va a recibir los datos de telemetría, o los baudios a los que nos comunicamos con el tracker en modo CLI. Por defecto tiene el valor 2 (9600 bauds) y acepta valores entre 1 (4800 bauds) y 6 (250000 bauds).
 * **start_tracking_distance:** Es la distancia mínima a partir de la cual el tracker empieza a realizar el seguimiento del aeromodelo.
 * **init_servos:** Permite activar/desactivar el inicio de los servos durante el arranque. Si está activado, durante el inicio enviará al servo PAN el pulso de parada (pan0), y en el caso del servo TILT, enviará el pulso para que se mueva ala posición horizontal 0º (tilt0). Por defecto el valor de este parámetro es 0. Si usas una antena muy pesada no se recomienda la activación de este parámetro, salvo que hayas activado y configurado previamente el efecto easing para el servo tilt, y hayas ajustado el valor de pan0.
