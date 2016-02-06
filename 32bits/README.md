@@ -297,7 +297,7 @@ Luego aumentas la D para conseguir que reaccione con viveza pero siempre sin que
 
 # Configuración de la telemetría de entrada
 
-** Configuración del puerto serie 0 (UART1)**
+**Configuración del puerto serie 0 (UART1)**
 
 Tras el primer arranque, nuestra controladora sólo puede trabajar con el puerto serie 0 (UART1) a 115200 baudios, dedicado inialmente a la telemetría de entrada.
 
