@@ -295,7 +295,9 @@ Luego aumentas la I hasta que veas que rebota sobre el final pero se amortigua.
 Luego aumentas la D para conseguir que reaccione con viveza pero siempre sin que oscile sobre el final.
 ```
 
-# Configuración de del puerto serie 0 (UART1) para telemetría de entrada
+# Configuración de la telemetría de entrada
+
+** Configuración del puerto serie 0 (UART1)**
 
 Tras el primer arranque, nuestra controladora sólo puede trabajar con el puerto serie 0 (UART1) a 115200 baudios, dedicado inialmente a la telemetría de entrada.
 
@@ -332,7 +334,7 @@ El resto de valores no son tenidos en cuenta para la telemetría, pero son neces
 
 Para poder utilizar el puerto serie 1 (UART2) para gestionar el GPS local, es necesario 
 
-# Selección del protocolo de telemetría de entrada
+**Selección del protocolo de telemetría de entrada**
 
 Por defecto, nuestro tracker está configurado con el protocolo que hemos llamado GPS TELEMETRY. No es más que la telemetría directa en formato NMEA que puede suministrar cualquier módulo GPS compatible. En el aeromodelo puede tener un módulo GPS y hacer las tramas al tracker a través de un enlace sería de telemetría, como por ejemplo la que proporcionan los sistemas OpenLRS.
 
@@ -447,6 +449,8 @@ Para los protocolos de telemetría, **excepto para MFD**, se establece la posici
 
 En el esquema de conexiones se describe como debe ir conectado el GPS. Para recibir datos de GPS sólo es necesario conectar en el pin RX de la controladora (pin nº 4) el cable TX del GPS, así como el cable de alimentación +5V y GND. No obstante, con el objetivo de poder configurar el GPS de forma automática, también es necesario conectar el pin TX de la controladora al cable RX del GPS.
 
+**Parámetros de configuración**
+
 Inicialmente estos son los parámetros a tener en cuenta para su correcto funcionamiento:
 
 * **feature GPS** para activar la característica GPS
@@ -459,7 +463,7 @@ Inicialmente estos son los parámetros a tener en cuenta para su correcto funcio
 
 Los protocolos GPS soportados son NMEA y UBLOX. Para más información sobre los modelos de GPS soportados, consulte la información reportada por los usuarios de nuestra comunidad: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
 
-# Asignación de del puerto serie 1 (UART2) para GPS Local
+** Configuración de del puerto serie 1 (UART2) para GPS Local
 
 Desde la versión 1.12, es necesario ejecutar el siguiente comando en el modo cli para activar la función de gps local a través del puerto serie 1 (UART2)
 
@@ -472,7 +476,7 @@ serial 1 2 115200 57600 0 115200
 ```
 Una vez asignado el puerto serie al GPS, es posible cabiar los baudios con set gps_baud, el formato de tramas con set gps_provider, y el número mínimo de satélites para establecer el home con set home_min_sats, como se ha explicado en la sección anterior.
 
-# Telemetría de salida: Conversor de protocolo
+# Telemetría de salida: Conversión de protocolos
 
 Nuestro sistema tracker incorpora una funcionalidad que permite la conversión de tramas, desde los distintos protocolos de entrada soprotados, a otros formatos de tramas para enviarlos por un puerto de salida. Veamos un par de ejemplos de las posibles aplicaciones:
 
@@ -530,8 +534,8 @@ El puerto serie 30 se asigna a la función 256 (telemetría de salida MFD) a 960
 El puerto serie 31 está sin asignar, valor 0.
 
 
-# Parámetros configurables
----------------------------------
+# Parámetros configurables en modo CLI
+--------------------------------------
 
 Esta es la lista completa de los parámetros que pueden ser configurados mediante el comando set:
 
