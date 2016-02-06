@@ -503,7 +503,7 @@ save
 
 El comando serial es similar a los comandos utilziados para activar el GPS o la telemetría de entrada. La diferencia está en el número de puerto, y la posición de campos a modificar.
 
-# Puertos serie virtuales: softserial.
+# Puertos serie virtuales: Softserial.
 
 Para activar los puertos serie virtuales, debemos activar la característica softserial:
 
