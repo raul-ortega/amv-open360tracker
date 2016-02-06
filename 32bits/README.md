@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v1.11
+# amv-open60tracker-32bits v2.0
 ---------------------------------
 # EXPERIMENTAL
 
@@ -7,6 +7,16 @@
 Esta es la versión de 32bits del seguidor de antena para FPV con rotación contínua de 360º de la [comunidad española de aeromodelismo virtual](http://www.aeromodelismovirtual.com/showthread.php?t=34530).
 
 Por favor, antes de usar este software lea atentamente esta guía, aquí encontrará detallada toda la información necesaria para poner en marcha su seguirdor de antena con esta versión del firmware. Preste especial atención a las las instrucciones de instalación y las notas de recomendación para no dañar sus dispositivos.
+
+# Novedades de la vesión 2.0
+
+* Soporta hasta 4 puertos series: uarts 1 y 2 y softserial 1 y 2.
+* Posiblidad de reasingnación de funciones de los puertos serie.
+* Conversión y reenvío hacia puerto de salida de datos de posición a formatos Mavlink, FrSKY D, FrSKY X (SmartPort), Hott Telemetry y Light Telemetry.
+* Conversión y reenvío hacia puerto de salida de datos de Distancia, Altitud y Azimuth a formato MFD (MFD Tracker).
+* Nuevo sistema de activación de la posición HOME del tracker.
+* Visualización en el display del estado y la fuente de la posición HOME.
+* Nuevos perámetros para un mejor ajuste del control PIDs.
 
 # Plataforma Hardware
 
@@ -22,12 +32,12 @@ El objetivo que se persigue con esta primera versión es la realización de prue
 
 Si decides usar este firmware, hazlo bajo tu propia responsabilidad, pues los dispositivos usados podrían terminar dañados, especialmente si no se siguen las instrucciones y recomendaciones que se dan en este documento.
 
-# Protocolos de telemetría soportados
+# Protocolos de telemetría de entrada soportados
 
 En estos momentos los protocolos de telemetría implementados son:
 
 - **MFD** 
-- **GPS TELEMETRY**
+- **GPS TELEMETRY (direct NMEA from GPS)**
 - **MAVLINK**
 - **RVOSD**
 - **FRSKY D**
@@ -35,8 +45,16 @@ En estos momentos los protocolos de telemetría implementados son:
 
 El resto de protocolos soportados en la versión 8 bits están en fase de integración en esta nueva versión de 32bits.
 
-**Notas**:
-* Las funciones equivalentes al procolo **SERVOTEST** están disponibles **desde el modo CLI**, pero ahora se ejecutan de forma distinta.
+# Protocolos de telemetría de salida soportados
+
+En estos momentos los protocolos de telemetría implementados son:
+
+- **MAVLINK** 
+- **MFD**
+- **FRSKY D**
+- **FRSKY X (Smartport)**
+- **HOTT**
+- **LTM**
 
 # Interfaz de Línea de Comandos: modo CLI 
 
@@ -101,8 +119,8 @@ set tilt90 = 2025
 # TILT EASING
 feature EASING
 set easing = 1
-set easing_steps = 40
-set easing_min_angle = 4
+set easing_steps = 20
+set easing_min_angle = 1
 set easing_milis = 15
 
 # INIT SERVOS
@@ -112,26 +130,28 @@ set init_servos = 0
 set offset =  90.000
 set mag_declination = 0
 
-# TELEMETRY
+# TELEMETRY (GPS TELEMETRY 9600 BAUDS)
 set telemetry_baud = 2
 set telemetry_protocol = 8
 set start_tracking_distance = 10
 
 # GPS
 feature GPS
-gps_baud = valor
-gps_provider = protocolo
+set gps_baud = 2
+set gps_provider = NMEA
 ```
 
 Cuando la controladora se inicia por primera vez tras la carga del firmware, los valores por defecto son cargados automáticamente y podría provocar que los servos se activen, sobre todo si no son los mismos con los que se diseñó el software, en especial el PAN, que podría provocar que el servo se pusiera a girar a alta velocidad sin parar. 
 
 El valor 0 en parámetro init_servos, por defecto, impide que los servos giren durante el arranque. Si ese parámetro lo configuramos a valor 0, una vez conectados los servos y suministres alimentación, sólo debería moverse el servo PAN un instante y pararse, y el servo tilt debería moverse hasta alcanzar la posición horizontal, cero grados de inclinación, quedando el tracker a espera de telemetría u órdenes vía CLI.
 
+**Nota:** Consulta al final de este documento la lista de parámetros disponibles, es posible que haya parámetros nuevos, o modificaciones que no se contemplan aquí .
+
 # Carga del firmware
 
 Sigue con exactitud estos pasos para instalar el firmware en la controladora.
 
-El firmware puedes descargarlo desde aquí: [amv-open360tracker-32bits-v1.3.0](https://github.com/raul-ortega/amv-open360tracker/blob/master/32bits/amv-open360tracker_NAZE-v1.3.0.hex)
+Para descargar el firmware utiliza el botón [Download ZIP]((https://github.com/raul-ortega/amv-open360tracker) que encontrarás en la página principal del proyecto. El firmware compilado y listo para subir a la controladora es el archivo con extensión .hex.
 
 ```
 1.- Coloca el jumper en los pines boot.
@@ -165,7 +185,7 @@ Ahora debemos entrar en modo CLI, para ello:
 2.- Seleccionamos los parámetros de comunicaciones:
 
     Name(Puerto): COM8
-    Baud: 9600
+    Baud: 115200
 	Data size: 8
     Parity: none
     Handshake: OFF
@@ -275,15 +295,52 @@ Luego aumentas la I hasta que veas que rebota sobre el final pero se amortigua.
 Luego aumentas la D para conseguir que reaccione con viveza pero siempre sin que oscile sobre el final.
 ```
 
-# Selección del protocolo de telemetría
+# Configuración de del puerto serie 0 (UART1) para telemetría de entrada
 
-Por defecto, nuestro tracker está configurado con el protocolo GPS TELEMETRY.
+Tras el primer arranque, nuestra controladora sólo puede trabajar con el puerto serie 0 (UART1) a 115200 baudios, dedicado inialmente a la telemetría de entrada.
+
+Para cambiar los baudios del puerto serie 0 (UART1) puede emplear cualquiera de los siguietnes comandos:
+
+	* set telemetry_baud=**valor**
+
+	* serial 0 1 **baudios** **baudios** 0 **bauidos**
+
+Si utilizas el primero, en la sección de parámetros encontrarás los valores y sus correpsondientes baudios.
+
+Si optas por la segunda opcion ,debes sustituir **bauidos** por el valor deseado. El comando serial debe ir acompañado de los 6 parámetros, no se puede omitir ninguno. Por ejemplo, si queremos usar la uart1 a 9600 bauidos:
+
+```
+set telemetry_baud=2
+```
+
+O también.
+
+```
+serial 0 1 9600 9600 0 9600
+```
+
+En este último caso estamos configurando a 9600 baudios la uart1, indpendientemente de la función a la que se esté asignando.
+
+El valor 0 indica puerto serie número 0 (uart1)
+
+El valor 1 indica que se destina a telemetría.
+
+El primer valor 9600 indica que la telemetría funcionará a 9600 baudios.
+
+El resto de valores no son tenidos en cuenta para la telemetría, pero son necesarios para ejecutar con éxito el comando.
+	
+
+Para poder utilizar el puerto serie 1 (UART2) para gestionar el GPS local, es necesario 
+
+# Selección del protocolo de telemetría de entrada
+
+Por defecto, nuestro tracker está configurado con el protocolo que hemos llamado GPS TELEMETRY. No es más que la telemetría directa en formato NMEA que puede suministrar cualquier módulo GPS compatible. En el aeromodelo puede tener un módulo GPS y hacer las tramas al tracker a través de un enlace sería de telemetría, como por ejemplo la que proporcionan los sistemas OpenLRS.
 
 Para cambiar de protocolo:
 
 ```
 1.- Entrar al modo CLI
-2.- Ejecutar comando set telemtry_protocol=valor (4 para MFD, y 8 para GPS TELEMETRY)
+2.- Ejecutar comando set telemtry_protocol=valor (ver valores en la sección de parámetros de este documento).
 3.- Configurar los bauidos para la telemetría con set telemetry_baud=valor (ver lista de parámetros al final de este documento)
 4.- Guardamos con save 
 ```
@@ -354,9 +411,9 @@ Para desactivarlo basta con emplear el comando **featurea -easing**.
 
 # Display OLED
 
-Esta característica en estos momentos está en fase de implementación, pero ya es posible activarla y visualizar datos básicos de telemetría.
+Si instalamso un dispositivo OLDED, podremos visualizar bastante información relativa a la telemetría de entrada, datos del GPS Local, estado de la batería del tracker, y en versiones futuras incluso interactuar con el antena tracker para taréas básicas de configuración y ajuste.
 
-Para activarla:
+Para activarla la utilización del display:
 
 * feature display
 
@@ -364,22 +421,31 @@ Para desactivarla:
 
 * feature -display
 
-La característica se está probando con los siguientes displays OLED:
+La característica se está usando con los siguientes displays OLED:
 
 * [0.96 Inch 4Pin White IIC I2C OLED Display Module 12864 LED For Arduino](http://www.banggood.com/0_96-Inch-4Pin-White-IIC-I2C-OLED-Display-Module-12864-LED-For-Arduino-p-958196.html)
 * [0.96 Inch 4Pin IIC I2C Blue OLED Display Module For Arduino](http://www.banggood.com/0_96-Inch-4Pin-IIC-I2C-Blue-OLED-Display-Module-For-Arduino-p-969147.html)
 
-Cuando el tracker está a la espera de telemetría, la barrita que hay a la derecha del título de la página está quieta. Una vez que se reciben datos de telemetría por el puerto serie uart1, la barrita empieza a girar. Se detiene si deja de recibir datos por el puerto serie.
+Cuando el tracker está a la espera de telemetría, la barrita que hay a la derecha del título de la página está quieta. Una vez que se reciben datos por el puerto serie asignado a la telemetría de entrada, la barrita empieza a girar, y se detiene si deja de recibir datos.
 
-Notas:
+** Páginas **
 
-* Está prevista la visualización de varias páginas de datos, pasando de una a otra de forma cíclica. En estos momentos sólo se visualiza la página de bienvenida durante el arranque, y la página TELEMETRY mostrando los datos de telemetría. Notarás un parpadeo de la página TELEMETRY cada x segundos, es normal, es porque intenta pasar a la siguiente página que aún no están implementada.
+En función de las características que se tengan activadas, el tracker mostrará distintas páginas de datos, que se irán alternando de forma cílical. Si no se activa ninguna característica, únicamente se mostrarán la página de inicio durante el arranque, y la página datos de Telemetría.
+
+Las páginas mostradas son:
+
+ * Página de inicio, con la versión del firmware.
+ * Página de datos de telemetría.
+ * Página de estado del GPS local.
+ * Página del monitorización de la batería del tracker.
 
 # GPS Local
 
-En uso de GPS Local está integrado en en esta versión del firmware, aunque aún está en fase de pruebas. Para los protocolos de telemetría, **excepto para MFD**, se establece la posición HOME con los datos de posición obtenidos del GPS local, empezando el seguimiento de forma automática una vez que el aeromodelo se aleja una distancia mínica configurada, sin necesidad de pulsar el botón HOME. El display del tracker mostrará bastante información útil a monitorizar, que nos ayudará a decidir si es o no un buen momento para lanzar nuestro aeromodelo al aire.
+Para mejorar la calidad del seguimiento, a la vez que hacer más cómodo establecer la posición de HOME, puede instalar un módulo GPS en el interior del tracker.
 
-En el esquema de conexiones se describe como deben ir conectado el GPS. Para recibir datos de GPS sólo es necesario conectar en el pin RX de la controladora (pin nº 4) el cable TX del GPS, así como el cable de alimentación +5V y GND. No obstante, con el objetivo de poder configurar el GPS de forma automática, también es necesario conectar el pin TX de la controladora al cable RX del GPS.
+Para los protocolos de telemetría, **excepto para MFD**, se establece la posición HOME con los datos de posición obtenidos del GPS local, empezando el seguimiento de forma automática una vez que el aeromodelo se aleja la distancia mínica configurada, sin necesidad de pulsar el botón HOME. El display del tracker mostrará bastante información útil para monitorizar su estado, y determinar la calidad de la señal de los satélites, lo que nos ayudará a decidir si es o no un buen momento para lanzar nuestro aeromodelo al aire.
+
+En el esquema de conexiones se describe como debe ir conectado el GPS. Para recibir datos de GPS sólo es necesario conectar en el pin RX de la controladora (pin nº 4) el cable TX del GPS, así como el cable de alimentación +5V y GND. No obstante, con el objetivo de poder configurar el GPS de forma automática, también es necesario conectar el pin TX de la controladora al cable RX del GPS.
 
 Inicialmente estos son los parámetros a tener en cuenta para su correcto funcionamiento:
 
@@ -389,16 +455,87 @@ Inicialmente estos son los parámetros a tener en cuenta para su correcto funcio
 
 * **set gps_provider=protocolo** para configurar el formato de tramas, que puede ser NMEA o UBLOX.
 
-* **set gps_min_sats=valor** asegura tener un número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME.
+* **set home_min_sats=valor** asegura tener un número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME.
 
 Los protocolos GPS soportados son NMEA y UBLOX. Para más información sobre los modelos de GPS soportados, consulte la información reportada por los usuarios de nuestra comunidad: [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
+
+# Asignación de del puerto serie 1 (UART2) para GPS Local
+
+Desde la versión 1.12, es necesario ejecutar el siguiente comando en el modo cli para activar la función de gps local a través del puerto serie 1 (UART2)
+
+serial 1 2 115200 **9600** 0 115200
+
+Todos los parámetros del comando son necesarios, y únicamente basta con modificar el valor marcado en negrita para adecuarlo a los baudios a los que tengas configurado tu GPS local. Por ejemplo, para configurarlo a 57600 baudios:
+
+```
+serial 1 2 115200 57600 0 115200
+```
+Una vez asignado el puerto serie al GPS, es posible cabiar los baudios con set gps_baud, el formato de tramas con set gps_provider, y el número mínimo de satélites para establecer el home con set home_min_sats, como se ha explicado en la sección anterior.
+
+# Telemetría de salida: Conversor de protocolo
+
+Nuestro sistema tracker incorpora una funcionalidad que permite la conversión de tramas, desde los distintos protocolos de entrada soprotados, a otros formatos de tramas para enviarlos por un puerto de salida. Veamos un par de ejemplos de las posibles aplicaciones:
+
+* El aeromodelo envía al tracker telemetría mavlink, y éste saca por un puerto serie la telemetría en formato MFD que es inyectado a la mecánica de otro tracker MFD.
+* El aeromodelo envía telemetría NMEA Directa al tracker, y ésta es enviada a travmés de un módulo bluetooth en formato MAVLINK a la aplcación Droid Planner.
+
+Son sólo dos ejemplos, pero son posibles otras combinaciones y aplicaciones.
+
+Para activar esta funcionalidad, es necesario activar las características softserial y telemetría, y asignar un puerto serie a través del cual enviar las tramas de salida, según la siguietne secuencia:
+
+```
+feature softserial
+
+save
+
+feature telemetry
+
+save
+
+serial puerto tipotelemetria 115200 57600 baudios 115200
+
+save
+```
+
+El comando serial es similar a los comandos utilziados para activar el GPS o la telemetría de entrada. La diferencia está en el número de puerto, y la posición de campos a modificar.
+
+# Puertos serie virtuales: softserial.
+
+Para activar los puertos serie virtuales, debemos activar la característica softserial:
+
+```
+feature softserial
+
+save
+```
+
+Al ejecutar el comando feature softserial y salvar, en el siguiente arranque se configuran y activan pines de propósito general de la controladora como puertos series virtuales.
+
+Para comprobar el número de puerto correspondiente, tecleamos el comando:
+
+```
+serial
+```
+
+que muestra la lista completa de puertos disponibles. Dos puertos virtuales son añadidos junto a los puertos serial 0 (urat1) y srial 1 (uart2). En nuestro ejemplo, la lista completa es:
+
+serial 0 1 9600 57600 0 115200
+serial 1 2 115200 9600 0 115200
+**serial 30 256 115200 57600 9600 115200**
+serial 31 0 115200 57600 0 115200
+
+El puerto serie 0 se asigna a la función 1 (telemetría de entrada) a 9600 baudios.
+El puerto serie 1 se asigna a la función 2 (gps local) a 9600 baudios.
+El puerto serie 30 se asigna a la función 256 (telemetría de salida MFD) a 9600 bauidos.
+El puerto serie 31 está sin asignar, valor 0.
+
 
 # Parámetros configurables
 ---------------------------------
 
 Esta es la lista completa de los parámetros que pueden ser configurados mediante el comando set:
 
-* **p,i,d:** El valor de los valores PID (más información de como ajustarlo en la sección "Ajustar PIDs")
+* **p,i,d:** El valor de los valores PID (más información de como ajustarlo en la sección "Ajustar PIDs").
 * **max_pid_error:** Es el valor máximo permitido de la componente de Error en el cálculo de PIDs. Por debajo de ese valor el pulso pwm resultante se envía al servo.
 * **max_pid_accumulator:** Valor máximo del error acumulado en el cálculo de PIDs. En algunos casos en los que no se consigue ajustar los PIDs, al subir este valor es posible realizar un ajuste más fino.
 * **max_pid_gain:** El valor máximo de ganancia de PIDs aplicado al pulso pwm del servo pan. Este valor por defecto está a 500, y es considerado como óptimo.
@@ -413,7 +550,7 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **min_pan_speed:** Si el servo de pan tiene problemas para iniciar la rotación cuando la velociad es baja, ajusta este valor hasta que el tracker se mueva de forma directa desde cada posición.
 * **offset:** Si montas la placa controladora de modo que no apunte hacia el frente, ajusta este valor tantos grados como sea necesario (de 1 a 360º).
 * **mag_declination:** Consulta el valor que se corresponde con tu zona de vuelo en [http://www.magnetic-declination.com/](http://www.magnetic-declination.com/). Ejemplo, si la declinación magnética es 2º7 el valor a introducier es 207. Para 6º24 es 624.
-* **telemetry_protocol:** Establece el protocolo de telemetría a usar. Los posibles valores soportados son:
+* **telemetry_protocol:** Establece el protocolo de telemetría de entrada, desde el cual se suministra al tracker la posición del aeromodelo. Los posibles valores soportados son:
      - 4:   MFD
 	 - 8:   GPS TELEMETRY
 	 - 16:  MAVLINK
@@ -426,7 +563,7 @@ Esta es la lista completa de los parámetros que pueden ser configurados mediant
 * **init_servos:** Permite activar/desactivar el inicio de los servos durante el arranque. Si está activado, durante el inicio enviará al servo PAN el pulso de parada (pan0), y en el caso del servo TILT, enviará el pulso para que se mueva ala posición horizontal 0º (tilt0). Por defecto el valor de este parámetro es 0. Si usas una antena muy pesada no se recomienda la activación de este parámetro, salvo que hayas activado y configurado previamente el efecto easing para el servo tilt, y hayas ajustado el valor de pan0.
 * **gps_baud:** Es el valor de los baudios a los que se va a recibir los datos del GPS local. Los valores soportados son los mismos que para telemetry_baud.
 * **gps_provider:** Puede tomar los valroes NMEA o UBLOX.
-* **gps_min_sats:** Es el número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME.
+* **home_min_sats:** Es el número de satélites mínimo a partir del cual se establece la posición HOME. Si el número de satélites es menor que ese número, no se activará la posición HOME. Este parámetro afecta tanto si la posición HOME es tomada a partir de los datos de telemetría de entrada, como si se toma del GPS local cuando está activado.
 
 # Documentos gráficos
 ---------------------------------
