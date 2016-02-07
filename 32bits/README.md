@@ -8,7 +8,7 @@ Esta es la versión de 32bits del seguidor de antena para FPV con rotación cont
 
 Por favor, antes de usar este software lea atentamente esta guía, aquí encontrará detallada toda la información necesaria para poner en marcha su seguirdor de antena con esta versión del firmware. Preste especial atención a las las instrucciones de instalación y las notas de recomendación para no dañar sus dispositivos.
 
-# Novedades de la vesión 2.0
+# Novedades de la vesión 2.1
 
 * Soporta hasta 4 puertos series: uarts 1 y 2 y softserial 1 y 2.
 * Posiblidad de reasingnación de funciones de los puertos serie.
@@ -17,6 +17,7 @@ Por favor, antes de usar este software lea atentamente esta guía, aquí encontr
 * Nuevo sistema de activación de la posición HOME del tracker.
 * Visualización en el display del estado y la fuente de la posición HOME.
 * Nuevos perámetros para un mejor ajuste del control PIDs.
+* Monitorización del voltaje y consumo de la batería del tracker.
 
 # Plataforma Hardware
 
