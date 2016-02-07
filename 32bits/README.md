@@ -538,6 +538,21 @@ El puerto serie 1 se asigna a la función 2 (gps local) a 9600 baudios.
 El puerto serie 30 se asigna a la función 256 (telemetría de salida MFD) a 9600 bauidos.
 El puerto serie 31 está sin asignar, valor 0.
 
+# Posición HOME
+
+**HOME automático con GPS local**
+
+Anteriormente se ha describo la funcionalidad de establecimiento automático de la posición HOME cuando tenemos instalado un GPS en nuestro antena tracker. Cuando el GPS recibe señal de más de un número de satélites que hemos prefijado en la configuración, la posición HOME es establecida sin necesidad de accionar el botón HOME.
+
+**HOME Manual con GPS local**
+
+En versiones anteriores del firmware, al incorporar un GPS local no era posible activar la posición HOME de forma manual, pues su presencia ocasionaba la activación de forma completamente automática. Si por algún motivo el GPS no recibía señal de suficientes satélites, o no se superaba el valor mínimo fijado a través de la configuración, no era posible iniciar el seguimiento del aeromodelo. Este problema se ha solucionado en las versionres resiente incorporando un nuevo algoritmo que permite el establecimiento de la posición home tanto de forma automática como manual.
+
+Imaginemos que tenemos GPS LOCAL, y que el gps no coge los satélites preconfigurados, 8 por ejemplo, porque hay una mala recepción de satélites hoy. Pero resulta coge 5 o 6, que podríamos considerar suficientes, y no tenemos ganas de esperar a que coja 8 o más, o porque puede que con el cielo nublado sea imposible.
+
+En una situación como la descrita es posible establecer la posición home mediante una pulsación simple del botón HOME. Con esa pulsación del botón, acpeto los 5 o 6 satélites que  está recibiendo el GPS local, fijándose la posición.
+
+**Resetear posición HOME **
 
 # Parámetros configurables en modo CLI
 --------------------------------------
