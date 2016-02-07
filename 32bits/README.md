@@ -1,4 +1,4 @@
-# amv-open60tracker-32bits v2.0
+# amv-open60tracker-32bits v2.1
 ---------------------------------
 # EXPERIMENTAL
 
@@ -10,6 +10,10 @@ Por favor, antes de usar este software lea atentamente esta guía, aquí encontr
 
 # Novedades de la vesión 2.1
 
+* Monitorización del voltaje y consumo de la batería del tracker.
+
+# Novedades de la vesión 2.0
+
 * Soporta hasta 4 puertos series: uarts 1 y 2 y softserial 1 y 2.
 * Posiblidad de reasingnación de funciones de los puertos serie.
 * Conversión y reenvío hacia puerto de salida de datos de posición a formatos Mavlink, FrSKY D, FrSKY X (SmartPort), Hott Telemetry y Light Telemetry.
@@ -17,7 +21,7 @@ Por favor, antes de usar este software lea atentamente esta guía, aquí encontr
 * Nuevo sistema de activación de la posición HOME del tracker.
 * Visualización en el display del estado y la fuente de la posición HOME.
 * Nuevos perámetros para un mejor ajuste del control PIDs.
-* Monitorización del voltaje y consumo de la batería del tracker.
+
 
 # Plataforma Hardware
 
