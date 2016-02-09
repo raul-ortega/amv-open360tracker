@@ -150,9 +150,7 @@
  *
  * If you did not mount your compass with the arrow pointing to the front you can set an offset here.
  *
- * Needs to be multiplied by 10 -> 90° = 900
- *
- * Range: 0 ... 3599
+ * Range: 0 ... 359
  *
  */
 #define OFFSET 0 //default 0 
@@ -247,7 +245,7 @@
 #endif
 
 #if OFFSET < 0 || OFFSET > 359
-#error "Offset invalid. Must be between 0 and 3599."
+#error "Offset invalid. Must be between 0 and 359."
 #endif
 
 #endif
