@@ -88,6 +88,8 @@ Aquí encontrarás una lista de los protocolos soportados: [Protocolos](https://
 
 # Comunidad FPV AMV:
 
+**Vídeos**
+
 A continuación un vídeo realizado por el compañero Simba, en el que se ve su antenna tracker en plena acción:
 
 [![ScreenShot](https://i.ytimg.com/vi/7mY_J5hPdOo/mqdefault.jpg)](https://www.youtube.com/watch?v=7mY_J5hPdOo)
@@ -95,6 +97,12 @@ A continuación un vídeo realizado por el compañero Simba, en el que se ve su 
 Vista el hilo del foro para más información:
 
 [http://www.aeromodelismovirtual.com/showthread.php?t=34530](http://www.aeromodelismovirtual.com/showthread.php?t=34530)
+
+**Diseños 3D**
+
+El compañero Ivan_Cillo ha realizado un diseño para impresión en 3D de la caja para el antena tracker con soporte para controladora: Multiwii Crius SE, NAZE32/Flip32.
+
+[![ScreenShot](https://github.com/raul-ortega/amv-open360tracker/blob/master/img/3d-design-Ivan_Cillo.jpg](http://www.thingiverse.com/thing:1367337)
 
 # amv-open360tracker v0.8 (English)
 
