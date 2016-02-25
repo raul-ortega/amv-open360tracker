@@ -100,7 +100,7 @@ Vista el hilo del foro para más información:
 
 **Diseños Para Impresión 3D**
 
-El compañero Ivan_Cillo ha realizado creado su propio diseño para impresión en 3D de las cajas para el montaje del antena tracker. Más información en: [http://www.thingiverse.com/thing:1367337](http://www.thingiverse.com/thing:1367337)
+El compañero Ivan_Cillo ha realizado su propio diseño para impresión en 3D de las cajas para el montaje del antena tracker. Más información en: [http://www.thingiverse.com/thing:1367337](http://www.thingiverse.com/thing:1367337)
 
 [![ScreenShot](https://github.com/raul-ortega/amv-open360tracker/blob/master/img/3d-design-Ivan_Cillo.jpg)](http://www.thingiverse.com/thing:1367337)
 
