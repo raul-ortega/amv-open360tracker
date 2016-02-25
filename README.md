@@ -102,7 +102,7 @@ Vista el hilo del foro para más información:
 
 El compañero Ivan_Cillo ha realizado un diseño para impresión en 3D de la caja para el antena tracker con soporte para controladora: Multiwii Crius SE, NAZE32/Flip32.
 
-[![ScreenShot](https://github.com/raul-ortega/amv-open360tracker/blob/master/img/3d-design-Ivan_Cillo.jpg](http://www.thingiverse.com/thing:1367337)
+[![ScreenShot](https://github.com/raul-ortega/amv-open360tracker/blob/master/img/3d-design-Ivan_Cillo.jpg)](http://www.thingiverse.com/thing:1367337)
 
 # amv-open360tracker v0.8 (English)
 
