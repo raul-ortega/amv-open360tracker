@@ -57,7 +57,7 @@ Este proyecto, que se deriva del proyecto original de  [open360tracker](https://
 * Se ha añadido efecto de amortiguación en el servo de TILT, pudiendo elegir entre tres funciones distintas de amortiguación.
 * Resuelto el problema del valor del parámetro OFFSET.
 
-Actualmente se está trabajando en la nueva [versión 32 bits](https://github.com/raul-ortega/amv-open360tracker-32bits) para modificar los parámetros de configuraicón desde consola serie. En el futuro se desarrollará una aplicación android para interactuar con el tracker vía Bluetooth.
+Actualmente se está trabajando en la nueva [versión para microprocesadores de32 bits STM32](https://github.com/raul-ortega/amv-open360tracker-32bits) para controladoras NAZE32.
 
 # Basado en Plataforma Arduino
 
@@ -126,7 +126,7 @@ There are many improvements in this version:
 * The tilt servo movement has been improved by adding easing effects at the beginning and smoothing at the end. This will avoid damaging the tilt servo and other mechanisms when using heavy and larger antennas.
 * Solved the issues with parameter OFFSET.
 
-We are now working on a [new version for 32 bit proccesors STM32](https://github.com/raul-ortega/amv-open360tracker-32bits) ) which will facilitate setting parameters using a remote console, for example some Android app over Bluetooth.
+We are now working on a [new version for 32 bit proccesors STM32](https://github.com/raul-ortega/amv-open360tracker-32bits) ) on NAZ32 boards.
 
 # Platform
 	
